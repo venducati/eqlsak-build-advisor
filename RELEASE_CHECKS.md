@@ -1,11 +1,11 @@
-# Version 1.6.6 checks and limits
+# Version 1.6.7 checks and limits
 
 Checked on Windows on 2026-09-13, using Node.js 24.18.0 and Electron 44.3.0.
 
 ## Passed
 
 - Public standalone source: engine/parser/render tests, TypeScript checking, lint, and offline/desktop UI build.
-- Desktop suite: 27 checks for log discovery, bounded local file reading, incomplete lines, replacement/truncation handling, URL restrictions, redirects, and source extraction.
+- Desktop suite: 32 checks for log discovery, bounded local file reading, incomplete lines, replacement/truncation handling, URL restrictions, redirects, and source extraction.
 - Browser and desktop recent-log readers agree on a bounded 4 MB snapshot. Tests verify completed loot trips and that quoted player chat is not counted as loot.
 - Isolated interface scenario: all 14 third-class reports for the Ranger/Rogue pair, report close/save/use, entered-build validation, presets, saved-build controls, rule imports and backups, and source-update preview/apply/rollback.
 - The same scenario checks buddy controls, zone browsing including Dagnor's Cauldron, faction character/add/save/remove/import actions, spell timer save/refresh/remove, demo controls, log start/pause/resume/stop, saved-log loading and replay, loot goals, trip exit, missed-drop notes, and exports.
@@ -16,16 +16,19 @@ Checked on Windows on 2026-09-13, using Node.js 24.18.0 and Electron 44.3.0.
 - The isolated audio/guild interface scenario verifies real pointer clicks, sound on/off, volume persistence, report cues, silent combat ticks, a trip-exit cue, hidden-page silence, and no autoplay on reload. Speaker output is muted during these checks.
 - Six guild parser checks cover the observed 15-column EQL layout, named TSV/CSV, quoted and multiline fields, duplicate names, malformed/oversized inputs, UTF-8/UTF-16 and saved-data validation. A rank named Member is not treated as a header.
 - Guild interface checks cover import, search, pagination, persistence, removal and safe rendering of HTML-like note text. Source and screenshots use invented guildmates. A local user-selected guild export was also parsed and loaded privately; its contents are excluded from public files.
-- Packaged Windows startup verified version 1.6.6 and the matching title badge, glossary, Advisor and log/update bridges. Packaged code and styles match the source. The NSIS installer archive integrity check passed.
+- Packaged Windows startup verified version 1.6.7 and the matching title badge, glossary, Advisor and log/update bridges. Packaged code and styles match the source. The NSIS installer archive integrity check passed.
 
 - Overlay checks verify meter/overlay totals and pet attribution, bounded display frames, effect estimates, saved settings and monitor bounds. A hidden native-window scenario uses the real log tail, isolated preloads and IPC controller with invented appended events; checks cover click-through flags, focusability, scaling, opacity, hidden/minimized main-window updates, pause labels, control recovery, malformed-frame rejection, visibility races and cleanup. Test shortcuts and file selection are substituted so the tests do not claim system-wide keys or show a game window.
 - Map parser checks cover standard line/label records, local-only plain text, size/record bounds, mixed zones, duplicate layers and location coordinates. The interface scenario verifies import, layers, search, height filters, centering, pan/zoom, typed location markers, failed-import preservation and clearing. Canvas dimensions and screenshots were checked at wide and narrow widths, including correct aspect and readable text after resizing.
 - Source references were reviewed on the creators’ pages. No third-party map pack, private guild file or real game log is bundled. The two map sources are included in optional checks; no class score is changed by map content.
 
+- Map-library checks verify shallow folder discovery, one-zone reads, layer grouping, saved choices, restart, new/replaced/missing files, bounds, stale-ID rejection and folder-junction rejection. Browser tests verify lazy grouping, friendly names, aliases and ambiguous-match handling.
+- The hidden map-picker scenario tests 580 invented locations, automatic detection without a folder dialog, search, base/layer loading, restart persistence, refresh, failed-read preservation, repeated zone-card navigation, browser folder selection and wide/narrow layouts. The user-authorized Brewall folder was also checked read-only for discovery; its map contents are excluded from tests and releases.
+
 ## Limits
 
 - The overlay uses an ordinary always-on-top Windows window. Use EQL in windowed or borderless mode. Exclusive fullscreen compatibility, hardware-specific behavior and a real in-game click-through acceptance test have not been verified. The overlay uses log data only, not game memory. Spell times are estimates; current HP is unavailable. A quiet log does not prove logging is still enabled.
-- Map files are community EverQuest references and are not verified for EQL. Users obtain and select their own copies. Imports allow up to four files for one zone, 8 MB and 50,000 records combined. Maps stay in memory until the app closes; updating requires selecting newer files. Location markers are manual and do not track the player.
+- Map files are community EverQuest references and are not verified for EQL. Users obtain and select their own copies. Imports allow up to four files for one zone, 8 MB and 50,000 records combined. The Windows app remembers the folder and last map. Browser folder access lasts for the session; users must choose it again after restarting. Updating a pack requires refreshing the map list. Location markers are manual and do not track the player.
 
 - The installer is unsigned. A fresh Windows installation and a complete live-game acceptance test have not been performed.
 - Audio rendering and controls are checked automatically; perceived loudness and tone still depend on the listener's speakers, headphones and preferences. New installations start with sounds off and volume at 35%.

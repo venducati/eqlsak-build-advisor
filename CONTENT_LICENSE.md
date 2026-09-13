@@ -13,3 +13,5 @@ Source URLs and short original summaries in `data/build-evidence.json`, `data/co
 EverQuest, EverQuest Legends, related names and trademarks belong to their respective owners. The software license grants no rights to those trademarks or to proprietary game files. Do not contribute extracted client art, models, maps, or copyrighted articles without redistribution permission.
 
 The map viewer and its test fixtures are original code/data. `data/map-sources.json` credits Brewall Rainsinger and Goodurden with contributors and links to their download pages. No third-party map files or world-map images are bundled, archived or rehosted. Users select their own copies locally; those files retain their creators’ rights and are not covered by this project’s MIT license.
+
+`data/map-zone-names.json` stores factual short-name, zone-name and numeric-ID pairs from the [EQEmu zone table](https://docs.eqemu.dev/server/zones/zone-list/), reviewed 2026-09-13, plus common-name aliases. It includes no map geometry or copied guide prose. Names identify local files; they do not verify availability or layouts in EQL.

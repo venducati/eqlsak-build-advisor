@@ -1,6 +1,6 @@
 {
   "name": "eqlsak-build-advisor",
-  "version": "1.6.6",
+  "version": "1.6.7",
   "description": "Offline EQLSaK Build Advisor, live combat meter, and optional source updates",
   "author": "EQLSaK community",
   "license": "MIT",
@@ -36,6 +36,7 @@
       "log-tail.cjs",
       "log-discovery.cjs",
       "log-history.cjs",
+      "map-library.cjs",
       "overlay.cjs",
       "overlay-state.cjs",
       "overlay-preload.cjs"

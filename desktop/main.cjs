@@ -9,6 +9,7 @@ const {LogTail}=require('./log-tail.cjs');
 const {LogDiscovery}=require('./log-discovery.cjs');
 const {readRecentLog}=require('./log-history.cjs');
 const {createOverlay}=require('./overlay.cjs');
+const {MapLibrary}=require('./map-library.cjs');
 const {basename,extname}=require('node:path');
 const manifest=require('./source-manifest.json');
 const entry=pathToFileURL(join(__dirname,'ui','index.html')).href;
@@ -25,6 +26,16 @@ ipcMain.handle('app:visibility',event=>{trusted(event);return appVisible();});
 let tail=null,tailPaused=false,tailBusy=false,tailGeneration=0;
 let discovery;
 function logFinder(){return discovery||(discovery=new LogDiscovery(join(app.getPath('userData'),'log-discovery.json')));}
+let maps;
+function mapLibrary(){return maps||(maps=new MapLibrary(join(app.getPath('userData'),'map-library.json')));}
+ipcMain.handle('maps:find',event=>{trusted(event);return mapLibrary().find();});
+ipcMain.handle('maps:choose-folder',async event=>{
+ trusted(event);
+ const selected=await dialog.showOpenDialog(window,{title:'Choose your EQL Maps or Brewall folder',properties:['openDirectory']});
+ return selected.canceled||!selected.filePaths[0]?null:mapLibrary().find(selected.filePaths[0]);
+});
+ipcMain.handle('maps:read',(event,id)=>{trusted(event);return mapLibrary().read(id);});
+ipcMain.handle('maps:remember',(event,id)=>{trusted(event);return mapLibrary().remember(id);});
 async function attachLog(path){
  if(!['.txt','.log'].includes(extname(path).toLowerCase()))throw new Error('Choose a .txt or .log file.');
  const next=new LogTail(path);const state=await next.start();
@@ -124,7 +135,7 @@ app.whenReady().then(async()=>{
   if(smoke) {
     const timer=setTimeout(()=>{console.error('Desktop load timed out.');app.exit(1);},25000);
     window.webContents.on('did-fail-load',(_e,code,description)=>{clearTimeout(timer);console.error('Desktop load failed',code,description);app.exit(1);});
-    window.webContents.on('did-finish-load',async()=>{try{const info=await window.webContents.executeJavaScript('(async()=>({version:window.eqlDesktop.version,history:await window.eqlDesktop.getSourceHistory(),overlay:await window.eqlOverlay.getState(),visibility:window.eqlWindow.isVisible(),mapSources:document.querySelectorAll(".map-source-grid article").length,meter:typeof window.eqlMeter.start,detect:typeof window.eqlMeter.detect,recent:typeof window.eqlMeter.readRecent,folder:typeof window.eqlMeter.chooseFolder,watch:typeof window.eqlMeter.startDetected,headingVersion:document.querySelector(".ba-app-version")?.textContent,glossaryGroups:document.querySelectorAll(".ba-glossary-group").length,glossaryWords:document.querySelectorAll(".ba-glossary-word").length}))()');if(info.overlay.visible!==false||info.visibility!==false||info.mapSources!==2)throw new Error('Overlay or maps bridge check failed.');if(info.version!==app.getVersion()||info.headingVersion!=="v"+app.getVersion()||info.history.version!==1||[info.meter,info.detect,info.recent,info.folder,info.watch].some(value=>value!=='function'))throw new Error('Desktop bridge check failed.');if(info.glossaryGroups!==6||info.glossaryWords!==21)throw new Error('Packaged glossary matrix did not render.');clearTimeout(timer);console.log('DESKTOP_SMOKE_OK: version '+info.version+', glossary matrix, advisor, updates, combat meter, overlay, maps, log discovery and recent-history bridges loaded.');app.exit(0);}catch(e){console.error(e);app.exit(1);}});
+    window.webContents.on('did-finish-load',async()=>{try{const info=await window.webContents.executeJavaScript('(async()=>({version:window.eqlDesktop.version,history:await window.eqlDesktop.getSourceHistory(),overlay:await window.eqlOverlay.getState(),visibility:window.eqlWindow.isVisible(),mapBridge:[typeof window.eqlMaps.find,typeof window.eqlMaps.chooseFolder,typeof window.eqlMaps.read,typeof window.eqlMaps.remember],mapSources:document.querySelectorAll(".map-source-grid article").length,meter:typeof window.eqlMeter.start,detect:typeof window.eqlMeter.detect,recent:typeof window.eqlMeter.readRecent,folder:typeof window.eqlMeter.chooseFolder,watch:typeof window.eqlMeter.startDetected,headingVersion:document.querySelector(".ba-app-version")?.textContent,glossaryGroups:document.querySelectorAll(".ba-glossary-group").length,glossaryWords:document.querySelectorAll(".ba-glossary-word").length}))()');if(info.overlay.visible!==false||info.visibility!==false||info.mapSources!==2||info.mapBridge.some(value=>value!=='function'))throw new Error('Overlay or maps bridge check failed.');if(info.version!==app.getVersion()||info.headingVersion!=="v"+app.getVersion()||info.history.version!==1||[info.meter,info.detect,info.recent,info.folder,info.watch].some(value=>value!=='function'))throw new Error('Desktop bridge check failed.');if(info.glossaryGroups!==6||info.glossaryWords!==21)throw new Error('Packaged glossary matrix did not render.');clearTimeout(timer);console.log('DESKTOP_SMOKE_OK: version '+info.version+', glossary matrix, advisor, updates, combat meter, overlay, maps, log discovery and recent-history bridges loaded.');app.exit(0);}catch(e){console.error(e);app.exit(1);}});
     window.webContents.on('render-process-gone',(_e,details)=>{console.error(details);app.exit(1);});
   }
   await window.loadFile(join(__dirname,'ui','index.html'));

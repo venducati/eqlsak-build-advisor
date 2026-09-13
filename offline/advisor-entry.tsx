@@ -20,9 +20,10 @@ function App() {
   });
   const [tool, setTool] = React.useState<'advisor' | 'meter' | 'guild' | 'maps'>('advisor');
   const [mapZone,setMapZone]=React.useState<string|null>(null);
+  const [mapRequest,setMapRequest]=React.useState(0);
   React.useEffect(()=>window.eqlOverlay?.onOpenControls(()=>setTool('meter')),[]);
   return (
-    <LocalMapContext.Provider value={zone=>{setMapZone(zone);setTool('maps');window.scrollTo({top:0});}}><main className="advisor-client">
+    <LocalMapContext.Provider value={zone=>{setMapZone(zone);setMapRequest(n=>n+1);setTool('maps');window.scrollTo({top:0});}}><main className="advisor-client">
       <nav className="offline-tabs" aria-label="Companion tools" data-sound="navigate">
         <button aria-pressed={tool === 'advisor'} onClick={() => setTool('advisor')}>
           <Compass aria-hidden="true" /> Build Advisor
@@ -46,7 +47,7 @@ function App() {
         <CombatMeter advisorInput={model.input} advisorPack={model.pack} />
       </div>
       <div hidden={tool !== 'guild'}><MyGuild /></div>
-      <div hidden={tool !== 'maps'}><MapLibrary zone={mapZone??model.input.zone} active={tool==='maps'}/></div>
+      <div hidden={tool !== 'maps'}><MapLibrary zone={mapZone??model.input.zone} requestKey={mapRequest} active={tool==='maps'}/></div>
       <ProjectSupport />
     </main></LocalMapContext.Provider>
   );

@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.6.7 — 2026-09-13
+
+- Find installed EQL map folders automatically in the Windows app, preferring Brewall. Remember the folder and last successfully opened map.
+- Add a searchable dungeon/zone list built from local files; load base and numbered layers together. Support friendly names and common aliases, with filenames for unknown locations.
+- Open exact matching local maps from zone cards. Keep manual browsing available and show mismatched planning zones clearly.
+- Let browser users choose a whole folder once per session. Collapse setup and individual-file tools. Add a refresh action for changed map packs.
+- Keep map reads local and bounded. Preserve existing tools and distribute no third-party map pack.
+
+
 ## 1.6.6 — 2026-09-13
 
 - Add a Windows game overlay with local log stats, critical-hit rate, damage taken, healing, damage graph and up to three estimated spell timers. Keep updates running while BA is minimized; label demo, saved, paused and stale data.

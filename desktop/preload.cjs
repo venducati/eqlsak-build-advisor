@@ -7,13 +7,17 @@ ipcRenderer.on('app:visibility',(_event,visible)=>updateVisibility(visible));
 window.addEventListener('DOMContentLoaded',()=>{void ipcRenderer.invoke('app:visibility').then(updateVisibility).catch(()=>{});},{once:true});
 contextBridge.exposeInMainWorld('eqlWindow',{isVisible:()=>appIsVisible,onVisibility:callback=>{visibilityCallbacks.add(callback);return()=>visibilityCallbacks.delete(callback);}});
 const listen=(channel,callback)=>{const listener=(_event,value)=>callback(value);ipcRenderer.on(channel,listener);return()=>ipcRenderer.removeListener(channel,listener);};
+contextBridge.exposeInMainWorld('eqlMaps',{
+ find:()=>ipcRenderer.invoke('maps:find'),chooseFolder:()=>ipcRenderer.invoke('maps:choose-folder'),
+ read:id=>ipcRenderer.invoke('maps:read',id),remember:id=>ipcRenderer.invoke('maps:remember',id),
+});
 contextBridge.exposeInMainWorld('eqlOverlay',{
  getState:()=>ipcRenderer.invoke('overlay:get-state'),control:action=>ipcRenderer.invoke('overlay:control',action),
  publish:frame=>ipcRenderer.send('overlay:frame',frame),onState:callback=>listen('overlay:state',callback),
  onOpenControls:callback=>listen('overlay:open-controls',callback),
 });
 contextBridge.exposeInMainWorld('eqlDesktop',{
-  version:'1.6.6',
+  version:'1.6.7',
   getSourceHistory:()=>ipcRenderer.invoke('advisor:history'),
   checkSources:(classes)=>ipcRenderer.invoke('advisor:check-sources',classes),
   getRuleUpdate:(url,expectedHash)=>ipcRenderer.invoke('advisor:rule-update',url,expectedHash),

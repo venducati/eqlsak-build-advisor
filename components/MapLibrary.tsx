@@ -3,14 +3,16 @@ import {Map,ExternalLink,FolderOpen,Layers,ZoomIn,ZoomOut,LocateFixed,Trash2,Map
 import sources from '../data/map-sources.json';
 import {mapBounds,parseMapFile,parseLocation,validateMapSelection,MAP_RECORDS,type MapLayer,type MapPoint} from '../lib/eq-map';
 import {zoneGuideURL} from '../lib/zone-navigation';
+import MapFolderPicker from './MapFolderPicker';
+import {mapLocationName,matchMapLocation,type MapContents} from '../lib/map-library';
 import '../app/map-library.css';
 
-export default function MapLibrary({zone,active}:{zone:string;active:boolean}) {
+export default function MapLibrary({zone,active,requestKey=0}:{zone:string;active:boolean;requestKey?:number}) {
   const [layers,setLayers]=useState<MapLayer[]>([]),[provider,setProvider]=useState('brewall'),[loadedProvider,setLoadedProvider]=useState('');
   const [visible,setVisible]=useState<number[]>([0,1,2,3]),[query,setQuery]=useState(''),[showLabels,setShowLabels]=useState(true);
   const [floor,setFloor]=useState(''),[band,setBand]=useState('30'),[location,setLocation]=useState(''),[pin,setPin]=useState<MapPoint|null>(null);
   const [message,setMessage]=useState(''),[busy,setBusy]=useState(false),[zoom,setZoom]=useState(1),[center,setCenter]=useState({x:0,y:0});
-  const [size,setSize]=useState({width:800,height:480}),[loadedZone,setLoadedZone]=useState('');
+  const [size,setSize]=useState({width:800,height:480});
   const canvas=useRef<HTMLCanvasElement>(null),picker=useRef<HTMLInputElement>(null),drag=useRef<{x:number;y:number;origin:{x:number;y:number}}|null>(null),generation=useRef(0);
   const bounds=useMemo(()=>mapBounds(layers),[layers]);
   const scale=Math.min(size.width/bounds.spanX,size.height/bounds.spanY)*zoom;
@@ -31,25 +33,32 @@ export default function MapLibrary({zone,active}:{zone:string;active:boolean}) {
     if(pin){const p=xy(pin);ctx.strokeStyle='#8e254a';ctx.lineWidth=2;ctx.beginPath();ctx.arc(p.x,p.y,9,0,Math.PI*2);ctx.moveTo(p.x-14,p.y);ctx.lineTo(p.x+14,p.y);ctx.moveTo(p.x,p.y-14);ctx.lineTo(p.x,p.y+14);ctx.stroke();}
   },[active,size,center,scale,selected,labels,showLabels,z,validFloor,thickness,pin]);
   function reset(){setCenter({x:bounds.x,y:bounds.y});setZoom(1);}
+  function applyFiles(contents:MapContents){
+    validateMapSelection(contents.files.map(f=>({name:f.name,size:new TextEncoder().encode(f.text).length})));
+    const next=contents.files.map(f=>parseMapFile(f.name,f.text));
+    const count=next.reduce((n,l)=>n+l.lines.length+l.labels.length,0);
+    if(!count)throw Error('No map lines or labels were found. Choose EQ map files, not a combat log.');
+    if(count>MAP_RECORDS)throw Error('This selection has more than 50,000 records. Load fewer layers.');
+    generation.current++;next.sort((a,b)=>a.layer-b.layer);setLayers(next);setLoadedProvider(contents.provider);setVisible([0,1,2,3]);setQuery('');setFloor('');setPin(null);setLocation('');setZoom(1);setCenter(mapBounds(next));
+    const skipped=next.reduce((n,l)=>n+l.skipped,0);
+    setMessage(`Loaded ${next.length} map file${next.length===1?'':'s'} together. ${skipped?skipped+' unreadable rows were skipped.':'Files stay on this device.'}`);
+  }
   async function load(files:File[]) {
     const ticket=++generation.current;setBusy(true);setMessage('');
-    try{validateMapSelection(files);const next=await Promise.all(files.map(async f=>parseMapFile(f.name,await f.text())));const count=next.reduce((n,l)=>n+l.lines.length+l.labels.length,0);if(!count)throw Error('No map lines or labels were found. Choose EQ map files, not a combat log.');if(count>MAP_RECORDS)throw Error('This selection has more than 50,000 records. Load fewer layers.');if(ticket!==generation.current)return;next.sort((a,b)=>a.layer-b.layer);setLayers(next);setLoadedProvider(provider);setLoadedZone(zone);setVisible([0,1,2,3]);setQuery('');setFloor('');setPin(null);setLocation('');setZoom(1);setCenter(mapBounds(next));const skipped=next.reduce((n,l)=>n+l.skipped,0);setMessage(`Loaded ${next.length} map file${next.length===1?'':'s'}. ${skipped?skipped+' unreadable rows were skipped.':'Files stay on this device.'}`);}
+    try{validateMapSelection(files);const texts=await Promise.all(files.map(async f=>({name:f.name,text:await f.text()})));if(ticket!==generation.current)return;applyFiles({id:'manual',stem:'',provider,files:texts});setBusy(false);}
     catch(error){if(ticket===generation.current)setMessage(error instanceof Error?error.message:'The map could not be read.');}
     finally{if(ticket===generation.current)setBusy(false);}
   }
   function mark(){const p=parseLocation(location);if(!p){setMessage('Enter three numbers from /loc: north, west, height. Example: 100, -200, 10');return;}setPin(p);setCenter(p);setMessage('Your typed location is marked. It stays here until you enter another location.');}
   const pan=(dx:number,dy:number)=>setCenter(c=>({x:c.x+dx*100/scale,y:c.y+dy*100/scale}));
   return <section className="map-library" aria-label="Maps and routes">
-    <header className="map-heading"><Map aria-hidden="true"/><div><h2>Maps &amp; Routes</h2><p>Bring your map maker’s details into your trip plan.</p></div></header>
-    <div className="map-source-grid">{sources.sources.map(source=><article key={source.id}><h3>{source.name}</h3><p>{source.summary}</p><small>By {source.creator}</small><a href={source.url} target="_blank" rel="noopener noreferrer"><ExternalLink aria-hidden="true"/> Downloads &amp; latest changes</a>{source.worldUrl&&<a href={source.worldUrl} target="_blank" rel="noopener noreferrer"><Map aria-hidden="true"/> World connections map</a>}</article>)}</div>
-    <p className="map-reference-note"><strong>EverQuest community reference · EQL not verified</strong><br/>{sources.compatibility}</p>
-    <details className="map-setup"><summary>How to bring in a map or update it</summary><ol><li>Open a map maker’s download page above. Download and unzip their map pack.</li><li>In BA, choose the map maker below, then choose one zone’s files. Include the base file and any numbered layers, such as <code>unrest.txt</code> and <code>unrest_1.txt</code>.</li><li>Check the file name against the zone you plan to visit. BA does not check EQL compatibility.</li><li>For a newer map, download the new pack and choose its files again. BA replaces the view after a successful import.</li></ol><p>To use maps inside the game, follow the creator’s guide and use a separate folder within your game’s Maps folder. BA only reads the files you choose. It does not install or change game files.</p><p>Imported maps stay in memory while BA is open. Choose the files again after restarting. No map pack is included with BA.</p></details>
-    <div className="map-import-row"><label>Map maker<select value={provider} onChange={e=>setProvider(e.target.value)} disabled={busy}>{sources.sources.map(s=><option key={s.id} value={s.id}>{s.name}</option>)}<option value="other">My own / another map</option></select></label><button disabled={busy} onClick={()=>picker.current?.click()}><FolderOpen aria-hidden="true"/>{busy?'Reading map…':'Choose zone map files'}</button><input ref={picker} type="file" accept=".txt" multiple hidden onChange={e=>{void load(Array.from(e.target.files||[]));e.target.value='';}}/></div>
+    <header className="map-heading"><Map aria-hidden="true"/><div><h2>Maps &amp; Routes</h2><p>Choose a location. Its map and layers open together.</p></div></header>
+    <MapFolderPicker zone={zone} active={active} requestKey={requestKey} loadedStem={layers[0]?.stem||''} busy={busy} onBusy={setBusy} onLoad={applyFiles}/>
     <p role="status" className="map-message">{message}</p>
     <p><strong>Planning zone:</strong> {zone||'Choose a current zone in Build Advisor.'} {zone&&<a href={zoneGuideURL(zone)} target="_blank" rel="noopener noreferrer">Open EQLSaK zone guide <ExternalLink aria-hidden="true"/></a>}</p>
     {layers.length>0?<>
-      <div className="map-loaded"><strong>{layers[0].stem}</strong><span>{credit?.name||'Your chosen map'} · Loaded {loadedZone?'while planning '+loadedZone:'without a planning zone'}</span><small>{credit?.credit||'Local file selected by you. Check its creator’s terms before sharing.'}</small></div>
-      {loadedZone!==zone&&<p className="map-reference-note">Your planning zone changed. The map below is still <strong>{layers[0].stem}</strong>. Choose new files if needed.</p>}
+      <div className="map-loaded"><strong>{mapLocationName(layers[0].stem)}</strong><span>{credit?.name||'Your chosen map'} · {layers[0].stem}</span><small>EverQuest community map · EQL layout not verified. {credit?'By '+credit.creator+'.':'Check the creator’s terms before sharing.'}</small></div>
+      {zone&&!matchMapLocation([{id:'loaded',stem:layers[0].stem,fileCount:layers.length}],zone)&&<p className="map-reference-note">The map shown is <strong>{mapLocationName(layers[0].stem)}</strong>. Your planning zone is {zone}. Choose another location above if needed.</p>}
       <fieldset className="map-layer-controls"><legend><Layers aria-hidden="true"/> Layers</legend>{layers.map(layer=><label key={layer.layer}><input type="checkbox" checked={visible.includes(layer.layer)} onChange={e=>setVisible(v=>e.target.checked?[...v,layer.layer]:v.filter(n=>n!==layer.layer))}/>{layer.layer===0?'Base':'Layer '+layer.layer}<small>{layer.lines.length} lines · {layer.labels.length} labels</small></label>)}</fieldset>
       <div className="map-filter-grid"><label><Search aria-hidden="true"/> Find a landmark<input value={query} maxLength={120} onChange={e=>setQuery(e.target.value)} placeholder="Merchant, zone exit, named…"/></label><label>Height (Z), optional<input type="number" value={floor} onChange={e=>setFloor(e.target.value)} placeholder="All heights"/></label><label>Height range ±<input type="number" min="1" max="100000" value={band} onChange={e=>setBand(e.target.value)}/></label></div>
       {!validFloor&&<p role="status">Enter a valid height and a range above zero. Showing all heights for now.</p>}
@@ -60,6 +69,14 @@ export default function MapLibrary({zone,active}:{zone:string;active:boolean}) {
       <details className="map-landmarks" open={Boolean(query)}><summary>{labels.length} matching landmarks · choose one to center the map</summary><ul>{labels.slice(0,100).map((label,i)=><li key={i}><button onClick={()=>{setCenter(label);setPin(label);setZoom(v=>Math.max(3,v));}}>{label.text}<small>Map X {label.x.toFixed(1)} · Y {label.y.toFixed(1)} · Height {label.z.toFixed(1)}</small></button></li>)}</ul>{labels.length>100&&<p>Showing the first 100. Search above to narrow the list.</p>}{!labels.length&&<p>No labels match your search, layers and height.</p>}</details>
       {loadedProvider==='good'&&<details className="map-key"><summary>Good’s map label key</summary><dl>{sources.goodLabelKey.map(k=><div key={k.code}><dt>({k.code})</dt><dd>{k.meaning}</dd></div>)}</dl><p>Layer contents and colors depend on the map. See the creator’s guide for details.</p></details>}
       <button disabled={busy} className="map-clear" onClick={()=>{generation.current++;setLayers([]);setPin(null);setMessage('Map cleared from this view. Your original files are unchanged.');}}><Trash2/> Clear map from BA</button>
-    </>:<div className="map-empty"><Map aria-hidden="true"/><h3>Your local map appears here</h3><p>Choose a zone’s map files to see its paths and landmarks. Use the source pages above to get maps.</p></div>}
+    </>:<div className="map-empty"><Map aria-hidden="true"/><h3>Your local map appears here</h3><p>Choose a dungeon or zone above to see its paths and landmarks.</p></div>}
+    <details className="map-setup"><summary>Map downloads &amp; manual files</summary>
+      <div className="map-source-grid">{sources.sources.map(source=><article key={source.id}><h3>{source.name}</h3><p>{source.summary}</p><small>By {source.creator}</small><a href={source.url} target="_blank" rel="noopener noreferrer"><ExternalLink aria-hidden="true"/> Downloads &amp; latest changes</a>{source.worldUrl&&<a href={source.worldUrl} target="_blank" rel="noopener noreferrer"><Map aria-hidden="true"/> World connections map</a>}</article>)}</div>
+      <p className="map-reference-note"><strong>EverQuest community reference · EQL not verified</strong><br/>{sources.compatibility}</p>
+      <ol><li>Need maps? Download a pack from its creator above. Unzip it into its own folder within the game’s Maps folder.</li><li>In the Windows app, open Folder options and choose Refresh map list. Choose your folder once if it is not found.</li><li>In the browser edition, choose the whole folder once per session. Then pick any zone from the list.</li><li>After replacing a map pack with a newer version, refresh the list to read the updated files.</li></ol>
+      <p>BA reads local maps. It does not change game files or include a map pack. Known zone names use the <a href="https://docs.eqemu.dev/server/zones/zone-list/" target="_blank" rel="noopener noreferrer">EQEmu zone list</a>; other files appear by their file name.</p>
+      <h3>Choose individual files instead</h3><p>This option is useful for custom maps. Select one zone’s base file and numbered layers together, such as <code>unrest.txt</code> and <code>unrest_1.txt</code>.</p>
+      <div className="map-import-row"><label>Map maker<select value={provider} onChange={e=>setProvider(e.target.value)} disabled={busy}>{sources.sources.map(s=><option key={s.id} value={s.id}>{s.name}</option>)}<option value="other">My own / another map</option></select></label><button disabled={busy} onClick={()=>picker.current?.click()}><FolderOpen aria-hidden="true"/>{busy?'Reading map…':'Choose zone map files'}</button><input ref={picker} type="file" accept=".txt" multiple hidden onChange={e=>{void load(Array.from(e.target.files||[]));e.target.value='';}}/></div>
+    </details>
   </section>;
 }

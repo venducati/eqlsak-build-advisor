@@ -4,17 +4,17 @@
 
 > **No ChatGPT account or subscription needed.** Download BA and run it on your own computer. EQLSaK is an independent fan project, not affiliated with, sponsored by, or endorsed by OpenAI or ChatGPT. The optional companion website uses ChatGPT Sites hosting; hosting does not imply endorsement.
 
-[Download version 1.6.6 for Windows](https://github.com/venducati/eqlsak-build-advisor/releases/tag/v1.6.6) · [Report a problem or suggest an idea](https://github.com/venducati/eqlsak-build-advisor/issues) · [How to contribute](CONTRIBUTING.md)
+[Download version 1.6.7 for Windows](https://github.com/venducati/eqlsak-build-advisor/releases/tag/v1.6.7) · [Report a problem or suggest an idea](https://github.com/venducati/eqlsak-build-advisor/issues) · [How to contribute](CONTRIBUTING.md)
 
 ## Download and start
 
 1. Open the release page above.
-2. Under **Assets**, download **EQLSaK-Build-Advisor-1.6.6-Setup.exe**.
+2. Under **Assets**, download **EQLSaK-Build-Advisor-1.6.7-Setup.exe**.
 3. Run it on 64-bit Windows and follow the setup steps.
 
 This is a **community preview**. The installer is **unsigned**, so Windows may show Unknown Publisher or a SmartScreen warning. It has not been tested on a fresh Windows installation. Read [the installation guide](DESKTOP_ADVISOR.md) and [the checks and limits](RELEASE_CHECKS.md).
 
-For a version that needs no installation, download **EQLSaK-Offline-Advisor.html** from the same release and open it in your browser. Live file access varies by browser; source checks and automatic log discovery are supported by the Windows app.
+For a version that needs no installation, download **EQLSaK-Offline-Advisor.html** from the same release and open it in your browser. Live file access varies by browser; source checks, automatic map-folder detection and automatic log discovery are supported by the Windows app.
 
 ## Do I need to sign in?
 
@@ -58,6 +58,7 @@ npm run build
 npm run test:ui
 npm run test:audio-ui
 npm run test:overlay-maps-ui
+npm run test:map-folder-ui
 npm run package:win
 ```
 
@@ -71,7 +72,7 @@ Use **Find loot log** beside the trip report to search your character logs. **Lo
 
 The Windows **Combat Meter → Game overlay** keeps log stats above windowed or borderless EQL. Move it, lock it for click-through play, and adjust size or opacity. See [GAME_OVERLAY.md](GAME_OVERLAY.md).
 
-**Maps & Routes** opens Brewall and Good’s map sources and reads your chosen EQ map text files locally. Use layers, landmark search, height filters and manual location markers. Zone and trip cards can open this viewer. These map packs are community EverQuest references; EQL compatibility is not verified. See [MAPS_AND_ROUTES.md](MAPS_AND_ROUTES.md).
+**Maps & Routes** finds installed map folders in the Windows app. Search the dungeon or zone list to load its base map and layers together. BA remembers the folder and last map. The browser edition lets you choose a whole folder once per session. Brewall and Good’s source links remain available under Map downloads & manual files. Use layers, landmark search, height filters and manual location markers. Zone and trip cards can open this viewer. These map packs are community EverQuest references; EQL compatibility is not verified. See [MAPS_AND_ROUTES.md](MAPS_AND_ROUTES.md).
 
 ## Change the rules
 

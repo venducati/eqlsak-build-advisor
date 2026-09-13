@@ -25,6 +25,7 @@ app.whenReady().then(async()=>{
  const tail=new LogTail(log);let paused=false;
  ipcMain.handle('app:visibility',event=>{trusted(event);return false;});
  ipcMain.handle('advisor:history',event=>{trusted(event);return {version:1,sources:{}};});
+ ipcMain.handle('maps:find',event=>{trusted(event);return {folders:[],selectedFolderId:'',lastStem:'',warnings:[],truncated:false};});
  ipcMain.handle('meter:start',async event=>{trusted(event);const s=await tail.start();return {name:'eqlog_Fixture_Test.txt',skipPartial:s.skipPartial};});
  ipcMain.handle('meter:stop',()=>{});ipcMain.handle('meter:pause',(_event,value)=>{paused=value;});
  const run=code=>main.webContents.executeJavaScript(code,true),view=code=>hud.webContents.executeJavaScript(code,true);
@@ -66,7 +67,7 @@ app.whenReady().then(async()=>{
   await click('Build Advisor');await click('Open local map');assert(await run('!document.querySelector(".map-library").closest("[hidden]")'),'zone card opens map view');
   const fixtureFiles=[{name:'fictional.txt',text:'L -200, -100, 0, 200, -100, 0, 0, 0, 0\nL 200,-100,0,200,100,0,0,0,0\nL 200,100,0,-200,100,0,0,0,0\nL -200,100,0,-200,-100,0,0,0,0\n'},{name:'fictional_1.txt',text:'P 0,0,0,0,0,200,2,Fixture_Merchant_(M)\nP 60,30,80,200,0,0,2,Upper_Floor\nP -100,40,0,0,0,0,1,<img_src=x_onerror=alert(1)>\n'}];
   const importFiles=async files=>{await run(`(()=>{const dt=new DataTransfer();for(const f of ${JSON.stringify(files)})dt.items.add(new File([f.text],f.name,{type:'text/plain'}));const picker=document.querySelector('.map-import-row input[type=file]');picker.files=dt.files;picker.dispatchEvent(new Event('change',{bubbles:true}));})()`);await pause(180);};
-  await setValue('.map-import-row select','good');await importFiles(fixtureFiles);assert(await run('document.querySelector(".map-loaded").textContent.includes("fictional")'),'map file imported');
+  await click('Map downloads & manual files','summary');await setValue('.map-import-row select','good');await importFiles(fixtureFiles);assert(await run('document.querySelector(".map-loaded").textContent.includes("fictional")'),'map file imported');
   assert(await run('document.querySelector(".map-landmarks summary").textContent.includes("3 matching")'),'all labels counted');assert(await run('!document.querySelector(".map-landmarks img")'),'hostile label is rendered as plain text');
   await click('Zoom in');await click('Zoom out');await click('Fit map');await click('Move view east');await click('Move view west');await click('Move view north');await click('Move view south');
   await setValue('.map-filter-grid input[placeholder]','Merchant');assert(await run('document.querySelector(".map-landmarks summary").textContent.includes("1 matching")'),'search works');await click('Fixture Merchant (M)Map X 0.0 · Y 0.0 · Height 0.0');

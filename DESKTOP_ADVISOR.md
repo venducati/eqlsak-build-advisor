@@ -1,6 +1,6 @@
 # EQLSaK Build Advisor — Installation and update guide
 
-Version 1.6.6
+Version 1.6.7
 
 Install the app, check for new information, and update your build rules when you choose.
 
@@ -11,7 +11,7 @@ Install the app, check for new information, and update your build rules when you
 ## 01 · Install the app
 
 1. **Use a Windows computer.** The app needs 64-bit Windows.
-2. **Open the setup file.** `EQLSaK-Build-Advisor-1.6.6-Setup.exe`
+2. **Open the setup file.** `EQLSaK-Build-Advisor-1.6.7-Setup.exe`
 3. **Follow the steps on the screen.** Choose where to install the app. Then open EQLSaK Build Advisor from the Start menu or desktop.
 
 > **! Windows may show “Unknown Publisher”**
@@ -28,7 +28,7 @@ In **Combat Meter**, choose a live log and select **Show game overlay**. Use EQL
 
 ## Read local maps
 
-Open **Maps & Routes**. Use the Brewall or Good’s download page, unzip the pack, and choose one zone’s base file and numbered layers. Search landmarks, switch layers, filter by height, or mark a typed /loc. Reimport new files to update the view. Maps stay in memory until BA closes. These EverQuest maps are not verified for EQL. See [Maps & Routes](MAPS_AND_ROUTES.md).
+Open **Maps & Routes**. BA finds installed map folders. Search **Dungeon or zone** and choose a name; the base map and layers open together. BA remembers your folder and last map. If your folder is not found, choose it once. Use **Folder options → Refresh map list** after updating a pack. Search landmarks, switch layers, filter by height, or mark a typed /loc. These EverQuest maps are not verified for EQL. See [Maps & Routes](MAPS_AND_ROUTES.md).
 
 ## Sounds & volume
 
@@ -48,7 +48,7 @@ This is a saved snapshot, not live online status. Import a fresh dump to update 
 
 ## Free downloads and optional support
 
-Download the Windows setup file and matching source from [GitHub Releases](https://github.com/venducati/eqlsak-build-advisor/releases/tag/v1.6.6). All features are free. A donation is never required. No donation page is set up yet, so there is no donation button.
+Download the Windows setup file and matching source from [GitHub Releases](https://github.com/venducati/eqlsak-build-advisor/releases/tag/v1.6.7). All features are free. A donation is never required. No donation page is set up yet, so there is no donation button.
 
 ## See why a class fits
 
@@ -209,7 +209,7 @@ The setup file will be in `desktop/release`. To sign a release, use your own Win
 
 ### What has been checked
 
-See RELEASE_CHECKS.md in the public repository for the checks performed for version 1.6.6.
+See RELEASE_CHECKS.md in the public repository for the checks performed for version 1.6.7.
 
 The app has not yet been tested on a fresh Windows computer. The meter still needs tests during real EQL play. Source checks and file-picking are simulated in the automated interface tests.
 
