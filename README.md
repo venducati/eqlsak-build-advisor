@@ -2,6 +2,8 @@
 
 **Free, offline build planning and combat log tools for EverQuest Legends.**
 
+> **No ChatGPT account or subscription needed.** Download BA and run it on your own computer. EQLSaK is an independent fan project, not affiliated with, sponsored by, or endorsed by OpenAI or ChatGPT. The optional companion website uses ChatGPT Sites hosting; hosting does not imply endorsement.
+
 [Download version 1.6.2 for Windows](https://github.com/venducati/eqlsak-build-advisor/releases/tag/v1.6.2) · [Report a problem or suggest an idea](https://github.com/venducati/eqlsak-build-advisor/issues) · [How to contribute](CONTRIBUTING.md)
 
 ## Download and start
@@ -13,6 +15,18 @@
 This is a **community preview**. The installer is **unsigned**, so Windows may show Unknown Publisher or a SmartScreen warning. It has not been tested on a fresh Windows installation. Read [the installation guide](DESKTOP_ADVISOR.md) and [the checks and limits](RELEASE_CHECKS.md).
 
 For a version that needs no installation, download **EQLSaK-Offline-Advisor.html** from the same release and open it in your browser. Live file access varies by browser; source checks and automatic log discovery are supported by the Windows app.
+
+## Do I need to sign in?
+
+| Where you use EQLSaK | ChatGPT sign-in needed? |
+| --- | --- |
+| Installed Windows Build Advisor | **No.** There is no BA account, activation or sign-in step. |
+| Downloaded offline HTML | **No.** Open the saved file in your browser. |
+| Optional hosted companion and zone guides | **Yes, under the site's current limited-access setting.** Visitors must sign in with an account that has been granted access. |
+
+The hosted companion is separate from the downloadable BA. **Open zone guide** can take you to that website. A ChatGPT sign-in prompt there is for website access, not app activation or a paid BA feature. How often the host asks you to sign in depends on its session rules; BA does not control that.
+
+The host's sign-in screen is managed by OpenAI. The independent project notice on this page does not change that screen or grant website access. For background, see [Sites sharing and sign-in](https://learn.chatgpt.com/docs/sites#control-access-and-secrets).
 
 ## What it does
 
@@ -64,3 +78,5 @@ The first public commit is a reviewed **1.6.1 starting snapshot** of the standal
 Original code uses the [MIT License](LICENSE), which permits forks and redistribution, including commercial use. This project's downloads remain free. Keep the license and identify changes in your fork. See [CONTENT_LICENSE.md](CONTENT_LICENSE.md) for artwork and source-data notes.
 
 EQLSaK is an unofficial fan project. It is not affiliated with, endorsed by, or sponsored by Daybreak Game Company or EverQuest Legends.
+
+It is also independent of OpenAI and ChatGPT. Using development tools or hosting services from a company does not make EQLSaK an official product of that company.
