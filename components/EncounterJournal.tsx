@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { playAdvisorSound } from '../lib/advisor-audio';
 import {
   Backpack,
   Gem,
@@ -154,7 +155,7 @@ export function useTripJournal(input: AdvisorInput, pack: RulePack) {
     stream.current = newTripStream(source, player, makeContext);
     publish();
   }
-  function ingest(events: CombatEvent[]) {
+  function ingest(events: CombatEvent[], notify = false) {
     const existingIds = new Set(stream.current.trips.map((t) => t.id));
     const before = stream.current.trips.filter((t) => t.ended !== null).length;
     appendTripEvents(stream.current, events);
@@ -170,13 +171,17 @@ export function useTripJournal(input: AdvisorInput, pack: RulePack) {
         )
           trip.missed = saved.missed.map((row) => ({ ...row }));
       }
-    if (stream.current.trips.filter((t) => t.ended !== null).length !== before)
+    if (stream.current.trips.filter((t) => t.ended !== null).length !== before) {
       save();
+      if (notify) playAdvisorSound('trip');
+    }
   }
   function finish(at: number, reason: string) {
+    const wasOpen = Boolean(stream.current.active);
     finishTrip(stream.current, at, `You reported leaving: ${reason}`, true);
     publish();
     save();
+    if (wasOpen) playAdvisorSound('trip');
   }
   function addMissed(id: string, row: MissedDrop) {
     if (

@@ -1,7 +1,7 @@
 'use strict';
 const {contextBridge,ipcRenderer}=require('electron');
 contextBridge.exposeInMainWorld('eqlDesktop',{
-  version:'1.6.4',
+  version:'1.6.5',
   getSourceHistory:()=>ipcRenderer.invoke('advisor:history'),
   checkSources:(classes)=>ipcRenderer.invoke('advisor:check-sources',classes),
   getRuleUpdate:(url,expectedHash)=>ipcRenderer.invoke('advisor:rule-update',url,expectedHash),

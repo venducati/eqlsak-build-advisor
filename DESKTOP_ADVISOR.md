@@ -1,6 +1,6 @@
 # EQLSaK Build Advisor — Installation and update guide
 
-Version 1.6.4
+Version 1.6.5
 
 Install the app, check for new information, and update your build rules when you choose.
 
@@ -11,7 +11,7 @@ Install the app, check for new information, and update your build rules when you
 ## 01 · Install the app
 
 1. **Use a Windows computer.** The app needs 64-bit Windows.
-2. **Open the setup file.** `EQLSaK-Build-Advisor-1.6.4-Setup.exe`
+2. **Open the setup file.** `EQLSaK-Build-Advisor-1.6.5-Setup.exe`
 3. **Follow the steps on the screen.** Choose where to install the app. Then open EQLSaK Build Advisor from the Start menu or desktop.
 
 > **! Windows may show “Unknown Publisher”**
@@ -20,9 +20,25 @@ Install the app, check for new information, and update your build rules when you
 
 This Windows app includes **Build Advisor** and **Combat Meter**. Maps, loot, factions, logs, and the command center are still part of the full EQLSaK project. The new zone faction tracker is included in this Windows app; the other full-site tools remain in the larger project.
 
+## Sounds & volume
+
+1. **Turn sounds on.** Choose **Sound Off** at the top of the app. It changes to **Sound On**.
+2. **Pick a comfortable level.** Open **Sound settings**, move **Sound volume**, then try the button, report or trip sound.
+3. **Go quiet at any time.** Choose **Sound On** to turn sounds off right away. Text and charts still show all results.
+
+Sounds start off. Your choice is saved on this device. When you reopen the app, your first click starts sound. Short fantasy taps and chimes mark clicks, completed reports and trips. There is no background music or sound for each combat hit. The sounds work offline.
+
+## My Guild: your parchment roster
+
+Open **My Guild** at the top. In EQL, open the **Guild** window and choose **Dump** with the full member list showing. Back in BA, choose **Import guild dump** and select the text file from your game folder.
+
+The scroll shows members, levels, class trios, rank titles, last-seen dates and locations from that file. Search by name, filter by class or rank, and open **More exported details** for extra fields. Use **Class presence** to see how many members have each class. It counts roster entries, not combat strength.
+
+This is a saved snapshot, not live online status. Import a fresh dump to update it. The roster stays on your device. **Remove saved roster** clears BA's copy without changing your game file.
+
 ## Free downloads and optional support
 
-Download the Windows setup file and matching source from [GitHub Releases](https://github.com/venducati/eqlsak-build-advisor/releases/tag/v1.6.4). All features are free. A donation is never required. No donation page is set up yet, so there is no donation button.
+Download the Windows setup file and matching source from [GitHub Releases](https://github.com/venducati/eqlsak-build-advisor/releases/tag/v1.6.5). All features are free. A donation is never required. No donation page is set up yet, so there is no donation button.
 
 ## See why a class fits
 
@@ -183,7 +199,7 @@ The setup file will be in `desktop/release`. To sign a release, use your own Win
 
 ### What has been checked
 
-See RELEASE_CHECKS.md in the public repository for the checks performed for version 1.6.4.
+See RELEASE_CHECKS.md in the public repository for the checks performed for version 1.6.5.
 
 The app has not yet been tested on a fresh Windows computer. The meter still needs tests during real EQL play. Source checks and file-picking are simulated in the automated interface tests.
 

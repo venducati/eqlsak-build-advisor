@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
+import { playAdvisorSound } from '../lib/advisor-audio';
 import '../app/build-advisor.css';
 import AdvisorUpdates from './AdvisorUpdates';
 import AdvisorIcon from './AdvisorIcon';
@@ -428,6 +429,7 @@ export default function BuildAdvisor({
           e.preventDefault();
           const ids = parseBuild(combo, pack);
           if (ids.length < 2 || ids.length > 3) {
+            playAdvisorSound('notice');
             setComboError(
               'Enter two or three classes with / between them. You can also enter MCE for Monk / Cleric / Enchanter.',
             );
@@ -441,6 +443,7 @@ export default function BuildAdvisor({
           };
           const errors = validateInput(next, pack);
           if (errors.length) {
+            playAdvisorSound('notice');
             setComboError(errors.join(' '));
             return;
           }

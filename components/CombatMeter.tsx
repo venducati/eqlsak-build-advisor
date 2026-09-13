@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useEffectEvent, useRef, useState } from 'react';
+import { playAdvisorSound } from '../lib/advisor-audio';
 import {
   Activity,
   Heart,
@@ -164,20 +165,20 @@ export default function CombatMeter({
       );
     }
   }, [timerRules, timersReady]);
-  function ingest(text: string) {
+  function ingest(text: string, notify = false) {
     const parsed = reader.current
       .push(text)
       .map(parseCombatLine)
       .filter((x): x is CombatEvent => Boolean(x));
     if (!parsed.length) return;
-    tripJournal.ingest(parsed);
+    tripJournal.ingest(parsed, notify);
     const all = [...store.current, ...parsed];
     const excess = Math.max(0, all.length - EVENT_LIMIT);
     if (excess) setDropped((n) => n + excess);
     store.current = all.slice(-EVENT_LIMIT);
     setEvents(store.current);
   }
-  const ingestLive = useEffectEvent((text: string) => ingest(text));
+  const ingestLive = useEffectEvent((text: string) => ingest(text, true));
   const restartLive = useEffectEvent(() => { reset(); tripJournal.restart(); });
   useEffect(() => {
     let disposed = false;
@@ -350,8 +351,10 @@ export default function CombatMeter({
       setMessage(
         'Saved log loaded. The gauges show recorded totals. Press Replay last minute to watch the graphs move. Choose live log to follow new game activity.',
       );
+      playAdvisorSound('report');
     } catch (e) {
       setMessage(String(e));
+      playAdvisorSound('notice');
     } finally {
       setBusy(false);
     }
@@ -372,6 +375,7 @@ export default function CombatMeter({
       setRolling(false);
       setMode('replay');
       setMessage(`Recent log loaded (${(snapshot.bytesRead / 1048576).toFixed(1)} MB read). ${snapshot.partial ? 'Partial history: earlier or unfinished lines are left out; the first trip may be incomplete. ' : ''}Read your trip reports below. This is a saved snapshot. Watch selected log follows new events.`);
+      playAdvisorSound('report');
     } finally {setBusy(false);}
   }
   async function demo() {

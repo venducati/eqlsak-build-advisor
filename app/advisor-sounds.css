@@ -1,0 +1,54 @@
+/* Original fantasy button treatment. No motion or sound on hover. */
+.advisor-client :is(button, summary) { touch-action: manipulation; }
+.advisor-client :is(.build-advisor, .combat-meter) button:not(:disabled) {
+  border-color: #ac8952;
+  box-shadow: inset 0 1px #ffe2a82c, 0 2px 4px #0003;
+}
+.advisor-client :is(.build-advisor, .combat-meter) button:not(:disabled):hover {
+  border-color: #f4d28d;
+  box-shadow: inset 0 1px #ffe2a84c, 0 0 0 1px #f4d28d35;
+}
+.advisor-client :is(.build-advisor, .combat-meter) button:not(:disabled):active {
+  box-shadow: inset 0 2px 6px #0006;
+}
+.advisor-client :is(.build-advisor, .combat-meter, .ba-sound-controls) button:focus-visible {
+  outline: 3px solid #b1eafa; outline-offset: 4px;
+}
+.ba-sound-controls {
+  padding: 16px 20px; border-inline: 1px solid #a27b43;
+  border-bottom: 1px solid #80643f; background: #101d28f5;
+  color: #f4ead7; line-height: 1.75;
+}
+.ba-sound-bar { display: flex; align-items: flex-start; flex-wrap: wrap; gap: 16px 24px; }
+.ba-sound-controls button, .ba-sound-options > summary {
+  display: inline-flex; align-items: center; gap: 10px; min-height: 46px;
+  border: 1px solid #ac8952; border-radius: 7px; padding: 10px 16px;
+  background: linear-gradient(#3c3021, #221c18); color: #ffe3ac;
+  font: 600 15px/1.5 system-ui, sans-serif; cursor: pointer;
+  box-shadow: inset 0 1px #ffe2a82c;
+}
+.ba-sound-controls svg { flex-shrink: 0; width: 21px; height: 21px; }
+.ba-sound-toggle[aria-pressed="true"] { background: linear-gradient(#205362, #142f3d); border-color: #80d5dc; color: #e4fbff; }
+.ba-sound-controls button:hover:not(:disabled), .ba-sound-options > summary:hover { border-color: #ffe4a4; }
+.ba-sound-controls button:disabled { opacity: .55; cursor: default; }
+.ba-sound-options { flex: 1; min-width: min(100%, 230px); }
+.ba-sound-options > summary { list-style: none; background: #1a2631; color: #e8dfd1; border-color: #827053; }
+.ba-sound-options > summary::-webkit-details-marker { display: none; }
+.ba-sound-options > summary::after { content: '+'; padding-left: 12px; }
+.ba-sound-options[open] > summary::after { content: '−'; }
+.ba-sound-options > summary:focus-visible { outline: 3px solid #b1eafa; outline-offset: 4px; }
+.ba-sound-body { max-width: 740px; padding: 4px 0 8px; }
+.ba-sound-body p { margin-block: 18px; }
+.ba-sound-volume { display: grid; grid-template-columns: 1fr auto; gap: 12px; max-width: 480px; margin-block: 24px; font-weight: 600; }
+.ba-sound-volume input { grid-column: 1 / -1; width: 100%; min-height: 32px; margin: 0; accent-color: #91dbe5; }
+.ba-sound-volume input:focus-visible { outline: 3px solid #b1eafa; outline-offset: 4px; }
+.ba-sound-previews { display: flex; flex-wrap: wrap; gap: 12px; }
+.ba-sound-note { color: #c7ccc9; }
+.ba-sound-message { margin: 14px 0 0; }
+.ba-sound-message:empty { display: none; }
+@media (max-width: 640px) {
+  .ba-sound-controls { padding: 16px; }
+  .ba-sound-bar { gap: 16px; }
+  .ba-sound-options { flex-basis: 100%; }
+  .ba-sound-previews { flex-direction: column; align-items: stretch; }
+}

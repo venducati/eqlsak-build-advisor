@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.6.5 — 2026-09-13
+
+- Add original offline fantasy sounds for buttons, navigation, report completion and finished trips. Include saved Sound On/Off and volume controls with previews. Start silent and stop active or pending sound immediately when muted.
+- Add restrained fantasy button finishes while keeping readable spacing, focus outlines and the distinct Combat Meter tab.
+- Add **My Guild**, an original parchment roster with local Guild Dump import, class icons, member search, class/rank filters, level sorting, class-presence bars, pagination and expandable exported details.
+- Support the observed 15-column EQL guild dump and tables with named columns, including UTF-8 and UTF-16 files. Keep imports local, label their source and date, preserve the old roster on failed imports, and allow clearing BA's saved copy.
+- Include no private guild roster or game recordings in public downloads.
+
 ## 1.6.4 — 2026-09-13
 
 - Make the Combat Meter tab stand out with a teal background, bright border, larger waveform icon and clear selected state.

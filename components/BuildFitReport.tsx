@@ -2,6 +2,7 @@ import { useEffect, useId, useRef, useState } from 'react';
 import AdvisorIcon from './AdvisorIcon';
 import { buildFitReport, fitReportText } from '../lib/build-fit-report';
 import type { AdvisorInput, RulePack } from '../lib/build-advisor';
+import { playAdvisorSound } from '../lib/advisor-audio';
 
 export default function BuildFitReport({ input, candidate, pack, onClose, onChoose }: {
   input: AdvisorInput; candidate: string; pack: RulePack; onClose: () => void; onChoose: () => void;
@@ -13,6 +14,7 @@ export default function BuildFitReport({ input, candidate, pack, onClose, onChoo
   useEffect(() => {
     const element = dialog.current;
     element?.showModal();
+    if (report) playAdvisorSound('report');
     return () => element?.close();
   }, []);
   function save() {

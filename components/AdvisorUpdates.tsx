@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
+import { playAdvisorSound } from '../lib/advisor-audio';
 import { recommend, teammateBuilds, validateRulePack } from '../lib/build-advisor';
 import type { AdvisorInput, RulePack } from '../lib/build-advisor';
 import { refreshBuiltInWording } from '../lib/advisor-wording';
@@ -146,12 +147,14 @@ export default function AdvisorUpdates({
           unavailable +
           ' could not be read. Build scores have not changed.',
       );
+      playAdvisorSound(unavailable ? 'notice' : 'report');
     } catch (e) {
       setMessage(
         e instanceof Error
           ? e.message
           : 'The source check failed. Your saved data is still in place.',
       );
+      playAdvisorSound('notice');
     } finally {
       setBusy(false);
       setProgress('');
@@ -178,12 +181,14 @@ export default function AdvisorUpdates({
       setMessage(
         'The update file passed its format check. Read the changes below before using it.',
       );
+      playAdvisorSound('report');
     } catch (e) {
       setMessage(
         e instanceof Error
           ? e.message
           : 'The update failed. Your current rules are still in place.',
       );
+      playAdvisorSound('notice');
     } finally {
       setBusy(false);
       setProgress('');

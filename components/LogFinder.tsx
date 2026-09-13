@@ -1,4 +1,5 @@
 import { useEffect, useImperativeHandle, useRef, useState, type Ref } from 'react';
+import { playAdvisorSound } from '../lib/advisor-audio';
 import LogSetupHelp from './LogSetupHelp';
 import {readRecentBrowserLog, type LogSnapshot} from '../lib/log-history';
 import {
@@ -83,6 +84,7 @@ export default function LogFinder({
           ? `Found ${result.candidates.length} character log${result.candidates.length === 1 ? '' : 's'}. Check the character and server, then start watching.`
           : 'No character logs found. Enter /log on in EQL, then search again or choose your game or Logs folder.',
       );
+      playAdvisorSound(result.candidates.length ? 'report' : 'notice');
     } catch (error) {
       setMessage(
         error instanceof DOMException && error.name === 'AbortError'

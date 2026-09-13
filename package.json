@@ -1,6 +1,6 @@
 {
   "name": "eqlsak-build-advisor",
-  "version": "1.6.4",
+  "version": "1.6.5",
   "private": true,
   "license": "MIT",
   "engines": {
@@ -9,11 +9,12 @@
   "scripts": {
     "build": "node scripts/build-offline-advisor.mjs && node scripts/prepare-advisor-desktop.mjs",
     "package:win": "npm run build && npm --prefix desktop run package:win",
-    "test": "node scripts/test-build-advisor.mjs && node scripts/test-advisor-wording.mjs && node scripts/test-combat-meter.mjs && node scripts/test-combat-visuals.mjs && node scripts/test-encounter-journal.mjs && node scripts/test-zone-factions.mjs && node scripts/test-party-advisor.mjs && node scripts/test-advisor-render.mjs && node scripts/test-log-discovery.mjs",
+    "test": "node scripts/test-build-advisor.mjs && node scripts/test-advisor-wording.mjs && node scripts/test-combat-meter.mjs && node scripts/test-combat-visuals.mjs && node scripts/test-encounter-journal.mjs && node scripts/test-zone-factions.mjs && node scripts/test-party-advisor.mjs && node scripts/test-advisor-render.mjs && node scripts/test-log-discovery.mjs && node scripts/test-advisor-audio.mjs && node scripts/test-guild-roster.mjs",
     "test:desktop": "npm --prefix desktop test",
     "test:ui": "desktop/node_modules/electron/dist/electron.exe scripts/test-desktop-ui.cjs",
     "typecheck": "tsc --noEmit",
-    "lint": "oxlint app components lib offline -A react/react-compiler -A typescript/no-deprecated -A jsx-a11y/prefer-tag-over-role"
+    "lint": "oxlint app components lib offline -A react/react-compiler -A typescript/no-deprecated -A jsx-a11y/prefer-tag-over-role",
+    "test:audio-ui": "desktop/node_modules/electron/dist/electron.exe scripts/test-audio-ui.cjs"
   },
   "dependencies": {
     "@base-ui/react": "1.8.0",

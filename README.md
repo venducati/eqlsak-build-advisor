@@ -4,12 +4,12 @@
 
 > **No ChatGPT account or subscription needed.** Download BA and run it on your own computer. EQLSaK is an independent fan project, not affiliated with, sponsored by, or endorsed by OpenAI or ChatGPT. The optional companion website uses ChatGPT Sites hosting; hosting does not imply endorsement.
 
-[Download version 1.6.4 for Windows](https://github.com/venducati/eqlsak-build-advisor/releases/tag/v1.6.4) · [Report a problem or suggest an idea](https://github.com/venducati/eqlsak-build-advisor/issues) · [How to contribute](CONTRIBUTING.md)
+[Download version 1.6.5 for Windows](https://github.com/venducati/eqlsak-build-advisor/releases/tag/v1.6.5) · [Report a problem or suggest an idea](https://github.com/venducati/eqlsak-build-advisor/issues) · [How to contribute](CONTRIBUTING.md)
 
 ## Download and start
 
 1. Open the release page above.
-2. Under **Assets**, download **EQLSaK-Build-Advisor-1.6.4-Setup.exe**.
+2. Under **Assets**, download **EQLSaK-Build-Advisor-1.6.5-Setup.exe**.
 3. Run it on 64-bit Windows and follow the setup steps.
 
 This is a **community preview**. The installer is **unsigned**, so Windows may show Unknown Publisher or a SmartScreen warning. It has not been tested on a fresh Windows installation. Read [the installation guide](DESKTOP_ADVISOR.md) and [the checks and limits](RELEASE_CHECKS.md).
@@ -36,6 +36,8 @@ The host's sign-in screen is managed by OpenAI. The independent project notice o
 - Save and share builds as local files.
 - Read a combat log locally for damage, critical hits, spell activity, estimated refresh timers, and loot-trip reports.
 - Choose when to check information sources or preview a reviewed rule update. Roll back an applied update.
+- Turn on original fantasy sounds for clicks, reports and completed trips. Set the volume or turn them off from either tool. Sounds start off and work offline.
+- Import a Guild Dump into **My Guild**, an original parchment scroll with member cards, class trios, rank and class filters, search, and class-presence bars. Guild data stays on your device.
 
 The advisor uses **local rules and fixed scoring**, with no AI API, cloud model, or remote inference. Identical inputs and rules give identical recommendations. Sources and player opinions are labeled; planning scores are estimates, not measured damage or guaranteed game outcomes.
 
@@ -54,6 +56,7 @@ npm run lint
 npm run test:desktop
 npm run build
 npm run test:ui
+npm run test:audio-ui
 npm run package:win
 ```
 
@@ -64,6 +67,8 @@ The offline HTML is written to `outputs/`. The installer is written to `desktop/
 Use **Find loot log** beside the trip report to search your character logs. **Load recent trips** reads up to the last 4 MB of a selected file, including large logs. **Watch selected log** follows new lines. If no log appears, BA opens simple in-game setup steps. The report shows its source file and recorded time span. See [TRIP_LOG_GUIDE.md](TRIP_LOG_GUIDE.md).
 
 ## Change the rules
+
+For sound controls and the editable local cue definitions, see [Interface sounds](INTERFACE_SOUNDS.md).
 
 Start with [BUILD_ADVISOR.md](BUILD_ADVISOR.md). Class ratings, weights, synergy rules, source evidence, zones, faction plans and trip strategies live in `data/`. Preserve the distinction between **User-verified EQL**, **EQL-sourced**, and **heuristic/inference**. A changed webpage is a reason to review a rule; it does not update the score automatically.
 

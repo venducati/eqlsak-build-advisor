@@ -23,6 +23,8 @@ Keep recommendation logic deterministic and local. Preserve accessibility, reada
 
 The installation guide has matching spacing in its own style block. Keep that standalone file readable when opened directly or printed.
 
+Sounds must stay optional, brief and local. Keep the saved on/off and volume controls. Use original cues, preserve visual feedback, and avoid sounds for repeated combat ticks or typing. See `INTERFACE_SOUNDS.md` for completion hooks and checks.
+
 ## Keep the record useful
 
 - Use clear commit messages and link relevant issues in pull requests.
