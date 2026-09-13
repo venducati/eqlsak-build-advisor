@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.6.6 — 2026-09-13
+
+- Add a Windows game overlay with local log stats, critical-hit rate, damage taken, healing, damage graph and up to three estimated spell timers. Keep updates running while BA is minimized; label demo, saved, paused and stale data.
+- Add drag placement, click-through locking, three sizes, opacity, optional show/hide and lock shortcuts, saved display preferences and monitor recovery. Keep the overlay hidden at startup and release it when BA closes.
+- Add Maps & Routes with credited Brewall and Good’s source pages, local EQ text-map import, base/numbered layers, landmark search, height filters, pan/zoom, an accessible label list and manual /loc markers.
+- Add Open local map actions to zone and trip cards. Include map pages in optional source checks. Imported map details are labeled as community EverQuest references with unverified EQL compatibility; no map pack is redistributed or used to change build scores.
+- Update the color-coded installation guide and add focused overlay/map guides. Preserve sounds, guild, advisor, combat, faction and trip tools.
+
+
 ## 1.6.5 — 2026-09-13
 
 - Add original offline fantasy sounds for buttons, navigation, report completion and finished trips. Include saved Sound On/Off and volume controls with previews. Start silent and stop active or pending sound immediately when muted.

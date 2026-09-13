@@ -1,0 +1,11 @@
+{
+  "reviewedOn": "2026-09-13",
+  "compatibility": "Community EverQuest reference. EQL compatibility is not verified. Check zone layout, NPCs, portals and expansion before following a map.",
+  "sources": [
+    {"id":"brewall","name":"Brewall’s Maps","creator":"Brewall Rainsinger","url":"https://www.eqmaps.info/eq-map-files/","worldUrl":"https://www.eqmaps.info/eq-world-map/","summary":"Detailed zone maps with landmarks and color guides.","credit":"Map files belong to their creators. Download from Brewall, then choose your local files here."},
+    {"id":"good","name":"Good’s Maps","creator":"Goodurden and contributors","url":"https://www.redguides.com/community/resources/goods-everquest-map-pack.303/","updatesUrl":"https://www.redguides.com/community/resources/goods-everquest-map-pack.303/updates","summary":"Detailed maps with separate layers for places, tasks and rare targets.","credit":"Map files belong to their creators. Download from Good’s resource page, then choose your local files here."}
+  ],
+  "goodLabelKey":[
+    {"code":"GM","meaning":"Class trainer"},{"code":"Q","meaning":"Quest"},{"code":"T","meaning":"Solo task"},{"code":"Mi","meaning":"Mission"},{"code":"M","meaning":"Merchant"},{"code":"R","meaning":"Raid"},{"code":"GS","meaning":"Ground spawn"},{"code":"S","meaning":"Spell"},{"code":"D","meaning":"Discipline"},{"code":"P","meaning":"Parcel"}
+  ]
+}

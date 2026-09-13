@@ -1,0 +1,84 @@
+// Runs hidden native windows, real isolated preloads/IPC, invented log/map files and no network.
+const {app,BrowserWindow,ipcMain,screen,session}=require('electron');
+const {resolve,join}=require('node:path');
+const {pathToFileURL}=require('node:url');
+const {mkdirSync,writeFileSync,readFileSync,appendFileSync}=require('node:fs');
+const {createOverlay}=require('../desktop/overlay.cjs');
+const {LogTail}=require('../desktop/log-tail.cjs');
+const dir=resolve('work/overlay-maps-ui-'+Date.now());mkdirSync(dir,{recursive:true});app.setPath('userData',join(dir,'profile'));app.disableHardwareAcceleration();
+const log=join(dir,'eqlog_Fixture_Test.txt');writeFileSync(log,'');
+const hotkeys=new Map(),nativeCalls=[];let hud,main,manager;
+function HiddenOverlay(options){hud=new BrowserWindow({...options,show:false});hud.showInactive=()=>nativeCalls.push('showInactive');const ignore=hud.setIgnoreMouseEvents.bind(hud);hud.setIgnoreMouseEvents=(flag,options)=>{nativeCalls.push(['ignore',flag]);ignore(flag,options);};return hud;}
+const pause=ms=>new Promise(r=>setTimeout(r,ms));const assert=(ok,message)=>{if(!ok)throw Error(message);};
+const waitFor=async(fn,message)=>{for(let i=0;i<40;i++){if(await fn())return;await pause(100);}throw Error(message);};
+app.whenReady().then(async()=>{
+ const deadline=setTimeout(()=>{console.error('Overlay / maps UI deadline exceeded.');app.exit(1);},55000);
+ const errors=[];
+ session.defaultSession.webRequest.onBeforeRequest({urls:['http://*/*','https://*/*']},(_d,cb)=>cb({cancel:true}));
+ main=new BrowserWindow({show:false,width:1320,height:940,webPreferences:{preload:resolve('desktop/preload.cjs'),contextIsolation:true,sandbox:true,nodeIntegration:false}});
+ main.show=()=>nativeCalls.push('main-show');main.focus=()=>nativeCalls.push('main-focus');main.restore=()=>nativeCalls.push('main-restore');
+ main.webContents.setAudioMuted(true);main.webContents.setWindowOpenHandler(()=>({action:'deny'}));main.webContents.debugger.attach('1.3');
+ main.webContents.on('console-message',(_event,level,message)=>{if(level===3)errors.push(message);});
+ const entry=pathToFileURL(resolve('desktop/ui/index.html')).href;
+ const trusted=event=>{if(event.sender!==main.webContents||event.senderFrame!==main.webContents.mainFrame||event.senderFrame.url!==entry)throw Error('Untrusted caller');};
+ manager=createOverlay({app,BrowserWindow:HiddenOverlay,ipcMain,screen,globalShortcut:{register:(key,fn)=>{hotkeys.set(key,fn);return true;},unregister:key=>hotkeys.delete(key)},mainWindow:()=>main,trustedMain:trusted});
+ const tail=new LogTail(log);let paused=false;
+ ipcMain.handle('app:visibility',event=>{trusted(event);return false;});
+ ipcMain.handle('advisor:history',event=>{trusted(event);return {version:1,sources:{}};});
+ ipcMain.handle('meter:start',async event=>{trusted(event);const s=await tail.start();return {name:'eqlog_Fixture_Test.txt',skipPartial:s.skipPartial};});
+ ipcMain.handle('meter:stop',()=>{});ipcMain.handle('meter:pause',(_event,value)=>{paused=value;});
+ const run=code=>main.webContents.executeJavaScript(code,true),view=code=>hud.webContents.executeJavaScript(code,true);
+ const click=async(label,selector='button')=>{await run(`(()=>{const el=[...document.querySelectorAll(${JSON.stringify(selector)})].find(e=>!e.closest('[hidden]')&&(e.textContent.trim()===${JSON.stringify(label)}||e.getAttribute('aria-label')===${JSON.stringify(label)}));if(!el||el.disabled)throw Error('Missing control: '+${JSON.stringify(label)});el.click();})()`);await pause(120);};
+ const setValue=async(selector,value)=>{await run(`(()=>{const el=document.querySelector(${JSON.stringify(selector)});Object.getOwnPropertyDescriptor(el.tagName==='SELECT'?HTMLSelectElement.prototype:HTMLInputElement.prototype,'value').set.call(el,${JSON.stringify(value)});el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}));})()`);await pause(100);};
+  const screenshot=async(win,name)=>{win.setSize(win.getSize()[0]+1,win.getSize()[1]);await pause(180);if(win===main&&name.startsWith('maps-'))await waitFor(()=>run('(()=>{const c=document.querySelector(".map-view canvas");return Math.abs(c.width-c.clientWidth*Math.min(2,devicePixelRatio))<2})()'),'map bitmap must match visible size');writeFileSync(join(dir,name),(await win.webContents.capturePage()).toPNG());};
+ try{
+  await main.loadFile(resolve('desktop/ui/index.html'));await pause(220);await main.webContents.debugger.sendCommand('Emulation.setFocusEmulationEnabled',{enabled:true});
+  assert(!manager.state().visible,'overlay starts hidden');await click('Combat Meter');await click('Choose live log');
+  await click('Show game overlay');await waitFor(()=>hud&&hud.webContents.executeJavaScript('!!document.querySelector(".game-overlay")'),'HUD failed to mount');
+  assert(nativeCalls.includes('showInactive'),'show does not request focus');assert(main.webContents.getBackgroundThrottling()===false,'main updates are not throttled');assert(hud.isAlwaysOnTop(),'always above ordinary windows');
+  const stamp=new Date().toISOString();appendFileSync(log,`[${stamp}] You slash a target for 120 points of damage. (Critical)\n[${stamp}] a target has taken 30 damage from your Burn.\n[${stamp}] a target hits YOU for 5 points of damage.\n`);
+  const batch=await tail.poll();main.webContents.send('meter:data',batch);
+  await waitFor(()=>view('document.querySelector(".overlay-secondary").textContent.includes("150")'),'real log tail did not reach HUD');
+  assert(await view('document.body.textContent.includes("LIVE LOG")'),'live label');assert(await view('document.querySelector(".overlay-stats").textContent.includes("5")'),'incoming damage');
+  await click('Lock for play');assert(manager.state().locked,'lock state');assert(!hud.isFocusable(),'locked overlay cannot capture keyboard');assert(nativeCalls.some(c=>Array.isArray(c)&&c[0]==='ignore'&&c[1]),'locked mouse pass-through');
+  hotkeys.get('CommandOrControl+Shift+F11')();await pause(80);assert(!manager.state().locked&&hud.isFocusable(),'unlock recovery');
+  await click('Overlay size, transparency & shortcuts','summary');
+  await setValue('.cm-overlay-options select','large');assert(hud.getBounds().width===456,'large width');assert(Math.abs(hud.webContents.getZoomFactor()-1.2)<.01,'native scaling');
+  await setValue('.cm-overlay-options input[type=range]','65');assert(Math.abs(hud.getOpacity()-.65)<.02,'native opacity');
+  await setValue('.cm-overlay-options select','medium');await setValue('.cm-overlay-options input[type=range]','100');
+  await click('Pause');assert(paused,'pause reached log controller');await waitFor(()=>view('document.body.textContent.includes("PAUSED")'),'HUD paused label');
+  await click('Resume');await click('Build Advisor');main.minimize();
+  const newer=new Date().toISOString();appendFileSync(log,`[${newer}] You slash a target for 25 points of damage.\n`);main.webContents.send('meter:data',await tail.poll());
+  await waitFor(()=>view('document.querySelector(".overlay-secondary").textContent.includes("175")'),'hidden BA did not keep HUD updated');
+  assert(await view('typeof window.eqlMeter==="undefined"&&typeof window.eqlDesktop==="undefined"&&typeof require==="undefined"'),'HUD has no broader bridge');
+  await view(`window.eqlOverlayView.control({action:'controls'})`);await pause(150);main.hide();assert(await run('!document.querySelector(".combat-meter").closest("[hidden]")'),'HUD controls return to meter');
+  const record=await view('window.eqlOverlayView.get()');
+  await run('window.eqlOverlay.publish({mode:"live",stats:{dps:999}})');await pause(80);assert((await view('window.eqlOverlayView.get()')).frame.stats.damage===record.frame.stats.damage,'malformed frames dropped');
+  await view(`window.eqlOverlayView.control({action:'settings',settings:{opacity:1}}).then(()=>{throw Error('bad')},()=>true)`);
+  await click('Hide game overlay');assert(!manager.state().visible&&main.webContents.getBackgroundThrottling(),'hide releases background work');
+  await run(`Promise.all([window.eqlOverlay.control({action:'show'}),window.eqlOverlay.control({action:'hide'})])`);assert(!manager.state().visible,'hide wins race');await click('Show game overlay');
+  const frame={...record.frame,effects:[{ability:'Test Ward',target:'You',kind:'buff',status:'timed',remaining:48},{ability:'Test Burn',target:'a target',kind:'DoT',status:'soon',remaining:7},{ability:'Long Debuff Name To Check Truncation',target:'a target',kind:'debuff',status:'due',remaining:0}]};
+  await click('Stop');await run(`window.eqlOverlay.publish(${JSON.stringify(frame)})`);await pause(100);await screenshot(hud,'overlay-medium.png');
+  const fit=await view(`(()=>{const root=document.querySelector('.game-overlay'),footer=document.querySelector('footer');return {root:root.getBoundingClientRect().bottom,footer:footer.getBoundingClientRect().bottom,scroll:root.scrollHeight,client:root.clientHeight}})()`);assert(fit.footer<=fit.root+1&&fit.scroll<=fit.client+1,'HUD content fits without clipping');
+  await click('Hide game overlay');manager.clear();
+  // A separate hidden window avoids asking the OS to restore a minimized test window.
+  main.destroy();main=new BrowserWindow({show:false,width:1320,height:940,webPreferences:{preload:resolve('desktop/preload.cjs'),contextIsolation:true,sandbox:true,nodeIntegration:false,backgroundThrottling:false}});main.webContents.setAudioMuted(true);main.webContents.setWindowOpenHandler(()=>({action:'deny'}));main.webContents.debugger.attach('1.3');main.webContents.on('console-message',(_event,level,message)=>{if(level===3)errors.push(message);});await main.loadFile(resolve('desktop/ui/index.html'));await pause(200);
+  await click('Build Advisor');await click('Open local map');assert(await run('!document.querySelector(".map-library").closest("[hidden]")'),'zone card opens map view');
+  const fixtureFiles=[{name:'fictional.txt',text:'L -200, -100, 0, 200, -100, 0, 0, 0, 0\nL 200,-100,0,200,100,0,0,0,0\nL 200,100,0,-200,100,0,0,0,0\nL -200,100,0,-200,-100,0,0,0,0\n'},{name:'fictional_1.txt',text:'P 0,0,0,0,0,200,2,Fixture_Merchant_(M)\nP 60,30,80,200,0,0,2,Upper_Floor\nP -100,40,0,0,0,0,1,<img_src=x_onerror=alert(1)>\n'}];
+  const importFiles=async files=>{await run(`(()=>{const dt=new DataTransfer();for(const f of ${JSON.stringify(files)})dt.items.add(new File([f.text],f.name,{type:'text/plain'}));const picker=document.querySelector('.map-import-row input[type=file]');picker.files=dt.files;picker.dispatchEvent(new Event('change',{bubbles:true}));})()`);await pause(180);};
+  await setValue('.map-import-row select','good');await importFiles(fixtureFiles);assert(await run('document.querySelector(".map-loaded").textContent.includes("fictional")'),'map file imported');
+  assert(await run('document.querySelector(".map-landmarks summary").textContent.includes("3 matching")'),'all labels counted');assert(await run('!document.querySelector(".map-landmarks img")'),'hostile label is rendered as plain text');
+  await click('Zoom in');await click('Zoom out');await click('Fit map');await click('Move view east');await click('Move view west');await click('Move view north');await click('Move view south');
+  await setValue('.map-filter-grid input[placeholder]','Merchant');assert(await run('document.querySelector(".map-landmarks summary").textContent.includes("1 matching")'),'search works');await click('Fixture Merchant (M)Map X 0.0 · Y 0.0 · Height 0.0');
+  await setValue('.map-filter-grid input[placeholder]','');await setValue('.map-filter-grid input[type=number]','0');assert(await run('document.querySelector(".map-landmarks summary").textContent.includes("2 matching")'),'height filter');
+  await run(`document.querySelectorAll('.map-layer-controls input')[1].click()`);await pause(80);assert(await run('document.querySelector(".map-landmarks summary").textContent.includes("0 matching")'),'layer filter');await run(`document.querySelectorAll('.map-layer-controls input')[1].click()`);
+  await setValue('.map-location input','100, -200, 0');await click('Mark location');assert(await run('document.querySelector(".map-message").textContent.includes("typed location")'),'location marker');await click('Clear location');await click('Good’s map label key','summary');
+  await importFiles([{name:'other.txt',text:fixtureFiles[0].text},fixtureFiles[1]]);assert(await run('document.querySelector(".map-message").textContent.includes("different zones")'),'mixed zones rejected');assert(await run('document.querySelector(".map-loaded").textContent.includes("fictional")'),'bad import preserves map');
+  main.webContents.setBackgroundThrottling(false);await click('Fit map');
+  for(const width of [1320,420]){main.setSize(width,940);await pause(180);await run('document.querySelector(".map-tools").scrollIntoView({block:"start"})');await screenshot(main,'maps-'+width+'.png');assert(await run(`window.innerWidth<=${width+1}&&window.innerWidth>${width-30}&&document.documentElement.scrollWidth<=window.innerWidth`),'responsive map viewport');}
+  await click('Clear map from BA');assert(await run('!!document.querySelector(".map-empty")'),'clear only removes local view');
+  const settings=JSON.parse(readFileSync(join(dir,'profile','overlay-settings.json'),'utf8'));assert(settings.size==='medium'&&settings.opacity===1,'preferences saved');
+  manager.dispose();assert(hotkeys.size===0&&hud.isDestroyed(),'cleanup destroys HUD and releases shortcuts');assert(!errors.length,errors.join('\n'));
+  writeFileSync(join(dir,'result.json'),JSON.stringify({nativeCalls,settings,fit,errors},null,2));clearTimeout(deadline);console.log('OVERLAY_MAPS_UI_OK: native overlay, live tail, lock, scaling, minimized updates, recovery, layers, search, height, markers and safe imports. '+dir);app.exit(0);
+ }catch(error){console.error(error);console.error('Details: '+dir);if(main&&!main.isDestroyed())writeFileSync(join(dir,'failure.txt'),await run('document.body.innerText'));if(hud&&!hud.isDestroyed())writeFileSync(join(dir,'overlay-failure.png'),(await hud.webContents.capturePage()).toPNG());app.exit(1);}
+});

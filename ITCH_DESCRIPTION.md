@@ -25,11 +25,15 @@ Search the zone list, review the available hunt advice, and weigh your party's f
 
 Use the faction tracker to enter or import your standing, set a goal, and view your progress. Read which listed hunts may help one faction while hurting another.
 
+Open **Maps & Routes** for links to Brewall and Good’s maps. Load a zone’s map files from your computer, search landmarks, switch layers, filter by height, and mark a spot from `/loc`. The maps are community EverQuest references; EQL compatibility is not verified. Download packs from their creators; no map packs are bundled with BA.
+
 ### ⚔️ Bring your combat log to life
 
 The Windows app can search common EQL log folders and let you choose the character log to watch. Live gauges and spike charts show recorded damage, critical hits, damage-over-time activity, and healing.
 
 Spell activity cards and configurable timers help you track effects and refresh cues. Load a saved log to review recorded totals or replay its last minute. A built-in demo lets you explore the displays before loading your own log.
+
+The Windows **game overlay** keeps a compact stats panel above windowed or borderless EQL. Move it, set its size and opacity, then lock it so clicks pass through to the game. Keep BA running in the background while you play. Data comes from your selected combat log; current HP is not available and spell times are estimates.
 
 ### 💎 Learn from each trip
 

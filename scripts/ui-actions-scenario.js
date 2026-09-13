@@ -16,7 +16,9 @@
   assert(!document.querySelector('.ba-project-support a'),'No placeholder donation link');
   await open('Game words explained');assert(document.querySelectorAll('.ba-glossary-word').length===21,'Glossary rows');checks.push('glossary and free-use footer');
   const classSelects=()=>[...document.querySelectorAll('.ba-controls select')].slice(0,3);
-  for (const button of [...document.querySelectorAll('.ba-choice button')]) {
+  const reportButtons=[...document.querySelectorAll('.ba-choice button')].filter(button=>text(button).startsWith('See why '));
+  assert(reportButtons.length===14,'All 14 third-class reports are available');
+  for (const button of reportButtons) {
     const initial=classSelects().map(el=>el.value).join('/');
     button.click();await wait();
     const dialog=document.querySelector('dialog[open]');assert(dialog,'Fit report opens for '+text(button));

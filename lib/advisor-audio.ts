@@ -58,7 +58,7 @@ export class AdvisorAudio {
 
   constructor(options: { createContext?: () => AudioContext; visible?: () => boolean; clock?: () => number } = {}) {
     this.createContext = options.createContext || (() => new AudioContext());
-    this.visible = options.visible || (() => typeof document !== 'undefined' && document.visibilityState !== 'hidden');
+    this.visible = options.visible || (() => typeof document !== 'undefined' && document.visibilityState !== 'hidden' && window.eqlWindow?.isVisible() !== false);
     this.clock = options.clock || (() => performance.now());
   }
 

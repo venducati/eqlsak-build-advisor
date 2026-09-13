@@ -1,4 +1,7 @@
 import {writeFileSync,mkdirSync,copyFileSync} from 'node:fs';
+import {build} from 'vite';
+import react from '@vitejs/plugin-react';
+import {resolve} from 'node:path';
 import {createHash} from 'node:crypto';
 import {defaultRules} from '../lib/build-advisor.ts';
 import {muralFile,shellStyles} from './advisor-theme.mjs';
@@ -6,13 +9,16 @@ import factionData from '../data/zone-factions.json' with {type:'json'};
 import zoneCatalog from '../data/zone-catalog.json' with {type:'json'};
 import combatMessages from '../data/combat-messages.json' with {type:'json'};
 import tripStrategy from '../data/trip-strategy.json' with {type:'json'};
+import mapSources from '../data/map-sources.json' with {type:'json'};
 const sources=new Map();
 for(const evidence of defaultRules.evidence) for(const link of evidence.links) {
  const old=sources.get(link.url);
  sources.set(link.url,{id:createHash('sha256').update(link.url).digest('hex').slice(0,16),title:link.title,url:link.url,classes:old?(!old.classes.length||!evidence.classes.length?[]:[...new Set([...old.classes,...evidence.classes])]):evidence.classes});
 }
 mkdirSync('desktop/ui',{recursive:true});
-for (const link of [...combatMessages.sources, ...tripStrategy.sources]) {
+await build({configFile:false,plugins:[react()],define:{'process.env.NODE_ENV':'"production"'},build:{outDir:resolve('desktop/ui'),emptyOutDir:false,lib:{entry:resolve('offline/overlay-entry.tsx'),name:'EQLSaKOverlay',formats:['iife'],fileName:()=> 'overlay.js',cssFileName:'overlay'},cssCodeSplit:false}});
+writeFileSync('desktop/ui/overlay.html',`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EQLSaK Game Overlay</title><link rel="stylesheet" href="./overlay.css"></head><body><div id="root"></div><script src="./overlay.js"></script></body></html>`);
+for (const link of [...combatMessages.sources, ...tripStrategy.sources, ...mapSources.sources.map(s=>({url:s.url,title:s.name+' map reference (EQL not verified)'}))]) {
  if (!sources.has(link.url)) sources.set(link.url,{id:createHash('sha256').update(link.url).digest('hex').slice(0,16),title:link.title,url:link.url,classes:[]});
 }
 for (const url of new Set([...factionData.actions.flatMap(a=>a.sources), ...factionData.factions.flatMap(f=>f.sources), ...zoneCatalog.sources.map(s=>s.url)])) {

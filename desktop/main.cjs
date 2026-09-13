@@ -1,5 +1,5 @@
 'use strict';
-const {app,BrowserWindow,ipcMain,shell,session,dialog}=require('electron');
+const {app,BrowserWindow,ipcMain,shell,session,dialog,screen,globalShortcut}=require('electron');
 const {readFileSync,mkdirSync,writeFileSync,renameSync}=require('node:fs');
 const {join}=require('node:path');
 const {pathToFileURL}=require('node:url');
@@ -8,6 +8,7 @@ const {fetchText,extractSource,compareSnapshot,validateURL}=require('./network.c
 const {LogTail}=require('./log-tail.cjs');
 const {LogDiscovery}=require('./log-discovery.cjs');
 const {readRecentLog}=require('./log-history.cjs');
+const {createOverlay}=require('./overlay.cjs');
 const {basename,extname}=require('node:path');
 const manifest=require('./source-manifest.json');
 const entry=pathToFileURL(join(__dirname,'ui','index.html')).href;
@@ -15,10 +16,12 @@ const smoke=process.argv.includes('--smoke-test');
 app.setAppUserModelId('community.eqlsak.buildadvisor');
 app.disableHardwareAcceleration();
 if(smoke) app.setPath('userData',join(__dirname,'..','work','desktop-smoke-data'));
-let window,busy=false;
+let window,overlay,busy=false;
 function trusted(event) {
   if(!window || event.sender!==window.webContents || event.senderFrame!==window.webContents.mainFrame || event.senderFrame.url!==entry) throw new Error('Untrusted update request.');
 }
+function appVisible(){return Boolean(window&&!window.isDestroyed()&&window.isVisible()&&!window.isMinimized());}
+ipcMain.handle('app:visibility',event=>{trusted(event);return appVisible();});
 let tail=null,tailPaused=false,tailBusy=false,tailGeneration=0;
 let discovery;
 function logFinder(){return discovery||(discovery=new LogDiscovery(join(app.getPath('userData'),'log-discovery.json')));}
@@ -53,7 +56,7 @@ const tailTimer=setInterval(async()=>{
  catch(e){if(current===tailGeneration&&!window.isDestroyed()){tailPaused=true;window.webContents.send('meter:data',{text:'',reset:false,backlog:0,error:'Log reading paused: '+e.message});}}
  finally{tailBusy=false;}
 },500);
-app.on('before-quit',()=>clearInterval(tailTimer));
+app.on('before-quit',()=>{clearInterval(tailTimer);overlay?.dispose();overlay=null;});
 function historyPath(){return join(app.getPath('userData'),'source-history.json');}
 function history(){
   try {const h=JSON.parse(readFileSync(historyPath(),'utf8'));return h&&h.version===1&&h.sources&&typeof h.sources==='object'?h:{version:1,sources:{}};}
@@ -108,13 +111,20 @@ app.whenReady().then(async()=>{
   // The renderer only needs local assets. Explicit update downloads use the main process.
   session.defaultSession.webRequest.onBeforeRequest({urls:['http://*/*','https://*/*']},(_details,callback)=>callback({cancel:true}));
   window=new BrowserWindow({width:1320,height:940,minWidth:760,minHeight:600,show:!smoke,backgroundColor:'#120f0c',title:'EQLSaK Build Advisor',icon:join(__dirname,'assets','advisor.ico'),autoHideMenuBar:true,webPreferences:{preload:join(__dirname,'preload.cjs'),contextIsolation:true,nodeIntegration:false,sandbox:true,webSecurity:true}});
+  overlay=createOverlay({app,BrowserWindow,ipcMain,screen,globalShortcut,mainWindow:()=>window,trustedMain:trusted});
+  const sendVisibility=()=>{if(window&&!window.isDestroyed())window.webContents.send('app:visibility',appVisible());};
+  for(const name of ['minimize','restore','show','hide'])window.on(name,sendVisibility);
+  window.webContents.on('did-finish-load',sendVisibility);
+  window.webContents.on('did-start-loading',()=>{overlay?.clear();tailGeneration++;tail=null;});
+  window.webContents.on('render-process-gone',()=>{overlay?.clear();tailGeneration++;tail=null;});
+  window.on('closed',()=>{overlay?.dispose();overlay=null;window=null;app.quit();});
   const external=raw=>{try {const url=validateURL(raw);void shell.openExternal(url.href);}catch{/* Ignore non-web destinations. */}};
   window.webContents.setWindowOpenHandler(({url})=>{external(url);return {action:'deny'};});
   window.webContents.on('will-navigate',(event,url)=>{if(url!==entry){event.preventDefault();external(url);}});
   if(smoke) {
     const timer=setTimeout(()=>{console.error('Desktop load timed out.');app.exit(1);},25000);
     window.webContents.on('did-fail-load',(_e,code,description)=>{clearTimeout(timer);console.error('Desktop load failed',code,description);app.exit(1);});
-    window.webContents.on('did-finish-load',async()=>{try{const info=await window.webContents.executeJavaScript('(async()=>({version:window.eqlDesktop.version,history:await window.eqlDesktop.getSourceHistory(),meter:typeof window.eqlMeter.start,detect:typeof window.eqlMeter.detect,recent:typeof window.eqlMeter.readRecent,folder:typeof window.eqlMeter.chooseFolder,watch:typeof window.eqlMeter.startDetected,headingVersion:document.querySelector(".ba-app-version")?.textContent,glossaryGroups:document.querySelectorAll(".ba-glossary-group").length,glossaryWords:document.querySelectorAll(".ba-glossary-word").length}))()');if(info.version!==app.getVersion()||info.headingVersion!=="v"+app.getVersion()||info.history.version!==1||[info.meter,info.detect,info.recent,info.folder,info.watch].some(value=>value!=='function'))throw new Error('Desktop bridge check failed.');if(info.glossaryGroups!==6||info.glossaryWords!==21)throw new Error('Packaged glossary matrix did not render.');clearTimeout(timer);console.log('DESKTOP_SMOKE_OK: version '+info.version+', glossary matrix, advisor, updates, combat meter, log discovery and recent-history bridges loaded.');app.exit(0);}catch(e){console.error(e);app.exit(1);}});
+    window.webContents.on('did-finish-load',async()=>{try{const info=await window.webContents.executeJavaScript('(async()=>({version:window.eqlDesktop.version,history:await window.eqlDesktop.getSourceHistory(),overlay:await window.eqlOverlay.getState(),visibility:window.eqlWindow.isVisible(),mapSources:document.querySelectorAll(".map-source-grid article").length,meter:typeof window.eqlMeter.start,detect:typeof window.eqlMeter.detect,recent:typeof window.eqlMeter.readRecent,folder:typeof window.eqlMeter.chooseFolder,watch:typeof window.eqlMeter.startDetected,headingVersion:document.querySelector(".ba-app-version")?.textContent,glossaryGroups:document.querySelectorAll(".ba-glossary-group").length,glossaryWords:document.querySelectorAll(".ba-glossary-word").length}))()');if(info.overlay.visible!==false||info.visibility!==false||info.mapSources!==2)throw new Error('Overlay or maps bridge check failed.');if(info.version!==app.getVersion()||info.headingVersion!=="v"+app.getVersion()||info.history.version!==1||[info.meter,info.detect,info.recent,info.folder,info.watch].some(value=>value!=='function'))throw new Error('Desktop bridge check failed.');if(info.glossaryGroups!==6||info.glossaryWords!==21)throw new Error('Packaged glossary matrix did not render.');clearTimeout(timer);console.log('DESKTOP_SMOKE_OK: version '+info.version+', glossary matrix, advisor, updates, combat meter, overlay, maps, log discovery and recent-history bridges loaded.');app.exit(0);}catch(e){console.error(e);app.exit(1);}});
     window.webContents.on('render-process-gone',(_e,details)=>{console.error(details);app.exit(1);});
   }
   await window.loadFile(join(__dirname,'ui','index.html'));

@@ -1,5 +1,7 @@
 import { ExternalLink, MapPin } from 'lucide-react';
 import { zoneGuideURL } from '../lib/zone-navigation';
+import { useContext } from 'react';
+import { LocalMapContext } from './LocalMapContext';
 
 export default function ZoneGuideLink({
   zone,
@@ -8,12 +10,13 @@ export default function ZoneGuideLink({
   zone: string;
   onZone?: (zone: string) => void;
 }) {
+  const openMap=useContext(LocalMapContext);
   const label = (
     <>
       <MapPin size={16} aria-hidden="true" /> Open zone guide
     </>
   );
-  return onZone ? (
+  const guide=onZone ? (
     <button
       type="button"
       className="ba-zone-guide"
@@ -33,4 +36,5 @@ export default function ZoneGuideLink({
       <ExternalLink size={14} aria-hidden="true" />
     </a>
   );
+  return <>{guide}{openMap&&<button type="button" className="ba-zone-guide" onClick={()=>openMap(zone)}><MapPin size={16} aria-hidden="true"/> Open local map</button>}</>;
 }

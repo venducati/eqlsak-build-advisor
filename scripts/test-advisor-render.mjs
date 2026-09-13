@@ -14,6 +14,7 @@ for (const file of [
   'components/PartyAdvisor.tsx',
   'components/AdvisorIcon.tsx',
   'components/ZoneGuideLink.tsx',
+  'components/LocalMapContext.tsx',
   'lib/zone-navigation.ts',
   'lib/zone-catalog.ts',
   'lib/party-advisor.ts',

@@ -13,6 +13,7 @@ export default function AdvisorSoundControls() {
       advisorAudio.configure(saved);
     } catch { setMessage('Sound settings work here, but could not be loaded from this device.'); }
     const hide = () => { if (document.visibilityState === 'hidden') advisorAudio.silence(); };
+    const offVisibility = window.eqlWindow?.onVisibility(visible => { if (!visible) advisorAudio.silence(); });
     const click = (event: MouseEvent) => {
       if (!event.isTrusted || !(event.target instanceof Element)) return;
       const target = event.target.closest('button, summary, a[href], input[type="checkbox"], input[type="radio"]');
@@ -28,6 +29,7 @@ export default function AdvisorSoundControls() {
     document.addEventListener('change', change, true);
     return () => {
       advisorAudio.silence();
+      offVisibility?.();
       document.removeEventListener('visibilitychange', hide);
       document.removeEventListener('click', click, true);
       document.removeEventListener('change', change, true);

@@ -1,7 +1,19 @@
 'use strict';
 const {contextBridge,ipcRenderer}=require('electron');
+let appIsVisible=true;
+const visibilityCallbacks=new Set();
+const updateVisibility=visible=>{appIsVisible=Boolean(visible);for(const cb of visibilityCallbacks)cb(appIsVisible);};
+ipcRenderer.on('app:visibility',(_event,visible)=>updateVisibility(visible));
+window.addEventListener('DOMContentLoaded',()=>{void ipcRenderer.invoke('app:visibility').then(updateVisibility).catch(()=>{});},{once:true});
+contextBridge.exposeInMainWorld('eqlWindow',{isVisible:()=>appIsVisible,onVisibility:callback=>{visibilityCallbacks.add(callback);return()=>visibilityCallbacks.delete(callback);}});
+const listen=(channel,callback)=>{const listener=(_event,value)=>callback(value);ipcRenderer.on(channel,listener);return()=>ipcRenderer.removeListener(channel,listener);};
+contextBridge.exposeInMainWorld('eqlOverlay',{
+ getState:()=>ipcRenderer.invoke('overlay:get-state'),control:action=>ipcRenderer.invoke('overlay:control',action),
+ publish:frame=>ipcRenderer.send('overlay:frame',frame),onState:callback=>listen('overlay:state',callback),
+ onOpenControls:callback=>listen('overlay:open-controls',callback),
+});
 contextBridge.exposeInMainWorld('eqlDesktop',{
-  version:'1.6.5',
+  version:'1.6.6',
   getSourceHistory:()=>ipcRenderer.invoke('advisor:history'),
   checkSources:(classes)=>ipcRenderer.invoke('advisor:check-sources',classes),
   getRuleUpdate:(url,expectedHash)=>ipcRenderer.invoke('advisor:rule-update',url,expectedHash),

@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useEffectEvent, useRef, useState } from 'react';
 import { playAdvisorSound } from '../lib/advisor-audio';
+import CombatOverlayControls from './CombatOverlayControls';
 import {
   Activity,
   Heart,
@@ -591,6 +592,7 @@ export default function CombatMeter({
         <code>eqlog_…txt</code> file in the EQL Logs folder. Only this selected
         file is read; combat data stays on your device.
       </p>
+      <CombatOverlayControls input={{events,player,pet,clock,rolling,mode,rules:activeTimerRules,manual:manualTimers}} />
       <div className="cm-settings">
         <label>
           Your character name
