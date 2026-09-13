@@ -1,0 +1,779 @@
+{
+  "version": 1,
+  "tertiaryUnlockLevel": 10,
+  "provenance": {
+    "label": "heuristic/inference",
+    "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+  },
+  "metrics": [
+    "dps",
+    "tank",
+    "heal",
+    "control",
+    "mobility",
+    "travel",
+    "stealth",
+    "pulling",
+    "survivability",
+    "faction"
+  ],
+  "weights": {
+    "dps": 1,
+    "tank": 1,
+    "heal": 1.6,
+    "control": 1.7,
+    "mobility": 1.4,
+    "travel": 1.1,
+    "stealth": 1,
+    "pulling": 1.2,
+    "survivability": 1.5,
+    "faction": 1
+  },
+  "tuning": {
+    "overlapPenalty": 0.7,
+    "buddyCoverage": 0.6,
+    "retainedStrength": 0.25,
+    "needWeight": 1.4,
+    "roleWeight": 2.5,
+    "workloadPenalty": 1.8,
+    "modeSurvival": {
+      "solo": 1.5,
+      "duo": 0.8,
+      "group": 0.3
+    }
+  },
+  "roles": {
+    "overall": [],
+    "DPS": [
+      "dps"
+    ],
+    "tank": [
+      "tank",
+      "survivability"
+    ],
+    "heal": [
+      "heal"
+    ],
+    "CC": [
+      "control"
+    ],
+    "travel": [
+      "travel",
+      "mobility"
+    ],
+    "stealth": [
+      "stealth"
+    ],
+    "pulling": [
+      "pulling",
+      "control"
+    ],
+    "named hunting": [
+      "survivability",
+      "heal",
+      "control"
+    ],
+    "faction work": [
+      "faction",
+      "stealth"
+    ]
+  },
+  "classes": [
+    {
+      "id": "WAR",
+      "name": "Warrior",
+      "ratings": {
+        "dps": 5,
+        "tank": 5,
+        "heal": 0,
+        "control": 0,
+        "mobility": 0,
+        "travel": 0,
+        "stealth": 0,
+        "pulling": 1,
+        "survivability": 5,
+        "faction": 0
+      },
+      "workload": 1,
+      "tradeoff": "Takes hits and deals strong weapon damage. Adds little healing, travel, or control over extra enemies.",
+      "provenance": {
+        "label": "heuristic/inference",
+        "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+      }
+    },
+    {
+      "id": "CLR",
+      "name": "Cleric",
+      "ratings": {
+        "dps": 1,
+        "tank": 2,
+        "heal": 5,
+        "control": 1,
+        "mobility": 0,
+        "travel": 0,
+        "stealth": 0,
+        "pulling": 1,
+        "survivability": 4,
+        "faction": 0
+      },
+      "workload": 2,
+      "tradeoff": "Strong healing helps you recover from fights. Adds little travel help or control over extra enemies.",
+      "provenance": {
+        "label": "heuristic/inference",
+        "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+      }
+    },
+    {
+      "id": "PAL",
+      "name": "Paladin",
+      "ratings": {
+        "dps": 3,
+        "tank": 4,
+        "heal": 3,
+        "control": 2,
+        "mobility": 0,
+        "travel": 0,
+        "stealth": 0,
+        "pulling": 2,
+        "survivability": 4,
+        "faction": 0
+      },
+      "workload": 2,
+      "tradeoff": "Takes hits well and uses both weapons and spells. Shares some weapon skills with other classes and needs mana.",
+      "provenance": {
+        "label": "heuristic/inference",
+        "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+      }
+    },
+    {
+      "id": "RNG",
+      "name": "Ranger",
+      "ratings": {
+        "dps": 4,
+        "tank": 2,
+        "heal": 1,
+        "control": 2,
+        "mobility": 3,
+        "travel": 1,
+        "stealth": 1,
+        "pulling": 3,
+        "survivability": 2,
+        "faction": 0
+      },
+      "workload": 2,
+      "tradeoff": "Tracks enemies and fights with bows or melee weapons. Has limited healing for long fights.",
+      "provenance": {
+        "label": "heuristic/inference",
+        "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+      }
+    },
+    {
+      "id": "SHD",
+      "name": "Shadow Knight",
+      "ratings": {
+        "dps": 4,
+        "tank": 4,
+        "heal": 1,
+        "control": 2,
+        "mobility": 1,
+        "travel": 0,
+        "stealth": 1,
+        "pulling": 4,
+        "survivability": 4,
+        "faction": 0
+      },
+      "workload": 3,
+      "tradeoff": "Takes hits well and can pull enemies. Has little healing for the group.",
+      "provenance": {
+        "label": "heuristic/inference",
+        "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+      }
+    },
+    {
+      "id": "DRU",
+      "name": "Druid",
+      "ratings": {
+        "dps": 3,
+        "tank": 1,
+        "heal": 4,
+        "control": 3,
+        "mobility": 4,
+        "travel": 5,
+        "stealth": 1,
+        "pulling": 2,
+        "survivability": 3,
+        "faction": 0
+      },
+      "workload": 2,
+      "tradeoff": "Helps you travel and keep going on your own. Has fewer ways to control enemies than Enchanter.",
+      "provenance": {
+        "label": "heuristic/inference",
+        "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+      }
+    },
+    {
+      "id": "MNK",
+      "name": "Monk",
+      "ratings": {
+        "dps": 5,
+        "tank": 3,
+        "heal": 0,
+        "control": 1,
+        "mobility": 2,
+        "travel": 0,
+        "stealth": 2,
+        "pulling": 5,
+        "survivability": 3,
+        "faction": 0
+      },
+      "workload": 2,
+      "tradeoff": "Good at pulling enemies and fighting up close. Needs help with healing and controlling extra enemies.",
+      "provenance": {
+        "label": "heuristic/inference",
+        "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+      }
+    },
+    {
+      "id": "BRD",
+      "name": "Bard",
+      "ratings": {
+        "dps": 3,
+        "tank": 2,
+        "heal": 2,
+        "control": 4,
+        "mobility": 5,
+        "travel": 3,
+        "stealth": 2,
+        "pulling": 5,
+        "survivability": 3,
+        "faction": 0
+      },
+      "workload": 4,
+      "tradeoff": "Adds speed and many kinds of support. Songs and movement need attention. Direct healing is limited.",
+      "provenance": {
+        "label": "heuristic/inference",
+        "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+      }
+    },
+    {
+      "id": "ROG",
+      "name": "Rogue",
+      "ratings": {
+        "dps": 5,
+        "tank": 1,
+        "heal": 0,
+        "control": 0,
+        "mobility": 1,
+        "travel": 0,
+        "stealth": 5,
+        "pulling": 2,
+        "survivability": 1,
+        "faction": 0
+      },
+      "workload": 2,
+      "tradeoff": "Adds stealth and quick bursts of damage. You must stand in the right spot and may need help with healing.",
+      "provenance": {
+        "label": "heuristic/inference",
+        "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+      }
+    },
+    {
+      "id": "SHM",
+      "name": "Shaman",
+      "ratings": {
+        "dps": 3,
+        "tank": 2,
+        "heal": 5,
+        "control": 4,
+        "mobility": 3,
+        "travel": 1,
+        "stealth": 1,
+        "pulling": 2,
+        "survivability": 5,
+        "faction": 0
+      },
+      "workload": 3,
+      "tradeoff": "Supports long fights and can slow enemy attacks. Managing spells takes effort. Long-distance travel is limited.",
+      "provenance": {
+        "label": "heuristic/inference",
+        "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+      }
+    },
+    {
+      "id": "NEC",
+      "name": "Necromancer",
+      "ratings": {
+        "dps": 5,
+        "tank": 1,
+        "heal": 2,
+        "control": 3,
+        "mobility": 2,
+        "travel": 1,
+        "stealth": 2,
+        "pulling": 4,
+        "survivability": 4,
+        "faction": 0
+      },
+      "workload": 3,
+      "tradeoff": "Can keep going alone and help pull enemies. You must manage a pet and damage-over-time spells.",
+      "provenance": {
+        "label": "heuristic/inference",
+        "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+      }
+    },
+    {
+      "id": "WIZ",
+      "name": "Wizard",
+      "ratings": {
+        "dps": 5,
+        "tank": 0,
+        "heal": 0,
+        "control": 1,
+        "mobility": 1,
+        "travel": 5,
+        "stealth": 1,
+        "pulling": 1,
+        "survivability": 1,
+        "faction": 0
+      },
+      "workload": 2,
+      "tradeoff": "Adds quick bursts of spell damage and travel help. Has gaps in healing and enemy control.",
+      "provenance": {
+        "label": "heuristic/inference",
+        "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+      }
+    },
+    {
+      "id": "MAG",
+      "name": "Magician",
+      "ratings": {
+        "dps": 5,
+        "tank": 2,
+        "heal": 1,
+        "control": 1,
+        "mobility": 0,
+        "travel": 1,
+        "stealth": 1,
+        "pulling": 1,
+        "survivability": 3,
+        "faction": 0
+      },
+      "workload": 2,
+      "tradeoff": "Adds pet damage and support spells. Offers little enemy control or travel help.",
+      "provenance": {
+        "label": "heuristic/inference",
+        "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+      }
+    },
+    {
+      "id": "ENC",
+      "name": "Enchanter",
+      "ratings": {
+        "dps": 3,
+        "tank": 1,
+        "heal": 0,
+        "control": 5,
+        "mobility": 1,
+        "travel": 1,
+        "stealth": 3,
+        "pulling": 4,
+        "survivability": 2,
+        "faction": 1
+      },
+      "workload": 5,
+      "tradeoff": "Has the strongest enemy-control rating in these rules. Charm and control spells take effort. Has no direct healing.",
+      "provenance": {
+        "label": "heuristic/inference",
+        "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+      }
+    },
+    {
+      "id": "BST",
+      "name": "Beastlord",
+      "ratings": {
+        "dps": 4,
+        "tank": 3,
+        "heal": 3,
+        "control": 2,
+        "mobility": 2,
+        "travel": 0,
+        "stealth": 1,
+        "pulling": 2,
+        "survivability": 4,
+        "faction": 0
+      },
+      "workload": 3,
+      "tradeoff": "Combines weapons, spells, and a pet. Shares some melee skills with other classes. The pet needs attention.",
+      "provenance": {
+        "label": "heuristic/inference",
+        "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+      }
+    },
+    {
+      "id": "BER",
+      "name": "Berserker",
+      "ratings": {
+        "dps": 5,
+        "tank": 2,
+        "heal": 0,
+        "control": 1,
+        "mobility": 1,
+        "travel": 0,
+        "stealth": 0,
+        "pulling": 1,
+        "survivability": 2,
+        "faction": 0
+      },
+      "workload": 2,
+      "tradeoff": "Focuses on weapon damage. Adds few new tools to a build that already has strong melee damage.",
+      "provenance": {
+        "label": "heuristic/inference",
+        "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+      }
+    }
+  ],
+  "aliases": {
+    "MCE": [
+      "MNK",
+      "CLR",
+      "ENC"
+    ],
+    "SK": [
+      "SHD"
+    ]
+  },
+  "rules": [
+    {
+      "id": "rng-rog-bard",
+      "when": {
+        "baseAll": [
+          "RNG",
+          "ROG"
+        ],
+        "candidate": "BRD"
+      },
+      "points": 24,
+      "why": "Ranger and Rogue already deal weapon damage. Bard adds speed, pulling, and many support tools.",
+      "tradeoff": "Songs need your attention. Direct healing is still limited.",
+      "provenance": {
+        "label": "heuristic/inference",
+        "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+      }
+    },
+    {
+      "id": "rng-rog-enc",
+      "when": {
+        "baseAll": [
+          "RNG",
+          "ROG"
+        ],
+        "candidate": "ENC"
+      },
+      "points": 12,
+      "why": "Ranger and Rogue need help controlling enemies. Enchanter has the strongest control rating in these rules.",
+      "tradeoff": "Takes more effort to play and adds no direct healing.",
+      "provenance": {
+        "label": "heuristic/inference",
+        "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+      }
+    },
+    {
+      "id": "rng-rog-shm",
+      "when": {
+        "baseAll": [
+          "RNG",
+          "ROG"
+        ],
+        "candidate": "SHM"
+      },
+      "points": 10,
+      "why": "Shaman adds healing for long fights and spells that weaken enemies. This helps when fighting named enemies.",
+      "tradeoff": "Adds less travel help and fewer stealth tools.",
+      "provenance": {
+        "label": "heuristic/inference",
+        "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+      }
+    },
+    {
+      "id": "rng-rog-dru",
+      "when": {
+        "baseAll": [
+          "RNG",
+          "ROG"
+        ],
+        "candidate": "DRU"
+      },
+      "points": 10,
+      "why": "Druid adds healing and travel spells. This helps you keep going on your own.",
+      "tradeoff": "Has fewer ways to control enemies than Enchanter.",
+      "provenance": {
+        "label": "heuristic/inference",
+        "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+      }
+    },
+    {
+      "id": "control-ceiling",
+      "when": {
+        "baseAll": [
+          "RNG",
+          "ROG"
+        ],
+        "candidate": "ENC",
+        "anyRole": [
+          "CC"
+        ]
+      },
+      "points": 36,
+      "why": "You chose enemy control as your main role. This gives Enchanter extra points.",
+      "provenance": {
+        "label": "heuristic/inference",
+        "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+      }
+    },
+    {
+      "id": "control-need",
+      "when": {
+        "baseAll": [
+          "RNG",
+          "ROG"
+        ],
+        "candidate": "ENC",
+        "needAtLeast": {
+          "control": 4
+        }
+      },
+      "points": 24,
+      "why": "You set a high need for enemy control. A class that is strong at control gets extra points.",
+      "provenance": {
+        "label": "heuristic/inference",
+        "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+      }
+    },
+    {
+      "id": "sustained-named",
+      "when": {
+        "baseAll": [
+          "RNG",
+          "ROG"
+        ],
+        "candidate": "SHM",
+        "anyRole": [
+          "named hunting"
+        ]
+      },
+      "points": 36,
+      "why": "You plan to fight named enemies. Healing and spells that slow enemy attacks get extra points for long fights.",
+      "provenance": {
+        "label": "heuristic/inference",
+        "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+      }
+    },
+    {
+      "id": "travel-self-sufficient",
+      "when": {
+        "baseAll": [
+          "RNG",
+          "ROG"
+        ],
+        "candidate": "DRU",
+        "anyRole": [
+          "travel"
+        ]
+      },
+      "points": 36,
+      "why": "You chose travel as your main goal. Druid gains points for travel spells and healing.",
+      "provenance": {
+        "label": "heuristic/inference",
+        "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+      }
+    },
+    {
+      "id": "mobility-with-healing",
+      "when": {
+        "baseAll": [
+          "RNG",
+          "ROG"
+        ],
+        "candidate": "DRU",
+        "needAtLeast": {
+          "mobility": 4,
+          "healing": 4
+        }
+      },
+      "points": 30,
+      "why": "You need both movement and healing. A class that helps you do both on your own gets extra points.",
+      "provenance": {
+        "label": "heuristic/inference",
+        "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+      }
+    }
+  ],
+  "companionRules": [
+    {
+      "id": "mce-rng-rog-brd",
+      "build": [
+        "RNG",
+        "ROG",
+        "BRD"
+      ],
+      "buddy": [
+        "MNK",
+        "CLR",
+        "ENC"
+      ],
+      "points": 10,
+      "why": "Monk / Cleric / Enchanter adds healing, enemy control, and pulling. Ranger / Rogue / Bard adds damage, scouting, and speed.",
+      "tradeoff": "Decide who will pull and who will control extra enemies. Bard and Enchanter may provide some of the same support.",
+      "provenance": {
+        "label": "heuristic/inference",
+        "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+      }
+    },
+    {
+      "id": "mnk-clr-rog-war-clr-enc",
+      "build": [
+        "MNK",
+        "CLR",
+        "ROG"
+      ],
+      "buddy": [
+        "WAR",
+        "CLR",
+        "ENC"
+      ],
+      "points": 10,
+      "why": "Monk / Cleric / Rogue adds pulling and damage. Warrior / Cleric / Enchanter takes hits and controls extra enemies.",
+      "tradeoff": "Both builds have Cleric healing. Choose a main healer and a backup healer.",
+      "provenance": {
+        "label": "heuristic/inference",
+        "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+      }
+    }
+  ],
+  "zoneScoring": {
+    "xp": 20,
+    "belowPerLevel": 4,
+    "abovePerLevel": 2,
+    "local": 6,
+    "sameContinent": 3,
+    "otherContinentPenalty": 4,
+    "lootMatch": 12,
+    "unknownLootPenalty": 3,
+    "unknownFactionPenalty": 8,
+    "controlNeed": 3,
+    "healNeed": 2
+  },
+  "zones": [
+    {
+      "id": "blackburrow",
+      "name": "Blackburrow",
+      "aliases": [],
+      "continent": "Antonica",
+      "min": 5,
+      "max": 22,
+      "control": 3,
+      "heal": 2,
+      "loot": [
+        "Wicked Sallet",
+        "Dark Runed Leggings",
+        "Balanced Rat Tooth",
+        "Rat Paw Talisman"
+      ],
+      "factionEffects": null,
+      "accessFactions": null,
+      "provenance": {
+        "label": "heuristic/inference",
+        "reference": "Level ranges and loot come from the existing EQLSaK Dungeon3D.tsx and DungeonGuide.tsx files. Their source links were not checked again in this update. Healing and control ratings are estimates."
+      }
+    },
+    {
+      "id": "mistmoore",
+      "name": "Castle Mistmoore",
+      "aliases": [
+        "Mistmoore"
+      ],
+      "continent": "Faydwer",
+      "min": 20,
+      "max": 45,
+      "control": 4,
+      "heal": 3,
+      "loot": [],
+      "factionEffects": null,
+      "accessFactions": null,
+      "provenance": {
+        "label": "heuristic/inference",
+        "reference": "Level ranges and loot come from the existing EQLSaK Dungeon3D.tsx and DungeonGuide.tsx files. Their source links were not checked again in this update. Healing and control ratings are estimates."
+      }
+    },
+    {
+      "id": "paw",
+      "name": "Splitpaw Lair",
+      "aliases": [
+        "Splitpaw"
+      ],
+      "continent": "Antonica",
+      "min": 25,
+      "max": 42,
+      "control": 3,
+      "heal": 3,
+      "loot": [],
+      "factionEffects": null,
+      "accessFactions": null,
+      "provenance": {
+        "label": "heuristic/inference",
+        "reference": "Level ranges and loot come from the existing EQLSaK Dungeon3D.tsx and DungeonGuide.tsx files. Their source links were not checked again in this update. Healing and control ratings are estimates."
+      }
+    },
+    {
+      "id": "befallen",
+      "name": "Befallen",
+      "aliases": [],
+      "continent": "Antonica",
+      "min": 5,
+      "max": 30,
+      "control": 3,
+      "heal": 2,
+      "loot": [],
+      "factionEffects": null,
+      "accessFactions": null,
+      "provenance": {
+        "label": "heuristic/inference",
+        "reference": "Level ranges and loot come from the existing EQLSaK Dungeon3D.tsx and DungeonGuide.tsx files. Their source links were not checked again in this update. Healing and control ratings are estimates."
+      }
+    },
+    {
+      "id": "najena",
+      "name": "Najena",
+      "aliases": [],
+      "continent": "Antonica",
+      "min": 15,
+      "max": 35,
+      "control": 3,
+      "heal": 3,
+      "loot": [],
+      "factionEffects": null,
+      "accessFactions": null,
+      "provenance": {
+        "label": "heuristic/inference",
+        "reference": "Level ranges and loot come from the existing EQLSaK Dungeon3D.tsx and DungeonGuide.tsx files. Their source links were not checked again in this update. Healing and control ratings are estimates."
+      }
+    },
+    {
+      "id": "gukbottom",
+      "name": "Lower Guk",
+      "aliases": [],
+      "continent": "Antonica",
+      "min": 30,
+      "max": 50,
+      "control": 4,
+      "heal": 4,
+      "loot": [],
+      "factionEffects": null,
+      "accessFactions": null,
+      "provenance": {
+        "label": "heuristic/inference",
+        "reference": "Level ranges and loot come from the existing EQLSaK Dungeon3D.tsx and DungeonGuide.tsx files. Their source links were not checked again in this update. Healing and control ratings are estimates."
+      }
+    }
+  ]
+}

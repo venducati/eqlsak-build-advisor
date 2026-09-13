@@ -1,0 +1,156 @@
+.bw-panel {
+  padding: 18px;
+  border: 1px solid #7e7759;
+  border-radius: 8px;
+  background: #14212cf0;
+  margin: 18px 0;
+  color: #e7e0d1;
+}
+.bw-panel h3 {
+  margin-top: 0;
+}
+.bw-panel p,
+.bw-panel summary {
+  font-size: 14px;
+  line-height: 1.6;
+}
+.bw-panel details {
+  border-top: 1px solid #53616a;
+  padding: 12px 0;
+}
+.bw-panel summary {
+  cursor: pointer;
+  color: #e7c78e;
+}
+.bw-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: end;
+  margin: 14px 0;
+}
+.bw-panel label {
+  display: grid;
+  gap: 6px;
+  font-size: 13px;
+}
+.bw-tools > label:first-child {
+  flex: 1;
+}
+.bw-panel input:not([type='checkbox']) {
+  padding: 10px;
+  border: 1px solid #777a6b;
+  background: #101b28;
+  color: #f2e4c5;
+  border-radius: 4px;
+  width: 100%;
+  min-width: 0;
+}
+.bw-panel .bw-check {
+  display: flex;
+  align-items: center;
+}
+.bw-check input {
+  width: auto;
+}
+.bw-panel button,
+.ba-view-switch button {
+  border: 1px solid #ab8d58;
+  border-radius: 5px;
+  background: #3d3422;
+  color: #f7e7c7;
+  padding: 9px 12px;
+  font: 600 13px system-ui;
+  cursor: pointer;
+}
+.bw-panel button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.bw-panel th,
+.bw-panel td {
+  padding: 10px;
+  min-width: 95px;
+}
+.bw-panel th:first-child {
+  min-width: 140px;
+}
+.bw-panel th {
+  color: #efd39b;
+}
+.bw-panel caption {
+  font-size: 12px;
+  text-align: left;
+  padding: 10px 0;
+  color: #bacbd0;
+}
+.bw-panel meter {
+  width: 58px;
+  vertical-align: middle;
+  accent-color: #79beba;
+}
+.bw-panel td span {
+  font-size: 12px;
+  white-space: nowrap;
+}
+.bw-panel small {
+  display: block;
+  font-size: 12px;
+  color: #b9c9d1;
+  margin-top: 4px;
+}
+.bw-saved {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  border: 1px solid #4d6577;
+  border-radius: 6px;
+  padding: 12px;
+  margin: 12px 0;
+}
+.bw-saved > div {
+  flex: 1;
+  min-width: 150px;
+}
+.bw-panel :is(input, button, summary, .ba-table-wrap):focus-visible {
+  outline: 3px solid #a1d9fa;
+  outline-offset: 3px;
+}
+.ba-view-switch {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 0 0 16px;
+  padding: 8px;
+  background: #0b1926;
+  border: 1px solid #6a624b;
+  border-radius: 7px;
+}
+.ba-view-switch button[aria-pressed='true'] {
+  background: #594222;
+  color: #ffedba;
+  border-color: #e0b565;
+}
+.ba-view-switch button {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.ba-results [hidden] {
+  display: none !important;
+}
+.bw-panel .bw-check input[type='checkbox'] {
+  width: 18px !important;
+  height: 18px !important;
+  min-height: 0;
+  padding: 0;
+  flex: 0 0 18px;
+  accent-color: #d4ad68;
+}
+.ba-controls .ba-two {
+  grid-template-columns: 1fr;
+}
+.ba-controls .ba-fields {
+  grid-template-columns: 1fr;
+}

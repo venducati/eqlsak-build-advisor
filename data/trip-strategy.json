@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "provenance": "heuristic/inference",
+  "rules": [
+    {"id":"protect-goal-loot","when":"soldGoal","title":"Protect the items you want","action":"Check your auto-sell and upgrade filters before the next run. Keep your goal items out of those filters.","tradeoff":"Keeping more drops takes bag space."},
+    {"id":"safer-pulls","when":"deaths","title":"Make the next pull safer","action":"Try smaller pulls and agree on an escape route. Let health and mana recover before the next fight.","tradeoff":"A slower start may mean fewer kills per hour."},
+    {"id":"spell-resists","when":"resists","title":"Review spells that did not land","action":"Check the resisted spells in your log. Try a better-suited spell or an easier target, and compare the next run.","tradeoff":"Changing spells can lower damage or add more buttons to manage."},
+    {"id":"control-coverage","when":"controlGap","title":"Give someone the control job","action":"Assign one player to manage extra enemies. If control still feels weak, bring a buddy with stronger control or choose a gentler camp.","tradeoff":"This is a build-planning estimate. Spell level, resists and player skill still matter."},
+    {"id":"healing-coverage","when":"healGap","title":"Plan more healing support","action":"Give a player time to focus on healing. Try a healing buddy or shorter fights if recovery is holding you back.","tradeoff":"More healing support may reduce damage output."},
+    {"id":"unfinished-goals","when":"unfinished","title":"Focus the next trip on one item","action":"Check which enemy drops your top goal, then plan a route to that camp. Use your own past drops or open the zone guide to review its source.","tradeoff":"An item missing from this log does not prove it dropped or was left behind. A longer run does not promise a rare drop."},
+    {"id":"recording-coverage","when":"missingLog","title":"Start the log before entering","action":"Turn logging on before you zone in. Check loot chat filters and save a trip report before changing log files.","tradeoff":"Events outside the log cannot be recovered by the meter."},
+    {"id":"faction-check","when":"factions","title":"Check your faction plan","action":"Review the zone's faction goals before repeating a camp. Compare a fresh faction export after the hunt.","tradeoff":"Loot and combat lines do not establish your current faction points."},
+    {"id":"goals-complete","when":"complete","title":"Secure your gains before another run","action":"Check your bags or depot, then set a new goal or stop here. Review which camp gave you the items you wanted.","tradeoff":"This report records gains during the trip. Later sales, trades and turn-ins may change what you still own."},
+    {"id":"set-goals","when":"noGoals","title":"Choose a loot goal for next time","action":"Add the exact item name and how many you want. The next report can compare your gains with that goal.","tradeoff":"A wish list is a plan; it does not prove a drop source or a drop rate."}
+  ],
+  "sources": [
+    {"title":"EQL Atlas documented loot and instance log messages","url":"https://github.com/blastlaster/eql-log-reader/blob/main/eql_atlas.py","reviewed":"2026-09-11"},
+    {"title":"Sky Ledger: EQL instance names and limits of loot logs","url":"https://www.eqlsource.com/tools/sky-ledger","reviewed":"2026-09-11"}
+  ]
+}

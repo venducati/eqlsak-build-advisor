@@ -1,0 +1,627 @@
+[
+  {
+    "id": "wiki-WAR",
+    "classes": [
+      "WAR"
+    ],
+    "kind": "class reference",
+    "status": "accepted",
+    "summary": "Takes hits and fights with weapons.",
+    "limitation": "This page gives a broad class overview and includes older information. The advisor’s scores and build advice are still estimates.",
+    "reviewedOn": "2026-09-10",
+    "provenance": {
+      "label": "EQL-sourced",
+      "reference": "EQL Wiki class reference"
+    },
+    "links": [
+      {
+        "title": "EQL Wiki — Warrior",
+        "url": "https://eqlwiki.com/Warrior"
+      }
+    ]
+  },
+  {
+    "id": "wiki-CLR",
+    "classes": [
+      "CLR"
+    ],
+    "kind": "class reference",
+    "status": "accepted",
+    "summary": "Strong healing and spells that help protect allies.",
+    "limitation": "This page gives a broad class overview and includes older information. The advisor’s scores and build advice are still estimates.",
+    "reviewedOn": "2026-09-10",
+    "provenance": {
+      "label": "EQL-sourced",
+      "reference": "EQL Wiki class reference"
+    },
+    "links": [
+      {
+        "title": "EQL Wiki — Cleric",
+        "url": "https://eqlwiki.com/Cleric"
+      }
+    ]
+  },
+  {
+    "id": "wiki-PAL",
+    "classes": [
+      "PAL"
+    ],
+    "kind": "class reference",
+    "status": "accepted",
+    "summary": "Fights up close, takes hits, heals, and stuns enemies.",
+    "limitation": "This page gives a broad class overview and includes older information. The advisor’s scores and build advice are still estimates.",
+    "reviewedOn": "2026-09-10",
+    "provenance": {
+      "label": "EQL-sourced",
+      "reference": "EQL Wiki class reference"
+    },
+    "links": [
+      {
+        "title": "EQL Wiki — Paladin",
+        "url": "https://eqlwiki.com/Paladin"
+      }
+    ]
+  },
+  {
+    "id": "wiki-RNG",
+    "classes": [
+      "RNG"
+    ],
+    "kind": "class reference",
+    "status": "accepted",
+    "summary": "Uses bows and melee weapons, tracks enemies, and has snare and root spells. The guide lists Rogue as a way to add melee damage.",
+    "limitation": "This page gives a broad class overview and includes older information. The advisor’s scores and build advice are still estimates.",
+    "reviewedOn": "2026-09-10",
+    "provenance": {
+      "label": "EQL-sourced",
+      "reference": "EQL Wiki class reference"
+    },
+    "links": [
+      {
+        "title": "EQL Wiki — Ranger",
+        "url": "https://eqlwiki.com/Ranger"
+      }
+    ]
+  },
+  {
+    "id": "wiki-SHD",
+    "classes": [
+      "SHD"
+    ],
+    "kind": "class reference",
+    "status": "accepted",
+    "summary": "Uses armor, melee weapons, dark magic, and a defensive stance.",
+    "limitation": "This page gives a broad class overview and includes older information. The advisor’s scores and build advice are still estimates.",
+    "reviewedOn": "2026-09-10",
+    "provenance": {
+      "label": "EQL-sourced",
+      "reference": "EQL Wiki class reference"
+    },
+    "links": [
+      {
+        "title": "EQL Wiki — Shadow Knight",
+        "url": "https://eqlwiki.com/Shadow_Knight"
+      }
+    ]
+  },
+  {
+    "id": "wiki-DRU",
+    "classes": [
+      "DRU"
+    ],
+    "kind": "class reference",
+    "status": "accepted",
+    "summary": "Heals, restores health over time, helps with movement, and has travel spells.",
+    "limitation": "This page gives a broad class overview and includes older information. The advisor’s scores and build advice are still estimates.",
+    "reviewedOn": "2026-09-10",
+    "provenance": {
+      "label": "EQL-sourced",
+      "reference": "EQL Wiki class reference"
+    },
+    "links": [
+      {
+        "title": "EQL Wiki — Druid",
+        "url": "https://eqlwiki.com/Druid"
+      }
+    ]
+  },
+  {
+    "id": "wiki-MNK",
+    "classes": [
+      "MNK"
+    ],
+    "kind": "class reference",
+    "status": "accepted",
+    "summary": "Fights up close and avoids hits. Mend helps restore the Monk’s own health.",
+    "limitation": "This page gives a broad class overview and includes older information. The advisor’s scores and build advice are still estimates.",
+    "reviewedOn": "2026-09-10",
+    "provenance": {
+      "label": "EQL-sourced",
+      "reference": "EQL Wiki class reference"
+    },
+    "links": [
+      {
+        "title": "EQL Wiki — Monk",
+        "url": "https://eqlwiki.com/Monk"
+      }
+    ]
+  },
+  {
+    "id": "wiki-BRD",
+    "classes": [
+      "BRD"
+    ],
+    "kind": "class reference",
+    "status": "accepted",
+    "summary": "Songs add speed, healing over time, faster attacks, and enemy control.",
+    "limitation": "This page gives a broad class overview and includes older information. The advisor’s scores and build advice are still estimates.",
+    "reviewedOn": "2026-09-10",
+    "provenance": {
+      "label": "EQL-sourced",
+      "reference": "EQL Wiki class reference"
+    },
+    "links": [
+      {
+        "title": "EQL Wiki — Bard",
+        "url": "https://eqlwiki.com/Bard"
+      }
+    ]
+  },
+  {
+    "id": "wiki-ROG",
+    "classes": [
+      "ROG"
+    ],
+    "kind": "class reference",
+    "status": "accepted",
+    "summary": "Uses Backstab and poisons. Sneak and Hide help with scouting.",
+    "limitation": "This page gives a broad class overview and includes older information. The advisor’s scores and build advice are still estimates.",
+    "reviewedOn": "2026-09-10",
+    "provenance": {
+      "label": "EQL-sourced",
+      "reference": "EQL Wiki class reference"
+    },
+    "links": [
+      {
+        "title": "EQL Wiki — Rogue",
+        "url": "https://eqlwiki.com/Rogue"
+      }
+    ]
+  },
+  {
+    "id": "wiki-SHM",
+    "classes": [
+      "SHM"
+    ],
+    "kind": "class reference",
+    "status": "accepted",
+    "summary": "Heals, slows enemy attacks, boosts stats, and deals damage over time.",
+    "limitation": "This page gives a broad class overview and includes older information. The advisor’s scores and build advice are still estimates.",
+    "reviewedOn": "2026-09-10",
+    "provenance": {
+      "label": "EQL-sourced",
+      "reference": "EQL Wiki class reference"
+    },
+    "links": [
+      {
+        "title": "EQL Wiki — Shaman",
+        "url": "https://eqlwiki.com/Shaman"
+      }
+    ]
+  },
+  {
+    "id": "wiki-NEC",
+    "classes": [
+      "NEC"
+    ],
+    "kind": "class reference",
+    "status": "accepted",
+    "summary": "Uses damage spells, pets, and magic that drains life.",
+    "limitation": "This page gives a broad class overview and includes older information. The advisor’s scores and build advice are still estimates.",
+    "reviewedOn": "2026-09-10",
+    "provenance": {
+      "label": "EQL-sourced",
+      "reference": "EQL Wiki class reference"
+    },
+    "links": [
+      {
+        "title": "EQL Wiki — Necromancer",
+        "url": "https://eqlwiki.com/Necromancer"
+      }
+    ]
+  },
+  {
+    "id": "wiki-WIZ",
+    "classes": [
+      "WIZ"
+    ],
+    "kind": "class reference",
+    "status": "accepted",
+    "summary": "Deals quick bursts of spell damage and can teleport. Its spells cover fewer other roles.",
+    "limitation": "This page gives a broad class overview and includes older information. The advisor’s scores and build advice are still estimates.",
+    "reviewedOn": "2026-09-10",
+    "provenance": {
+      "label": "EQL-sourced",
+      "reference": "EQL Wiki class reference"
+    },
+    "links": [
+      {
+        "title": "EQL Wiki — Wizard",
+        "url": "https://eqlwiki.com/Wizard"
+      }
+    ]
+  },
+  {
+    "id": "wiki-MAG",
+    "classes": [
+      "MAG"
+    ],
+    "kind": "class reference",
+    "status": "accepted",
+    "summary": "Uses elemental pets, direct damage, damage shields, and spells that create supplies.",
+    "limitation": "This page gives a broad class overview and includes older information. The advisor’s scores and build advice are still estimates.",
+    "reviewedOn": "2026-09-10",
+    "provenance": {
+      "label": "EQL-sourced",
+      "reference": "EQL Wiki class reference"
+    },
+    "links": [
+      {
+        "title": "EQL Wiki — Magician",
+        "url": "https://eqlwiki.com/Magician"
+      }
+    ]
+  },
+  {
+    "id": "wiki-ENC",
+    "classes": [
+      "ENC"
+    ],
+    "kind": "class reference",
+    "status": "accepted",
+    "summary": "Uses mez, slow, and charm to control enemies. Also adds faster attacks and mana support.",
+    "limitation": "This page gives a broad class overview and includes older information. The advisor’s scores and build advice are still estimates.",
+    "reviewedOn": "2026-09-10",
+    "provenance": {
+      "label": "EQL-sourced",
+      "reference": "EQL Wiki class reference"
+    },
+    "links": [
+      {
+        "title": "EQL Wiki — Enchanter",
+        "url": "https://eqlwiki.com/Enchanter"
+      }
+    ]
+  },
+  {
+    "id": "wiki-BST",
+    "classes": [
+      "BST"
+    ],
+    "kind": "class reference",
+    "status": "accepted",
+    "summary": "Combines melee weapons and spirit magic with a pet called a warder.",
+    "limitation": "This page gives a broad class overview and includes older information. The advisor’s scores and build advice are still estimates.",
+    "reviewedOn": "2026-09-10",
+    "provenance": {
+      "label": "EQL-sourced",
+      "reference": "EQL Wiki class reference"
+    },
+    "links": [
+      {
+        "title": "EQL Wiki — Beastlord",
+        "url": "https://eqlwiki.com/Beastlord"
+      }
+    ]
+  },
+  {
+    "id": "wiki-BER",
+    "classes": [
+      "BER"
+    ],
+    "kind": "class reference",
+    "status": "accepted",
+    "summary": "Uses weapons, Frenzy, and combat skills. Blood Rune helps with defense.",
+    "limitation": "This page gives a broad class overview and includes older information. The advisor’s scores and build advice are still estimates.",
+    "reviewedOn": "2026-09-10",
+    "provenance": {
+      "label": "EQL-sourced",
+      "reference": "EQL Wiki class reference"
+    },
+    "links": [
+      {
+        "title": "EQL Wiki — Berserker",
+        "url": "https://eqlwiki.com/Berserker"
+      }
+    ]
+  },
+  {
+    "id": "forge-roles",
+    "classes": [],
+    "kind": "cross-check",
+    "status": "accepted",
+    "summary": "EQLForge also lists Warrior, Paladin, and Shadow Knight as tanks. It groups priests as healers, weapon classes as melee damage, and Bard, Enchanter, and Beastlord as support.",
+    "limitation": "Used to compare broad class roles only. Armor labels and claims about the best performance are not used.",
+    "reviewedOn": "2026-09-10",
+    "provenance": {
+      "label": "EQL-sourced",
+      "reference": "EQLForge class guide — broad roles only"
+    },
+    "links": [
+      {
+        "title": "EQLForge — The 16 Classes",
+        "url": "https://eqlforge.com/classes"
+      }
+    ]
+  },
+  {
+    "id": "guides-model",
+    "classes": [],
+    "kind": "model scope",
+    "status": "accepted",
+    "summary": "EverQuest Guides keeps its EQL rankings separate from classic EQ and THJ. It says some class-balance claims still need to be checked again.",
+    "limitation": "Its tier scores and beta performance numbers are not treated as facts in EQLSaK.",
+    "reviewedOn": "2026-09-10",
+    "provenance": {
+      "label": "EQL-sourced",
+      "reference": "EverQuest Guides — how its ratings work and what still needs checking"
+    },
+    "links": [
+      {
+        "title": "EverQuest Guides — Legends Combo Builder",
+        "url": "https://www.everquestguides.com/legends/index.html"
+      }
+    ]
+  },
+  {
+    "id": "dual-wield",
+    "classes": [
+      "WAR",
+      "MNK",
+      "RNG",
+      "ROG",
+      "BRD",
+      "BST"
+    ],
+    "kind": "mechanic",
+    "status": "accepted",
+    "summary": "The EQL Wiki Dual Wield tool uses the highest skill limit among your chosen classes. It does not add those limits together.",
+    "limitation": "This supports giving fewer points for shared skills. It does not prove the exact point penalty used by this advisor.",
+    "reviewedOn": "2026-09-10",
+    "provenance": {
+      "label": "EQL-sourced",
+      "reference": "EQL Wiki — Skill Dual Wield"
+    },
+    "links": [
+      {
+        "title": "EQL Wiki — Dual Wield",
+        "url": "https://eqlwiki.com/Skill_Dual_Wield"
+      }
+    ]
+  },
+  {
+    "id": "support-comparison",
+    "classes": [
+      "BRD",
+      "ENC",
+      "SHM",
+      "DRU"
+    ],
+    "kind": "community opinion",
+    "status": "opinion",
+    "summary": "Players compare run speed, healing over time, and spells that slow or speed up attacks. They warn that Enchanter does not replace a healer.",
+    "limitation": "This discussion took place before launch. It shows player opinions about roles, not current class balance.",
+    "reviewedOn": "2026-09-10",
+    "provenance": {
+      "label": "heuristic/inference",
+      "reference": "EQL player discussion. These game claims have not been checked by the user."
+    },
+    "links": [
+      {
+        "title": "Class comparison — Bard, Enchanter, Shaman, Druid",
+        "url": "https://www.reddit.com/r/EQLegends/comments/1unmmmr/class_comparison_bard_enchanter_shaman_druid/"
+      }
+    ]
+  },
+  {
+    "id": "ranger-shaman",
+    "classes": [
+      "RNG",
+      "ROG",
+      "SHM"
+    ],
+    "kind": "community opinion",
+    "status": "opinion",
+    "summary": "Players think Ranger / Rogue / Shaman may work well. They also raise concerns about losing a defensive stance and needing better gear or more AA skills.",
+    "limitation": "These are player reports and guesses. They do not prove how the build performs at D4 difficulty.",
+    "reviewedOn": "2026-09-10",
+    "provenance": {
+      "label": "heuristic/inference",
+      "reference": "EQL player discussion. These game claims have not been checked by the user."
+    },
+    "links": [
+      {
+        "title": "Ranger/Rogue/Shaman Solo",
+        "url": "https://www.reddit.com/r/EQLegends/comments/1v6grg1/rangerrogueshaman_solo/"
+      }
+    ]
+  },
+  {
+    "id": "ranger-bard",
+    "classes": [
+      "RNG",
+      "BRD",
+      "SHM",
+      "DRU",
+      "WIZ"
+    ],
+    "kind": "community opinion",
+    "status": "opinion",
+    "summary": "Players suggest adding healing to Ranger / Bard. They say Ranger results depend a lot on weapons, arrows, AA skills, and stance choices.",
+    "limitation": "Players report different results. This does not prove Bard is the best third class for everyone.",
+    "reviewedOn": "2026-09-10",
+    "provenance": {
+      "label": "heuristic/inference",
+      "reference": "EQL player discussion. These game claims have not been checked by the user."
+    },
+    "links": [
+      {
+        "title": "Ranger/Bard and a third class",
+        "url": "https://www.reddit.com/r/EQLegends/comments/1w9kpmc/rangerbard_and/"
+      }
+    ]
+  },
+  {
+    "id": "monk-warrior",
+    "classes": [
+      "MNK",
+      "WAR",
+      "CLR",
+      "BRD"
+    ],
+    "kind": "community opinion",
+    "status": "opinion",
+    "summary": "Players compare how Warrior reduces damage with how Monk avoids hits. They disagree on whether more damage is worth taking more hits.",
+    "limitation": "This discussion comes from beta testing. Its reported percentages are not used here.",
+    "reviewedOn": "2026-09-10",
+    "provenance": {
+      "label": "heuristic/inference",
+      "reference": "EQL player discussion. These game claims have not been checked by the user."
+    },
+    "links": [
+      {
+        "title": "Monk versus Warrior",
+        "url": "https://www.reddit.com/r/EQLegends/comments/1uzy6iy/monk_versus_warrior/"
+      }
+    ]
+  },
+  {
+    "id": "war-clr-enc",
+    "classes": [
+      "WAR",
+      "CLR",
+      "ENC"
+    ],
+    "kind": "community opinion",
+    "status": "opinion",
+    "summary": "Players suggest adding Enchanter to Warrior / Cleric for slow, haste, and enemy control.",
+    "limitation": "This supports the reason for pairing the classes. It does not prove the exact point bonus for the buddy builds.",
+    "reviewedOn": "2026-09-10",
+    "provenance": {
+      "label": "heuristic/inference",
+      "reference": "EQL player discussion. These game claims have not been checked by the user."
+    },
+    "links": [
+      {
+        "title": "Warrior/Cleric — what third?",
+        "url": "https://www.reddit.com/r/EQLegends/comments/1vyc5x7/warriorclericwhat/"
+      }
+    ]
+  },
+  {
+    "id": "knight-pair",
+    "classes": [
+      "PAL",
+      "SHD",
+      "SHM",
+      "NEC"
+    ],
+    "kind": "community opinion",
+    "status": "opinion",
+    "summary": "Players discuss how Shadow Knight and Necromancer combine life-drain and damage-over-time spells, with Shaman support.",
+    "limitation": "This is opinion. It does not set damage bonuses or promise that the build can win every solo fight.",
+    "reviewedOn": "2026-09-10",
+    "provenance": {
+      "label": "heuristic/inference",
+      "reference": "EQL player discussion. These game claims have not been checked by the user."
+    },
+    "links": [
+      {
+        "title": "Shadow Knight versus Paladin with Necromancer/Shaman",
+        "url": "https://www.reddit.com/r/EQ_Legends/comments/1vuo1bz/shadow_vs_pally_with_necroshaman/"
+      }
+    ]
+  },
+  {
+    "id": "melee-debate",
+    "classes": [
+      "WAR",
+      "PAL",
+      "SHD",
+      "RNG",
+      "ROG",
+      "MNK",
+      "BER",
+      "BST",
+      "BRD"
+    ],
+    "kind": "community opinion",
+    "status": "opinion",
+    "summary": "Players share successful melee builds. They debate how these compare with casters, what stances cost, and which melee skills help most.",
+    "limitation": "Players disagree. Gear and fight difficulty can change the results.",
+    "reviewedOn": "2026-09-10",
+    "provenance": {
+      "label": "heuristic/inference",
+      "reference": "EQL player discussion. These game claims have not been checked by the user."
+    },
+    "links": [
+      {
+        "title": "Any strong melee builds?",
+        "url": "https://www.reddit.com/r/EQLegends/comments/1vzha6u/any_strong_melee_builds/"
+      }
+    ]
+  },
+  {
+    "id": "caster-debate",
+    "classes": [
+      "WIZ",
+      "MAG",
+      "NEC",
+      "ENC",
+      "CLR",
+      "SHM"
+    ],
+    "kind": "community opinion",
+    "status": "opinion",
+    "summary": "Players suggest caster builds and discuss whether to add healing or a tank to support their damage.",
+    "limitation": "These ideas came from before launch. They give context but do not change the score.",
+    "reviewedOn": "2026-09-10",
+    "provenance": {
+      "label": "heuristic/inference",
+      "reference": "EQL player discussion. These game claims have not been checked by the user."
+    },
+    "links": [
+      {
+        "title": "Theorycrafting a pure caster build",
+        "url": "https://www.reddit.com/r/EQLegends/comments/1tlr75j/theorycrafting_pure_caster_build/"
+      }
+    ]
+  },
+  {
+    "id": "forge-enc-healing-rejected",
+    "classes": [
+      "ENC",
+      "RNG",
+      "ROG"
+    ],
+    "kind": "conflicting claim",
+    "status": "excluded",
+    "summary": "An automatically generated trio guide says Enchanter helps restore health between pulls. The other class guides reviewed do not support that healing claim.",
+    "limitation": "This claim is not used for scoring. The advisor also does not copy EQLForge’s tier score.",
+    "reviewedOn": "2026-09-10",
+    "provenance": {
+      "label": "heuristic/inference",
+      "reference": "Review of claims that disagree across sources"
+    },
+    "links": [
+      {
+        "title": "EQLForge — Ranger/Rogue/Enchanter",
+        "url": "https://eqlforge.com/trio/enchanter-ranger-rogue"
+      },
+      {
+        "title": "EQL Wiki — Enchanter",
+        "url": "https://eqlwiki.com/Enchanter"
+      }
+    ]
+  }
+]

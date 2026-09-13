@@ -1,0 +1,1413 @@
+{
+  "format": "eqlsak-rule-update",
+  "schemaVersion": 1,
+  "release": "1.1.0-initial-rules",
+  "publishedAt": "2026-09-10T00:00:00Z",
+  "notes": "Initial reviewed rules. This example changes nothing; edit and publish a new package to distribute revised strategies.",
+  "rules": {
+    "version": 1,
+    "tertiaryUnlockLevel": 10,
+    "provenance": {
+      "label": "heuristic/inference",
+      "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+    },
+    "metrics": [
+      "dps",
+      "tank",
+      "heal",
+      "control",
+      "mobility",
+      "travel",
+      "stealth",
+      "pulling",
+      "survivability",
+      "faction"
+    ],
+    "weights": {
+      "dps": 1,
+      "tank": 1,
+      "heal": 1.6,
+      "control": 1.7,
+      "mobility": 1.4,
+      "travel": 1.1,
+      "stealth": 1,
+      "pulling": 1.2,
+      "survivability": 1.5,
+      "faction": 1
+    },
+    "tuning": {
+      "overlapPenalty": 0.7,
+      "buddyCoverage": 0.6,
+      "retainedStrength": 0.25,
+      "needWeight": 1.4,
+      "roleWeight": 2.5,
+      "workloadPenalty": 1.8,
+      "modeSurvival": {
+        "solo": 1.5,
+        "duo": 0.8,
+        "group": 0.3
+      }
+    },
+    "roles": {
+      "overall": [],
+      "DPS": [
+        "dps"
+      ],
+      "tank": [
+        "tank",
+        "survivability"
+      ],
+      "heal": [
+        "heal"
+      ],
+      "CC": [
+        "control"
+      ],
+      "travel": [
+        "travel",
+        "mobility"
+      ],
+      "stealth": [
+        "stealth"
+      ],
+      "pulling": [
+        "pulling",
+        "control"
+      ],
+      "named hunting": [
+        "survivability",
+        "heal",
+        "control"
+      ],
+      "faction work": [
+        "faction",
+        "stealth"
+      ]
+    },
+    "classes": [
+      {
+        "id": "WAR",
+        "name": "Warrior",
+        "ratings": {
+          "dps": 5,
+          "tank": 5,
+          "heal": 0,
+          "control": 0,
+          "mobility": 0,
+          "travel": 0,
+          "stealth": 0,
+          "pulling": 1,
+          "survivability": 5,
+          "faction": 0
+        },
+        "workload": 1,
+        "tradeoff": "Takes hits and deals strong weapon damage. Adds little healing, travel, or control over extra enemies.",
+        "provenance": {
+          "label": "heuristic/inference",
+          "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+        }
+      },
+      {
+        "id": "CLR",
+        "name": "Cleric",
+        "ratings": {
+          "dps": 1,
+          "tank": 2,
+          "heal": 5,
+          "control": 1,
+          "mobility": 0,
+          "travel": 0,
+          "stealth": 0,
+          "pulling": 1,
+          "survivability": 4,
+          "faction": 0
+        },
+        "workload": 2,
+        "tradeoff": "Strong healing helps you recover from fights. Adds little travel help or control over extra enemies.",
+        "provenance": {
+          "label": "heuristic/inference",
+          "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+        }
+      },
+      {
+        "id": "PAL",
+        "name": "Paladin",
+        "ratings": {
+          "dps": 3,
+          "tank": 4,
+          "heal": 3,
+          "control": 2,
+          "mobility": 0,
+          "travel": 0,
+          "stealth": 0,
+          "pulling": 2,
+          "survivability": 4,
+          "faction": 0
+        },
+        "workload": 2,
+        "tradeoff": "Takes hits well and uses both weapons and spells. Shares some weapon skills with other classes and needs mana.",
+        "provenance": {
+          "label": "heuristic/inference",
+          "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+        }
+      },
+      {
+        "id": "RNG",
+        "name": "Ranger",
+        "ratings": {
+          "dps": 4,
+          "tank": 2,
+          "heal": 1,
+          "control": 2,
+          "mobility": 3,
+          "travel": 1,
+          "stealth": 1,
+          "pulling": 3,
+          "survivability": 2,
+          "faction": 0
+        },
+        "workload": 2,
+        "tradeoff": "Tracks enemies and fights with bows or melee weapons. Has limited healing for long fights.",
+        "provenance": {
+          "label": "heuristic/inference",
+          "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+        }
+      },
+      {
+        "id": "SHD",
+        "name": "Shadow Knight",
+        "ratings": {
+          "dps": 4,
+          "tank": 4,
+          "heal": 1,
+          "control": 2,
+          "mobility": 1,
+          "travel": 0,
+          "stealth": 1,
+          "pulling": 4,
+          "survivability": 4,
+          "faction": 0
+        },
+        "workload": 3,
+        "tradeoff": "Takes hits well and can pull enemies. Has little healing for the group.",
+        "provenance": {
+          "label": "heuristic/inference",
+          "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+        }
+      },
+      {
+        "id": "DRU",
+        "name": "Druid",
+        "ratings": {
+          "dps": 3,
+          "tank": 1,
+          "heal": 4,
+          "control": 3,
+          "mobility": 4,
+          "travel": 5,
+          "stealth": 1,
+          "pulling": 2,
+          "survivability": 3,
+          "faction": 0
+        },
+        "workload": 2,
+        "tradeoff": "Helps you travel and keep going on your own. Has fewer ways to control enemies than Enchanter.",
+        "provenance": {
+          "label": "heuristic/inference",
+          "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+        }
+      },
+      {
+        "id": "MNK",
+        "name": "Monk",
+        "ratings": {
+          "dps": 5,
+          "tank": 3,
+          "heal": 0,
+          "control": 1,
+          "mobility": 2,
+          "travel": 0,
+          "stealth": 2,
+          "pulling": 5,
+          "survivability": 3,
+          "faction": 0
+        },
+        "workload": 2,
+        "tradeoff": "Good at pulling enemies and fighting up close. Needs help with healing and controlling extra enemies.",
+        "provenance": {
+          "label": "heuristic/inference",
+          "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+        }
+      },
+      {
+        "id": "BRD",
+        "name": "Bard",
+        "ratings": {
+          "dps": 3,
+          "tank": 2,
+          "heal": 2,
+          "control": 4,
+          "mobility": 5,
+          "travel": 3,
+          "stealth": 2,
+          "pulling": 5,
+          "survivability": 3,
+          "faction": 0
+        },
+        "workload": 4,
+        "tradeoff": "Adds speed and many kinds of support. Songs and movement need attention. Direct healing is limited.",
+        "provenance": {
+          "label": "heuristic/inference",
+          "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+        }
+      },
+      {
+        "id": "ROG",
+        "name": "Rogue",
+        "ratings": {
+          "dps": 5,
+          "tank": 1,
+          "heal": 0,
+          "control": 0,
+          "mobility": 1,
+          "travel": 0,
+          "stealth": 5,
+          "pulling": 2,
+          "survivability": 1,
+          "faction": 0
+        },
+        "workload": 2,
+        "tradeoff": "Adds stealth and quick bursts of damage. You must stand in the right spot and may need help with healing.",
+        "provenance": {
+          "label": "heuristic/inference",
+          "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+        }
+      },
+      {
+        "id": "SHM",
+        "name": "Shaman",
+        "ratings": {
+          "dps": 3,
+          "tank": 2,
+          "heal": 5,
+          "control": 4,
+          "mobility": 3,
+          "travel": 1,
+          "stealth": 1,
+          "pulling": 2,
+          "survivability": 5,
+          "faction": 0
+        },
+        "workload": 3,
+        "tradeoff": "Supports long fights and can slow enemy attacks. Managing spells takes effort. Long-distance travel is limited.",
+        "provenance": {
+          "label": "heuristic/inference",
+          "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+        }
+      },
+      {
+        "id": "NEC",
+        "name": "Necromancer",
+        "ratings": {
+          "dps": 5,
+          "tank": 1,
+          "heal": 2,
+          "control": 3,
+          "mobility": 2,
+          "travel": 1,
+          "stealth": 2,
+          "pulling": 4,
+          "survivability": 4,
+          "faction": 0
+        },
+        "workload": 3,
+        "tradeoff": "Can keep going alone and help pull enemies. You must manage a pet and damage-over-time spells.",
+        "provenance": {
+          "label": "heuristic/inference",
+          "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+        }
+      },
+      {
+        "id": "WIZ",
+        "name": "Wizard",
+        "ratings": {
+          "dps": 5,
+          "tank": 0,
+          "heal": 0,
+          "control": 1,
+          "mobility": 1,
+          "travel": 5,
+          "stealth": 1,
+          "pulling": 1,
+          "survivability": 1,
+          "faction": 0
+        },
+        "workload": 2,
+        "tradeoff": "Adds quick bursts of spell damage and travel help. Has gaps in healing and enemy control.",
+        "provenance": {
+          "label": "heuristic/inference",
+          "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+        }
+      },
+      {
+        "id": "MAG",
+        "name": "Magician",
+        "ratings": {
+          "dps": 5,
+          "tank": 2,
+          "heal": 1,
+          "control": 1,
+          "mobility": 0,
+          "travel": 1,
+          "stealth": 1,
+          "pulling": 1,
+          "survivability": 3,
+          "faction": 0
+        },
+        "workload": 2,
+        "tradeoff": "Adds pet damage and support spells. Offers little enemy control or travel help.",
+        "provenance": {
+          "label": "heuristic/inference",
+          "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+        }
+      },
+      {
+        "id": "ENC",
+        "name": "Enchanter",
+        "ratings": {
+          "dps": 3,
+          "tank": 1,
+          "heal": 0,
+          "control": 5,
+          "mobility": 1,
+          "travel": 1,
+          "stealth": 3,
+          "pulling": 4,
+          "survivability": 2,
+          "faction": 1
+        },
+        "workload": 5,
+        "tradeoff": "Has the strongest enemy-control rating in these rules. Charm and control spells take effort. Has no direct healing.",
+        "provenance": {
+          "label": "heuristic/inference",
+          "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+        }
+      },
+      {
+        "id": "BST",
+        "name": "Beastlord",
+        "ratings": {
+          "dps": 4,
+          "tank": 3,
+          "heal": 3,
+          "control": 2,
+          "mobility": 2,
+          "travel": 0,
+          "stealth": 1,
+          "pulling": 2,
+          "survivability": 4,
+          "faction": 0
+        },
+        "workload": 3,
+        "tradeoff": "Combines weapons, spells, and a pet. Shares some melee skills with other classes. The pet needs attention.",
+        "provenance": {
+          "label": "heuristic/inference",
+          "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+        }
+      },
+      {
+        "id": "BER",
+        "name": "Berserker",
+        "ratings": {
+          "dps": 5,
+          "tank": 2,
+          "heal": 0,
+          "control": 1,
+          "mobility": 1,
+          "travel": 0,
+          "stealth": 0,
+          "pulling": 1,
+          "survivability": 2,
+          "faction": 0
+        },
+        "workload": 2,
+        "tradeoff": "Focuses on weapon damage. Adds few new tools to a build that already has strong melee damage.",
+        "provenance": {
+          "label": "heuristic/inference",
+          "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+        }
+      }
+    ],
+    "aliases": {
+      "MCE": [
+        "MNK",
+        "CLR",
+        "ENC"
+      ],
+      "SK": [
+        "SHD"
+      ]
+    },
+    "rules": [
+      {
+        "id": "rng-rog-bard",
+        "when": {
+          "baseAll": [
+            "RNG",
+            "ROG"
+          ],
+          "candidate": "BRD"
+        },
+        "points": 24,
+        "why": "Ranger and Rogue already deal weapon damage. Bard adds speed, pulling, and many support tools.",
+        "tradeoff": "Songs need your attention. Direct healing is still limited.",
+        "provenance": {
+          "label": "heuristic/inference",
+          "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+        }
+      },
+      {
+        "id": "rng-rog-enc",
+        "when": {
+          "baseAll": [
+            "RNG",
+            "ROG"
+          ],
+          "candidate": "ENC"
+        },
+        "points": 12,
+        "why": "Ranger and Rogue need help controlling enemies. Enchanter has the strongest control rating in these rules.",
+        "tradeoff": "Takes more effort to play and adds no direct healing.",
+        "provenance": {
+          "label": "heuristic/inference",
+          "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+        }
+      },
+      {
+        "id": "rng-rog-shm",
+        "when": {
+          "baseAll": [
+            "RNG",
+            "ROG"
+          ],
+          "candidate": "SHM"
+        },
+        "points": 10,
+        "why": "Shaman adds healing for long fights and spells that weaken enemies. This helps when fighting named enemies.",
+        "tradeoff": "Adds less travel help and fewer stealth tools.",
+        "provenance": {
+          "label": "heuristic/inference",
+          "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+        }
+      },
+      {
+        "id": "rng-rog-dru",
+        "when": {
+          "baseAll": [
+            "RNG",
+            "ROG"
+          ],
+          "candidate": "DRU"
+        },
+        "points": 10,
+        "why": "Druid adds healing and travel spells. This helps you keep going on your own.",
+        "tradeoff": "Has fewer ways to control enemies than Enchanter.",
+        "provenance": {
+          "label": "heuristic/inference",
+          "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+        }
+      },
+      {
+        "id": "control-ceiling",
+        "when": {
+          "baseAll": [
+            "RNG",
+            "ROG"
+          ],
+          "candidate": "ENC",
+          "anyRole": [
+            "CC"
+          ]
+        },
+        "points": 36,
+        "why": "You chose enemy control as your main role. This gives Enchanter extra points.",
+        "provenance": {
+          "label": "heuristic/inference",
+          "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+        }
+      },
+      {
+        "id": "control-need",
+        "when": {
+          "baseAll": [
+            "RNG",
+            "ROG"
+          ],
+          "candidate": "ENC",
+          "needAtLeast": {
+            "control": 4
+          }
+        },
+        "points": 24,
+        "why": "You set a high need for enemy control. A class that is strong at control gets extra points.",
+        "provenance": {
+          "label": "heuristic/inference",
+          "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+        }
+      },
+      {
+        "id": "sustained-named",
+        "when": {
+          "baseAll": [
+            "RNG",
+            "ROG"
+          ],
+          "candidate": "SHM",
+          "anyRole": [
+            "named hunting"
+          ]
+        },
+        "points": 36,
+        "why": "You plan to fight named enemies. Healing and spells that slow enemy attacks get extra points for long fights.",
+        "provenance": {
+          "label": "heuristic/inference",
+          "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+        }
+      },
+      {
+        "id": "travel-self-sufficient",
+        "when": {
+          "baseAll": [
+            "RNG",
+            "ROG"
+          ],
+          "candidate": "DRU",
+          "anyRole": [
+            "travel"
+          ]
+        },
+        "points": 36,
+        "why": "You chose travel as your main goal. Druid gains points for travel spells and healing.",
+        "provenance": {
+          "label": "heuristic/inference",
+          "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+        }
+      },
+      {
+        "id": "mobility-with-healing",
+        "when": {
+          "baseAll": [
+            "RNG",
+            "ROG"
+          ],
+          "candidate": "DRU",
+          "needAtLeast": {
+            "mobility": 4,
+            "healing": 4
+          }
+        },
+        "points": 30,
+        "why": "You need both movement and healing. A class that helps you do both on your own gets extra points.",
+        "provenance": {
+          "label": "heuristic/inference",
+          "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+        }
+      }
+    ],
+    "companionRules": [
+      {
+        "id": "mce-rng-rog-brd",
+        "build": [
+          "RNG",
+          "ROG",
+          "BRD"
+        ],
+        "buddy": [
+          "MNK",
+          "CLR",
+          "ENC"
+        ],
+        "points": 10,
+        "why": "Monk / Cleric / Enchanter adds healing, enemy control, and pulling. Ranger / Rogue / Bard adds damage, scouting, and speed.",
+        "tradeoff": "Decide who will pull and who will control extra enemies. Bard and Enchanter may provide some of the same support.",
+        "provenance": {
+          "label": "heuristic/inference",
+          "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+        }
+      },
+      {
+        "id": "mnk-clr-rog-war-clr-enc",
+        "build": [
+          "MNK",
+          "CLR",
+          "ROG"
+        ],
+        "buddy": [
+          "WAR",
+          "CLR",
+          "ENC"
+        ],
+        "points": 10,
+        "why": "Monk / Cleric / Rogue adds pulling and damage. Warrior / Cleric / Enchanter takes hits and controls extra enemies.",
+        "tradeoff": "Both builds have Cleric healing. Choose a main healer and a backup healer.",
+        "provenance": {
+          "label": "heuristic/inference",
+          "reference": "Starting advice requested by the user on 2026-09-10. Scores are estimates for planning, not proven game results."
+        }
+      }
+    ],
+    "zoneScoring": {
+      "xp": 20,
+      "belowPerLevel": 4,
+      "abovePerLevel": 2,
+      "local": 6,
+      "sameContinent": 3,
+      "otherContinentPenalty": 4,
+      "lootMatch": 12,
+      "unknownLootPenalty": 3,
+      "unknownFactionPenalty": 8,
+      "controlNeed": 3,
+      "healNeed": 2
+    },
+    "zones": [
+      {
+        "id": "blackburrow",
+        "name": "Blackburrow",
+        "aliases": [],
+        "continent": "Antonica",
+        "min": 5,
+        "max": 22,
+        "control": 3,
+        "heal": 2,
+        "loot": [
+          "Wicked Sallet",
+          "Dark Runed Leggings",
+          "Balanced Rat Tooth",
+          "Rat Paw Talisman"
+        ],
+        "factionEffects": null,
+        "accessFactions": null,
+        "provenance": {
+          "label": "heuristic/inference",
+          "reference": "Level ranges and loot come from the existing EQLSaK Dungeon3D.tsx and DungeonGuide.tsx files. Their source links were not checked again in this update. Healing and control ratings are estimates."
+        }
+      },
+      {
+        "id": "mistmoore",
+        "name": "Castle Mistmoore",
+        "aliases": [
+          "Mistmoore"
+        ],
+        "continent": "Faydwer",
+        "min": 20,
+        "max": 45,
+        "control": 4,
+        "heal": 3,
+        "loot": [],
+        "factionEffects": null,
+        "accessFactions": null,
+        "provenance": {
+          "label": "heuristic/inference",
+          "reference": "Level ranges and loot come from the existing EQLSaK Dungeon3D.tsx and DungeonGuide.tsx files. Their source links were not checked again in this update. Healing and control ratings are estimates."
+        }
+      },
+      {
+        "id": "paw",
+        "name": "Splitpaw Lair",
+        "aliases": [
+          "Splitpaw"
+        ],
+        "continent": "Antonica",
+        "min": 25,
+        "max": 42,
+        "control": 3,
+        "heal": 3,
+        "loot": [],
+        "factionEffects": null,
+        "accessFactions": null,
+        "provenance": {
+          "label": "heuristic/inference",
+          "reference": "Level ranges and loot come from the existing EQLSaK Dungeon3D.tsx and DungeonGuide.tsx files. Their source links were not checked again in this update. Healing and control ratings are estimates."
+        }
+      },
+      {
+        "id": "befallen",
+        "name": "Befallen",
+        "aliases": [],
+        "continent": "Antonica",
+        "min": 5,
+        "max": 30,
+        "control": 3,
+        "heal": 2,
+        "loot": [],
+        "factionEffects": null,
+        "accessFactions": null,
+        "provenance": {
+          "label": "heuristic/inference",
+          "reference": "Level ranges and loot come from the existing EQLSaK Dungeon3D.tsx and DungeonGuide.tsx files. Their source links were not checked again in this update. Healing and control ratings are estimates."
+        }
+      },
+      {
+        "id": "najena",
+        "name": "Najena",
+        "aliases": [],
+        "continent": "Antonica",
+        "min": 15,
+        "max": 35,
+        "control": 3,
+        "heal": 3,
+        "loot": [],
+        "factionEffects": null,
+        "accessFactions": null,
+        "provenance": {
+          "label": "heuristic/inference",
+          "reference": "Level ranges and loot come from the existing EQLSaK Dungeon3D.tsx and DungeonGuide.tsx files. Their source links were not checked again in this update. Healing and control ratings are estimates."
+        }
+      },
+      {
+        "id": "gukbottom",
+        "name": "Lower Guk",
+        "aliases": [],
+        "continent": "Antonica",
+        "min": 30,
+        "max": 50,
+        "control": 4,
+        "heal": 4,
+        "loot": [],
+        "factionEffects": null,
+        "accessFactions": null,
+        "provenance": {
+          "label": "heuristic/inference",
+          "reference": "Level ranges and loot come from the existing EQLSaK Dungeon3D.tsx and DungeonGuide.tsx files. Their source links were not checked again in this update. Healing and control ratings are estimates."
+        }
+      }
+    ],
+    "evidence": [
+      {
+        "id": "wiki-WAR",
+        "classes": [
+          "WAR"
+        ],
+        "kind": "class reference",
+        "status": "accepted",
+        "summary": "Takes hits and fights with weapons.",
+        "limitation": "This page gives a broad class overview and includes older information. The advisor’s scores and build advice are still estimates.",
+        "reviewedOn": "2026-09-10",
+        "provenance": {
+          "label": "EQL-sourced",
+          "reference": "EQL Wiki class reference"
+        },
+        "links": [
+          {
+            "title": "EQL Wiki — Warrior",
+            "url": "https://eqlwiki.com/Warrior"
+          }
+        ]
+      },
+      {
+        "id": "wiki-CLR",
+        "classes": [
+          "CLR"
+        ],
+        "kind": "class reference",
+        "status": "accepted",
+        "summary": "Strong healing and spells that help protect allies.",
+        "limitation": "This page gives a broad class overview and includes older information. The advisor’s scores and build advice are still estimates.",
+        "reviewedOn": "2026-09-10",
+        "provenance": {
+          "label": "EQL-sourced",
+          "reference": "EQL Wiki class reference"
+        },
+        "links": [
+          {
+            "title": "EQL Wiki — Cleric",
+            "url": "https://eqlwiki.com/Cleric"
+          }
+        ]
+      },
+      {
+        "id": "wiki-PAL",
+        "classes": [
+          "PAL"
+        ],
+        "kind": "class reference",
+        "status": "accepted",
+        "summary": "Fights up close, takes hits, heals, and stuns enemies.",
+        "limitation": "This page gives a broad class overview and includes older information. The advisor’s scores and build advice are still estimates.",
+        "reviewedOn": "2026-09-10",
+        "provenance": {
+          "label": "EQL-sourced",
+          "reference": "EQL Wiki class reference"
+        },
+        "links": [
+          {
+            "title": "EQL Wiki — Paladin",
+            "url": "https://eqlwiki.com/Paladin"
+          }
+        ]
+      },
+      {
+        "id": "wiki-RNG",
+        "classes": [
+          "RNG"
+        ],
+        "kind": "class reference",
+        "status": "accepted",
+        "summary": "Uses bows and melee weapons, tracks enemies, and has snare and root spells. The guide lists Rogue as a way to add melee damage.",
+        "limitation": "This page gives a broad class overview and includes older information. The advisor’s scores and build advice are still estimates.",
+        "reviewedOn": "2026-09-10",
+        "provenance": {
+          "label": "EQL-sourced",
+          "reference": "EQL Wiki class reference"
+        },
+        "links": [
+          {
+            "title": "EQL Wiki — Ranger",
+            "url": "https://eqlwiki.com/Ranger"
+          }
+        ]
+      },
+      {
+        "id": "wiki-SHD",
+        "classes": [
+          "SHD"
+        ],
+        "kind": "class reference",
+        "status": "accepted",
+        "summary": "Uses armor, melee weapons, dark magic, and a defensive stance.",
+        "limitation": "This page gives a broad class overview and includes older information. The advisor’s scores and build advice are still estimates.",
+        "reviewedOn": "2026-09-10",
+        "provenance": {
+          "label": "EQL-sourced",
+          "reference": "EQL Wiki class reference"
+        },
+        "links": [
+          {
+            "title": "EQL Wiki — Shadow Knight",
+            "url": "https://eqlwiki.com/Shadow_Knight"
+          }
+        ]
+      },
+      {
+        "id": "wiki-DRU",
+        "classes": [
+          "DRU"
+        ],
+        "kind": "class reference",
+        "status": "accepted",
+        "summary": "Heals, restores health over time, helps with movement, and has travel spells.",
+        "limitation": "This page gives a broad class overview and includes older information. The advisor’s scores and build advice are still estimates.",
+        "reviewedOn": "2026-09-10",
+        "provenance": {
+          "label": "EQL-sourced",
+          "reference": "EQL Wiki class reference"
+        },
+        "links": [
+          {
+            "title": "EQL Wiki — Druid",
+            "url": "https://eqlwiki.com/Druid"
+          }
+        ]
+      },
+      {
+        "id": "wiki-MNK",
+        "classes": [
+          "MNK"
+        ],
+        "kind": "class reference",
+        "status": "accepted",
+        "summary": "Fights up close and avoids hits. Mend helps restore the Monk’s own health.",
+        "limitation": "This page gives a broad class overview and includes older information. The advisor’s scores and build advice are still estimates.",
+        "reviewedOn": "2026-09-10",
+        "provenance": {
+          "label": "EQL-sourced",
+          "reference": "EQL Wiki class reference"
+        },
+        "links": [
+          {
+            "title": "EQL Wiki — Monk",
+            "url": "https://eqlwiki.com/Monk"
+          }
+        ]
+      },
+      {
+        "id": "wiki-BRD",
+        "classes": [
+          "BRD"
+        ],
+        "kind": "class reference",
+        "status": "accepted",
+        "summary": "Songs add speed, healing over time, faster attacks, and enemy control.",
+        "limitation": "This page gives a broad class overview and includes older information. The advisor’s scores and build advice are still estimates.",
+        "reviewedOn": "2026-09-10",
+        "provenance": {
+          "label": "EQL-sourced",
+          "reference": "EQL Wiki class reference"
+        },
+        "links": [
+          {
+            "title": "EQL Wiki — Bard",
+            "url": "https://eqlwiki.com/Bard"
+          }
+        ]
+      },
+      {
+        "id": "wiki-ROG",
+        "classes": [
+          "ROG"
+        ],
+        "kind": "class reference",
+        "status": "accepted",
+        "summary": "Uses Backstab and poisons. Sneak and Hide help with scouting.",
+        "limitation": "This page gives a broad class overview and includes older information. The advisor’s scores and build advice are still estimates.",
+        "reviewedOn": "2026-09-10",
+        "provenance": {
+          "label": "EQL-sourced",
+          "reference": "EQL Wiki class reference"
+        },
+        "links": [
+          {
+            "title": "EQL Wiki — Rogue",
+            "url": "https://eqlwiki.com/Rogue"
+          }
+        ]
+      },
+      {
+        "id": "wiki-SHM",
+        "classes": [
+          "SHM"
+        ],
+        "kind": "class reference",
+        "status": "accepted",
+        "summary": "Heals, slows enemy attacks, boosts stats, and deals damage over time.",
+        "limitation": "This page gives a broad class overview and includes older information. The advisor’s scores and build advice are still estimates.",
+        "reviewedOn": "2026-09-10",
+        "provenance": {
+          "label": "EQL-sourced",
+          "reference": "EQL Wiki class reference"
+        },
+        "links": [
+          {
+            "title": "EQL Wiki — Shaman",
+            "url": "https://eqlwiki.com/Shaman"
+          }
+        ]
+      },
+      {
+        "id": "wiki-NEC",
+        "classes": [
+          "NEC"
+        ],
+        "kind": "class reference",
+        "status": "accepted",
+        "summary": "Uses damage spells, pets, and magic that drains life.",
+        "limitation": "This page gives a broad class overview and includes older information. The advisor’s scores and build advice are still estimates.",
+        "reviewedOn": "2026-09-10",
+        "provenance": {
+          "label": "EQL-sourced",
+          "reference": "EQL Wiki class reference"
+        },
+        "links": [
+          {
+            "title": "EQL Wiki — Necromancer",
+            "url": "https://eqlwiki.com/Necromancer"
+          }
+        ]
+      },
+      {
+        "id": "wiki-WIZ",
+        "classes": [
+          "WIZ"
+        ],
+        "kind": "class reference",
+        "status": "accepted",
+        "summary": "Deals quick bursts of spell damage and can teleport. Its spells cover fewer other roles.",
+        "limitation": "This page gives a broad class overview and includes older information. The advisor’s scores and build advice are still estimates.",
+        "reviewedOn": "2026-09-10",
+        "provenance": {
+          "label": "EQL-sourced",
+          "reference": "EQL Wiki class reference"
+        },
+        "links": [
+          {
+            "title": "EQL Wiki — Wizard",
+            "url": "https://eqlwiki.com/Wizard"
+          }
+        ]
+      },
+      {
+        "id": "wiki-MAG",
+        "classes": [
+          "MAG"
+        ],
+        "kind": "class reference",
+        "status": "accepted",
+        "summary": "Uses elemental pets, direct damage, damage shields, and spells that create supplies.",
+        "limitation": "This page gives a broad class overview and includes older information. The advisor’s scores and build advice are still estimates.",
+        "reviewedOn": "2026-09-10",
+        "provenance": {
+          "label": "EQL-sourced",
+          "reference": "EQL Wiki class reference"
+        },
+        "links": [
+          {
+            "title": "EQL Wiki — Magician",
+            "url": "https://eqlwiki.com/Magician"
+          }
+        ]
+      },
+      {
+        "id": "wiki-ENC",
+        "classes": [
+          "ENC"
+        ],
+        "kind": "class reference",
+        "status": "accepted",
+        "summary": "Uses mez, slow, and charm to control enemies. Also adds faster attacks and mana support.",
+        "limitation": "This page gives a broad class overview and includes older information. The advisor’s scores and build advice are still estimates.",
+        "reviewedOn": "2026-09-10",
+        "provenance": {
+          "label": "EQL-sourced",
+          "reference": "EQL Wiki class reference"
+        },
+        "links": [
+          {
+            "title": "EQL Wiki — Enchanter",
+            "url": "https://eqlwiki.com/Enchanter"
+          }
+        ]
+      },
+      {
+        "id": "wiki-BST",
+        "classes": [
+          "BST"
+        ],
+        "kind": "class reference",
+        "status": "accepted",
+        "summary": "Combines melee weapons and spirit magic with a pet called a warder.",
+        "limitation": "This page gives a broad class overview and includes older information. The advisor’s scores and build advice are still estimates.",
+        "reviewedOn": "2026-09-10",
+        "provenance": {
+          "label": "EQL-sourced",
+          "reference": "EQL Wiki class reference"
+        },
+        "links": [
+          {
+            "title": "EQL Wiki — Beastlord",
+            "url": "https://eqlwiki.com/Beastlord"
+          }
+        ]
+      },
+      {
+        "id": "wiki-BER",
+        "classes": [
+          "BER"
+        ],
+        "kind": "class reference",
+        "status": "accepted",
+        "summary": "Uses weapons, Frenzy, and combat skills. Blood Rune helps with defense.",
+        "limitation": "This page gives a broad class overview and includes older information. The advisor’s scores and build advice are still estimates.",
+        "reviewedOn": "2026-09-10",
+        "provenance": {
+          "label": "EQL-sourced",
+          "reference": "EQL Wiki class reference"
+        },
+        "links": [
+          {
+            "title": "EQL Wiki — Berserker",
+            "url": "https://eqlwiki.com/Berserker"
+          }
+        ]
+      },
+      {
+        "id": "forge-roles",
+        "classes": [],
+        "kind": "cross-check",
+        "status": "accepted",
+        "summary": "EQLForge also lists Warrior, Paladin, and Shadow Knight as tanks. It groups priests as healers, weapon classes as melee damage, and Bard, Enchanter, and Beastlord as support.",
+        "limitation": "Used to compare broad class roles only. Armor labels and claims about the best performance are not used.",
+        "reviewedOn": "2026-09-10",
+        "provenance": {
+          "label": "EQL-sourced",
+          "reference": "EQLForge class guide — broad roles only"
+        },
+        "links": [
+          {
+            "title": "EQLForge — The 16 Classes",
+            "url": "https://eqlforge.com/classes"
+          }
+        ]
+      },
+      {
+        "id": "guides-model",
+        "classes": [],
+        "kind": "model scope",
+        "status": "accepted",
+        "summary": "EverQuest Guides keeps its EQL rankings separate from classic EQ and THJ. It says some class-balance claims still need to be checked again.",
+        "limitation": "Its tier scores and beta performance numbers are not treated as facts in EQLSaK.",
+        "reviewedOn": "2026-09-10",
+        "provenance": {
+          "label": "EQL-sourced",
+          "reference": "EverQuest Guides — how its ratings work and what still needs checking"
+        },
+        "links": [
+          {
+            "title": "EverQuest Guides — Legends Combo Builder",
+            "url": "https://www.everquestguides.com/legends/index.html"
+          }
+        ]
+      },
+      {
+        "id": "dual-wield",
+        "classes": [
+          "WAR",
+          "MNK",
+          "RNG",
+          "ROG",
+          "BRD",
+          "BST"
+        ],
+        "kind": "mechanic",
+        "status": "accepted",
+        "summary": "The EQL Wiki Dual Wield tool uses the highest skill limit among your chosen classes. It does not add those limits together.",
+        "limitation": "This supports giving fewer points for shared skills. It does not prove the exact point penalty used by this advisor.",
+        "reviewedOn": "2026-09-10",
+        "provenance": {
+          "label": "EQL-sourced",
+          "reference": "EQL Wiki — Skill Dual Wield"
+        },
+        "links": [
+          {
+            "title": "EQL Wiki — Dual Wield",
+            "url": "https://eqlwiki.com/Skill_Dual_Wield"
+          }
+        ]
+      },
+      {
+        "id": "support-comparison",
+        "classes": [
+          "BRD",
+          "ENC",
+          "SHM",
+          "DRU"
+        ],
+        "kind": "community opinion",
+        "status": "opinion",
+        "summary": "Players compare run speed, healing over time, and spells that slow or speed up attacks. They warn that Enchanter does not replace a healer.",
+        "limitation": "This discussion took place before launch. It shows player opinions about roles, not current class balance.",
+        "reviewedOn": "2026-09-10",
+        "provenance": {
+          "label": "heuristic/inference",
+          "reference": "EQL player discussion. These game claims have not been checked by the user."
+        },
+        "links": [
+          {
+            "title": "Class comparison — Bard, Enchanter, Shaman, Druid",
+            "url": "https://www.reddit.com/r/EQLegends/comments/1unmmmr/class_comparison_bard_enchanter_shaman_druid/"
+          }
+        ]
+      },
+      {
+        "id": "ranger-shaman",
+        "classes": [
+          "RNG",
+          "ROG",
+          "SHM"
+        ],
+        "kind": "community opinion",
+        "status": "opinion",
+        "summary": "Players think Ranger / Rogue / Shaman may work well. They also raise concerns about losing a defensive stance and needing better gear or more AA skills.",
+        "limitation": "These are player reports and guesses. They do not prove how the build performs at D4 difficulty.",
+        "reviewedOn": "2026-09-10",
+        "provenance": {
+          "label": "heuristic/inference",
+          "reference": "EQL player discussion. These game claims have not been checked by the user."
+        },
+        "links": [
+          {
+            "title": "Ranger/Rogue/Shaman Solo",
+            "url": "https://www.reddit.com/r/EQLegends/comments/1v6grg1/rangerrogueshaman_solo/"
+          }
+        ]
+      },
+      {
+        "id": "ranger-bard",
+        "classes": [
+          "RNG",
+          "BRD",
+          "SHM",
+          "DRU",
+          "WIZ"
+        ],
+        "kind": "community opinion",
+        "status": "opinion",
+        "summary": "Players suggest adding healing to Ranger / Bard. They say Ranger results depend a lot on weapons, arrows, AA skills, and stance choices.",
+        "limitation": "Players report different results. This does not prove Bard is the best third class for everyone.",
+        "reviewedOn": "2026-09-10",
+        "provenance": {
+          "label": "heuristic/inference",
+          "reference": "EQL player discussion. These game claims have not been checked by the user."
+        },
+        "links": [
+          {
+            "title": "Ranger/Bard and a third class",
+            "url": "https://www.reddit.com/r/EQLegends/comments/1w9kpmc/rangerbard_and/"
+          }
+        ]
+      },
+      {
+        "id": "monk-warrior",
+        "classes": [
+          "MNK",
+          "WAR",
+          "CLR",
+          "BRD"
+        ],
+        "kind": "community opinion",
+        "status": "opinion",
+        "summary": "Players compare how Warrior reduces damage with how Monk avoids hits. They disagree on whether more damage is worth taking more hits.",
+        "limitation": "This discussion comes from beta testing. Its reported percentages are not used here.",
+        "reviewedOn": "2026-09-10",
+        "provenance": {
+          "label": "heuristic/inference",
+          "reference": "EQL player discussion. These game claims have not been checked by the user."
+        },
+        "links": [
+          {
+            "title": "Monk versus Warrior",
+            "url": "https://www.reddit.com/r/EQLegends/comments/1uzy6iy/monk_versus_warrior/"
+          }
+        ]
+      },
+      {
+        "id": "war-clr-enc",
+        "classes": [
+          "WAR",
+          "CLR",
+          "ENC"
+        ],
+        "kind": "community opinion",
+        "status": "opinion",
+        "summary": "Players suggest adding Enchanter to Warrior / Cleric for slow, haste, and enemy control.",
+        "limitation": "This supports the reason for pairing the classes. It does not prove the exact point bonus for the buddy builds.",
+        "reviewedOn": "2026-09-10",
+        "provenance": {
+          "label": "heuristic/inference",
+          "reference": "EQL player discussion. These game claims have not been checked by the user."
+        },
+        "links": [
+          {
+            "title": "Warrior/Cleric — what third?",
+            "url": "https://www.reddit.com/r/EQLegends/comments/1vyc5x7/warriorclericwhat/"
+          }
+        ]
+      },
+      {
+        "id": "knight-pair",
+        "classes": [
+          "PAL",
+          "SHD",
+          "SHM",
+          "NEC"
+        ],
+        "kind": "community opinion",
+        "status": "opinion",
+        "summary": "Players discuss how Shadow Knight and Necromancer combine life-drain and damage-over-time spells, with Shaman support.",
+        "limitation": "This is opinion. It does not set damage bonuses or promise that the build can win every solo fight.",
+        "reviewedOn": "2026-09-10",
+        "provenance": {
+          "label": "heuristic/inference",
+          "reference": "EQL player discussion. These game claims have not been checked by the user."
+        },
+        "links": [
+          {
+            "title": "Shadow Knight versus Paladin with Necromancer/Shaman",
+            "url": "https://www.reddit.com/r/EQ_Legends/comments/1vuo1bz/shadow_vs_pally_with_necroshaman/"
+          }
+        ]
+      },
+      {
+        "id": "melee-debate",
+        "classes": [
+          "WAR",
+          "PAL",
+          "SHD",
+          "RNG",
+          "ROG",
+          "MNK",
+          "BER",
+          "BST",
+          "BRD"
+        ],
+        "kind": "community opinion",
+        "status": "opinion",
+        "summary": "Players share successful melee builds. They debate how these compare with casters, what stances cost, and which melee skills help most.",
+        "limitation": "Players disagree. Gear and fight difficulty can change the results.",
+        "reviewedOn": "2026-09-10",
+        "provenance": {
+          "label": "heuristic/inference",
+          "reference": "EQL player discussion. These game claims have not been checked by the user."
+        },
+        "links": [
+          {
+            "title": "Any strong melee builds?",
+            "url": "https://www.reddit.com/r/EQLegends/comments/1vzha6u/any_strong_melee_builds/"
+          }
+        ]
+      },
+      {
+        "id": "caster-debate",
+        "classes": [
+          "WIZ",
+          "MAG",
+          "NEC",
+          "ENC",
+          "CLR",
+          "SHM"
+        ],
+        "kind": "community opinion",
+        "status": "opinion",
+        "summary": "Players suggest caster builds and discuss whether to add healing or a tank to support their damage.",
+        "limitation": "These ideas came from before launch. They give context but do not change the score.",
+        "reviewedOn": "2026-09-10",
+        "provenance": {
+          "label": "heuristic/inference",
+          "reference": "EQL player discussion. These game claims have not been checked by the user."
+        },
+        "links": [
+          {
+            "title": "Theorycrafting a pure caster build",
+            "url": "https://www.reddit.com/r/EQLegends/comments/1tlr75j/theorycrafting_pure_caster_build/"
+          }
+        ]
+      },
+      {
+        "id": "forge-enc-healing-rejected",
+        "classes": [
+          "ENC",
+          "RNG",
+          "ROG"
+        ],
+        "kind": "conflicting claim",
+        "status": "excluded",
+        "summary": "An automatically generated trio guide says Enchanter helps restore health between pulls. The other class guides reviewed do not support that healing claim.",
+        "limitation": "This claim is not used for scoring. The advisor also does not copy EQLForge’s tier score.",
+        "reviewedOn": "2026-09-10",
+        "provenance": {
+          "label": "heuristic/inference",
+          "reference": "Review of claims that disagree across sources"
+        },
+        "links": [
+          {
+            "title": "EQLForge — Ranger/Rogue/Enchanter",
+            "url": "https://eqlforge.com/trio/enchanter-ranger-rogue"
+          },
+          {
+            "title": "EQL Wiki — Enchanter",
+            "url": "https://eqlwiki.com/Enchanter"
+          }
+        ]
+      }
+    ]
+  }
+}

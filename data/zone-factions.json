@@ -1,0 +1,335 @@
+{
+  "version": 1,
+  "reviewedOn": "2026-09-11",
+  "note": "A reviewed starting set, not every faction or instance. EQL-sourced means a supporting EQL website, not independent in-game verification. Positive points do not guarantee friendly NPCs. Confirm one kill or turn-in before repeating a plan.",
+  "factions": [
+    {
+      "id": "goblin",
+      "name": "Goblin",
+      "aliases": [],
+      "sources": ["https://eqlwiki.com/Goblin_(Faction)"]
+    },
+    {
+      "id": "paladins-underfoot",
+      "name": "Paladins of Underfoot",
+      "aliases": ["Miners Guild 249"],
+      "sources": ["https://eqlwiki.com/Paladins_of_Underfoot"]
+    },
+    {
+      "id": "clerics-underfoot",
+      "name": "Clerics of Underfoot",
+      "aliases": [],
+      "sources": ["https://eqlwiki.com/Clerics_of_Underfoot"]
+    },
+    {
+      "id": "kazon",
+      "name": "Kazon Stormhammer",
+      "aliases": [],
+      "sources": ["https://eqlbase.com/npcs/70031/"]
+    },
+    {
+      "id": "storm-guard",
+      "name": "Storm Guard",
+      "aliases": [],
+      "sources": ["https://eqlsource.com/dungeons/crushbone"]
+    },
+    {
+      "id": "faydarks",
+      "name": "Faydark's Champions",
+      "aliases": ["Faydarks Champions"],
+      "sources": ["https://eqlwiki.com/Orc_Legionnaire_(Crushbone)"]
+    },
+    {
+      "id": "emerald",
+      "name": "Emerald Warriors",
+      "aliases": [],
+      "sources": ["https://eqlsource.com/dungeons/crushbone"]
+    },
+    {
+      "id": "crushbone",
+      "name": "Crushbone Orcs",
+      "aliases": [],
+      "sources": ["https://eqlsource.com/dungeons/crushbone"]
+    },
+    {
+      "id": "qeynos-guards",
+      "name": "Guards of Qeynos",
+      "aliases": ["Qeynos Guards"],
+      "sources": ["https://eqlsource.com/dungeons/blackburrow"]
+    },
+    {
+      "id": "sabertooths",
+      "name": "Sabertooths of Blackburrow",
+      "aliases": [],
+      "sources": ["https://eqlsource.com/dungeons/blackburrow"]
+    },
+    {
+      "id": "jaggedpine",
+      "name": "Jaggedpine Treefolk",
+      "aliases": [],
+      "sources": ["https://eqlsource.com/dungeons/blackburrow"]
+    },
+    {
+      "id": "qeynos-merchants",
+      "name": "Merchants of Qeynos",
+      "aliases": [],
+      "sources": ["https://eqlsource.com/dungeons/blackburrow"]
+    },
+    {
+      "id": "silent-fist",
+      "name": "Silent Fist Clan",
+      "aliases": [],
+      "sources": ["https://eqlsource.com/dungeons/blackburrow"]
+    },
+    {
+      "id": "splitpaw",
+      "name": "Split Paw Clan",
+      "aliases": ["Splitpaw Clan"],
+      "sources": ["https://eqlwiki.com/Split_Paw_Clan"]
+    },
+    {
+      "id": "heretics",
+      "name": "Heretics",
+      "aliases": [],
+      "sources": ["https://eqlwiki.com/Alanna%27s_Race_Unlock_Guide"]
+    },
+    {
+      "id": "high-guard",
+      "name": "High Guard of Erudin",
+      "aliases": [],
+      "sources": ["https://eqlwiki.com/Alanna%27s_Race_Unlock_Guide"]
+    },
+    {
+      "id": "kobolk",
+      "name": "Clan Kobolk",
+      "aliases": [],
+      "sources": ["https://eqlwiki.com/Alanna%27s_Race_Unlock_Guide"]
+    },
+    {
+      "id": "deepwater",
+      "name": "Deepwater Knights",
+      "aliases": [],
+      "sources": ["https://eqlwiki.com/Kobold_Molars_(Good)"]
+    },
+    {
+      "id": "high-council",
+      "name": "High Council of Erudin",
+      "aliases": [],
+      "sources": ["https://eqlwiki.com/Kobold_Molars_(Good)"]
+    },
+    {
+      "id": "kerra",
+      "name": "Kerra Isle",
+      "aliases": ["Kerra Island"],
+      "sources": ["https://eqlwiki.com/Kobold_Molars_(Good)"]
+    }
+  ],
+  "zones": [
+    {
+      "names": ["Dagnor's Cauldron"],
+      "factions": [
+        "goblin",
+        "paladins-underfoot",
+        "clerics-underfoot",
+        "kazon"
+      ],
+      "note": "Goblins and dwarf NPCs can affect different factions here. This list is not every NPC in the zone."
+    },
+    {
+      "names": ["Ocean of Tears"],
+      "factions": ["goblin"],
+      "note": "Goblin is one local faction; other inhabitants can have different ties."
+    },
+    {
+      "names": ["Crushbone"],
+      "factions": [
+        "crushbone",
+        "storm-guard",
+        "faydarks",
+        "emerald",
+        "clerics-underfoot"
+      ],
+      "note": "The gains below apply to the named orc target. Do not assume every NPC gives the same result; harming dwarf slaves can hurt Kaladim standing."
+    },
+    {
+      "names": [
+        "Butcherblock Mountains",
+        "Kaladim",
+        "North Kaladim",
+        "South Kaladim"
+      ],
+      "factions": [
+        "storm-guard",
+        "paladins-underfoot",
+        "clerics-underfoot",
+        "kazon"
+      ],
+      "note": "Several dwarf factions matter here. Check the exact NPC before attacking."
+    },
+    {
+      "names": ["Greater Faydark", "Kelethin"],
+      "factions": ["faydarks", "emerald"],
+      "note": "Crushbone offers a nearby way to work on these factions."
+    },
+    {
+      "names": ["Blackburrow"],
+      "factions": [
+        "sabertooths",
+        "splitpaw",
+        "qeynos-guards",
+        "jaggedpine",
+        "qeynos-merchants",
+        "silent-fist"
+      ],
+      "note": "EQLSource measured faction movement here, but did not confirm per-kill amounts or directions. The gnoll plan is marked as an inference."
+    },
+    {
+      "names": ["Infected Paw", "Lair of the Splitpaw", "Splitpaw Lair"],
+      "factions": ["splitpaw"],
+      "note": "No reviewed way to raise Split Paw Clan is included yet."
+    },
+    {
+      "names": ["The Warrens", "Stonebrunt Mountains"],
+      "factions": ["kobolk", "heretics", "high-guard"],
+      "note": "Community reports list kobold gains for both Erudin's guards and the Heretics. Named kobolds can give different hits."
+    },
+    {
+      "names": ["Erudin", "Erudin Palace"],
+      "factions": ["high-guard", "deepwater", "high-council"],
+      "note": "Check that the quest giver will accept your turn-in before handing over items."
+    },
+    {
+      "names": ["Paineel"],
+      "factions": ["heretics"],
+      "note": "Kobold hunting can help; the good molar turn-in works against Heretics."
+    },
+    {
+      "names": ["Kerra Island"],
+      "factions": ["kerra"],
+      "note": "The good molar turn-in lists a loss to Kerra Isle."
+    }
+  ],
+  "actions": [
+    {
+      "id": "orc-legionnaire",
+      "title": "Hunt orc legionnaires in Crushbone",
+      "zone": "Crushbone",
+      "kind": "kill",
+      "provenance": "EQL-sourced",
+      "confidence": "Wiki amounts; EQLSource confirms faction movement, not the exact rate.",
+      "effects": [
+        { "faction": "storm-guard", "direction": "up", "points": 5 },
+        { "faction": "faydarks", "direction": "up", "points": 5 },
+        { "faction": "emerald", "direction": "up", "points": 5 },
+        { "faction": "crushbone", "direction": "down", "points": 30 }
+      ],
+      "sources": [
+        "https://eqlwiki.com/Orc_Legionnaire_(Crushbone)",
+        "https://eqlsource.com/dungeons/crushbone"
+      ],
+      "note": "Try one kill and check the faction message before repeating. These hits apply to this target, not every orc."
+    },
+    {
+      "id": "warrens-kobolds",
+      "title": "Hunt ordinary kobolds in the Warrens",
+      "zone": "The Warrens",
+      "kind": "kill",
+      "provenance": "EQL-sourced",
+      "confidence": "Community-reported amounts, not independently tested by this app.",
+      "effects": [
+        { "faction": "heretics", "direction": "up", "points": 5 },
+        { "faction": "high-guard", "direction": "up", "points": 5 },
+        { "faction": "kobolk", "direction": "down", "points": 1 }
+      ],
+      "sources": ["https://eqlwiki.com/Alanna%27s_Race_Unlock_Guide"],
+      "note": "Named kobolds can give different losses. This rate does not promise that your build can handle the camp."
+    },
+    {
+      "id": "good-molars",
+      "title": "Collect kobold molars, then turn them in to Tiam Khonsir",
+      "zone": "Erudin",
+      "kind": "turn-in",
+      "provenance": "EQL-sourced",
+      "confidence": "Wiki reward amounts and a current community guide agree on the main gains.",
+      "effects": [
+        { "faction": "deepwater", "direction": "up", "points": 7 },
+        { "faction": "high-council", "direction": "up", "points": 5 },
+        { "faction": "heretics", "direction": "down", "points": 1 },
+        { "faction": "kerra", "direction": "down", "points": 1 }
+      ],
+      "sources": [
+        "https://eqlwiki.com/Kobold_Molars_(Good)",
+        "https://eqlwiki.com/Alanna%27s_Race_Unlock_Guide"
+      ],
+      "note": "Collect molars from Warrens kobolds. Check one turn-in first and confirm that Tiam will accept it."
+    },
+    {
+      "id": "blackburrow-gnoll",
+      "title": "Check the faction gains from a gnoll in Blackburrow",
+      "zone": "Blackburrow",
+      "kind": "kill",
+      "provenance": "heuristic/inference",
+      "confidence": "EQLBase marks this NPC as a classic baseline. Current EQL measurements show movement, but do not prove these directions.",
+      "effects": [
+        { "faction": "qeynos-guards", "direction": "up" },
+        { "faction": "jaggedpine", "direction": "up" },
+        { "faction": "qeynos-merchants", "direction": "up" },
+        { "faction": "silent-fist", "direction": "up" },
+        { "faction": "sabertooths", "direction": "down" }
+      ],
+      "sources": [
+        "https://eqlbase.com/npcs/17002/",
+        "https://eqlsource.com/tools/faction-impact"
+      ],
+      "note": "Confirm the signs and amounts in your game before using this as a faction plan. No kill estimate is given."
+    },
+    {
+      "id": "underfoot-chalice",
+      "title": "Review the Chalice of Conquest quest",
+      "zone": "Kaladim",
+      "kind": "quest",
+      "provenance": "EQL-sourced",
+      "confidence": "Listed by the faction pages; no verified gain per run in this pack.",
+      "effects": [
+        { "faction": "paladins-underfoot", "direction": "up" },
+        { "faction": "clerics-underfoot", "direction": "up" }
+      ],
+      "sources": [
+        "https://eqlwiki.com/Paladins_of_Underfoot",
+        "https://eqlwiki.com/Clerics_of_Underfoot",
+        "https://eqlwiki.com/Chalice_of_Conquest_Quest"
+      ],
+      "note": "Read the full quest and check access first. This is a quest lead, not a repeatable hunting route. Other faction hits have not been fully reviewed."
+    },
+    {
+      "id": "gundalthur",
+      "title": "Harming Gundalthur Izuran lowers dwarf factions",
+      "zone": "Dagnor's Cauldron",
+      "kind": "avoid",
+      "provenance": "EQL-sourced",
+      "confidence": "EQLBase labels this NPC Legends verified; faction pages also link him to these losses.",
+      "effects": [
+        { "faction": "paladins-underfoot", "direction": "down", "points": 1 },
+        { "faction": "clerics-underfoot", "direction": "down", "points": 1 },
+        { "faction": "kazon", "direction": "down", "points": 1 }
+      ],
+      "sources": [
+        "https://eqlbase.com/npcs/70031/",
+        "https://eqlwiki.com/Paladins_of_Underfoot",
+        "https://eqlwiki.com/Clerics_of_Underfoot"
+      ],
+      "note": "Keep this NPC out of your hunt if you want to protect these factions."
+    },
+    {
+      "id": "aqua-goblins",
+      "title": "Aqua goblin hunting lowers Goblin standing",
+      "zone": "Dagnor's Cauldron",
+      "kind": "avoid",
+      "provenance": "EQL-sourced",
+      "confidence": "The faction page lists these losses, with no reviewed positive route.",
+      "effects": [{ "faction": "goblin", "direction": "down" }],
+      "sources": ["https://eqlwiki.com/Goblin_(Faction)"],
+      "note": "The list includes aqua goblin bosuns, mariners, shamans and tidal lords. No amount is assumed."
+    }
+  ]
+}

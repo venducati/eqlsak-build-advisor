@@ -1,0 +1,11 @@
+node_modules/
+desktop/node_modules/
+desktop/release/
+desktop/ui/
+desktop/assets/eqlsak-mural.webp
+work/
+outputs/
+.env*
+*.log
+*.pem
+*.tsbuildinfo

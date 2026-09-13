@@ -1,0 +1,1043 @@
+{
+  "version": 1,
+  "reviewedOn": "2026-09-11",
+  "note": "Zone names only. This roster does not claim hunting advice or faction coverage for every zone. Out-of-era entries are planning locations listed separately by EQL Wiki.",
+  "sources": [
+    {
+      "id": "eql-wiki",
+      "url": "https://eqlwiki.com/Zones"
+    },
+    {
+      "id": "legends-tools",
+      "url": "https://eqlegendstools.com/zones/"
+    },
+    {
+      "id": "launch-map",
+      "url": "https://github.com/lab1702/eql-maps/blob/main/data/zones.json",
+      "credit": "lab1702/eql-maps (MIT), zone names and continents only"
+    },
+    {
+      "id": "advisor",
+      "url": "https://eqlwiki.com/Zones",
+      "note": "Existing local advisor rules"
+    }
+  ],
+  "zones": [
+    {
+      "id": "akanon",
+      "name": "Ak'Anon",
+      "continent": "Faydwer",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki"]
+    },
+    {
+      "id": "befallen",
+      "name": "Befallen",
+      "continent": "Antonica",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools", "advisor"]
+    },
+    {
+      "id": "blackburrow",
+      "name": "Blackburrow",
+      "continent": "Antonica",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools", "advisor"]
+    },
+    {
+      "id": "burningwood",
+      "name": "Burning Wood",
+      "continent": "Kunark",
+      "aliases": [],
+      "availability": "out-of-era",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "butcherblockmountains",
+      "name": "Butcherblock Mountains",
+      "continent": "Faydwer",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "cabilis",
+      "name": "Cabilis",
+      "continent": "Kunark",
+      "aliases": [],
+      "availability": "out-of-era",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "castlemistmoore",
+      "name": "Castle Mistmoore",
+      "continent": "Faydwer",
+      "aliases": ["Mistmoore Castle"],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools", "advisor"]
+    },
+    {
+      "id": "cazicthule",
+      "name": "Cazic-Thule",
+      "continent": "Antonica",
+      "aliases": ["Cazic Thule", "Temple of Cazic-Thule"],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "chardok",
+      "name": "Chardok",
+      "continent": "Kunark",
+      "aliases": [],
+      "availability": "out-of-era",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "cityofmist",
+      "name": "City of Mist",
+      "continent": "Kunark",
+      "aliases": [],
+      "availability": "out-of-era",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "cobaltscar",
+      "name": "Cobalt Scar",
+      "continent": "Velious",
+      "aliases": [],
+      "availability": "out-of-era",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "crushbone",
+      "name": "Crushbone",
+      "continent": "Faydwer",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "crystalcaverns",
+      "name": "Crystal Caverns",
+      "continent": "Velious",
+      "aliases": [],
+      "availability": "out-of-era",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "dagnorscauldron",
+      "name": "Dagnor's Cauldron",
+      "continent": "Faydwer",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "dalnir",
+      "name": "Dalnir",
+      "continent": "Kunark",
+      "aliases": [],
+      "availability": "out-of-era",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "dragonnecropolis",
+      "name": "Dragon Necropolis",
+      "continent": "Velious",
+      "aliases": [],
+      "availability": "out-of-era",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "dreadlands",
+      "name": "Dreadlands",
+      "continent": "Kunark",
+      "aliases": [],
+      "availability": "out-of-era",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "eastcommonlands",
+      "name": "East Commonlands",
+      "continent": "Antonica",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "eastfreeport",
+      "name": "East Freeport",
+      "continent": "Antonica",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map"]
+    },
+    {
+      "id": "eastkarana",
+      "name": "East Karana",
+      "continent": "Antonica",
+      "aliases": ["Eastern Karana"],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "easternwastes",
+      "name": "Eastern Wastes",
+      "continent": "Velious",
+      "aliases": [],
+      "availability": "out-of-era",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "emeraldjungle",
+      "name": "Emerald Jungle",
+      "continent": "Kunark",
+      "aliases": [],
+      "availability": "out-of-era",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "erudscrossing",
+      "name": "Erud's Crossing",
+      "continent": "Odus",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "erudin",
+      "name": "Erudin",
+      "continent": "Odus",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "erudinpalace",
+      "name": "Erudin Palace",
+      "continent": "Odus",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "legends-tools"]
+    },
+    {
+      "id": "estateofunrest",
+      "name": "Estate of Unrest",
+      "continent": "Faydwer",
+      "aliases": ["The Estate of Unrest"],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "everfrostpeaks",
+      "name": "Everfrost Peaks",
+      "continent": "Antonica",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "feerrott",
+      "name": "Feerrott",
+      "continent": "Antonica",
+      "aliases": ["The Feerrott"],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "felwithe",
+      "name": "Felwithe",
+      "continent": "Faydwer",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "fieldofbone",
+      "name": "Field of Bone",
+      "continent": "Kunark",
+      "aliases": [],
+      "availability": "out-of-era",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "firionavie",
+      "name": "Firiona Vie",
+      "continent": "Kunark",
+      "aliases": [],
+      "availability": "out-of-era",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "freeport",
+      "name": "Freeport",
+      "continent": "Antonica",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "frontiermountains",
+      "name": "Frontier Mountains",
+      "continent": "Kunark",
+      "aliases": [],
+      "availability": "out-of-era",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "gorgeofkingxorbb",
+      "name": "Gorge of King Xorbb",
+      "continent": "Antonica",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "greaterfaydark",
+      "name": "Greater Faydark",
+      "continent": "Faydwer",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "grobb",
+      "name": "Grobb",
+      "continent": "Antonica",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki"]
+    },
+    {
+      "id": "guk",
+      "name": "Guk",
+      "continent": "Antonica",
+      "aliases": ["Upper Guk"],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "halas",
+      "name": "Halas",
+      "continent": "Antonica",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki"]
+    },
+    {
+      "id": "highkeep",
+      "name": "High Keep",
+      "continent": "Antonica",
+      "aliases": ["Highpass Keep"],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "highpasshold",
+      "name": "Highpass Hold",
+      "continent": "Antonica",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "howlingstonescharasis",
+      "name": "Howling Stones (Charasis)",
+      "continent": "Kunark",
+      "aliases": [],
+      "availability": "out-of-era",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "icecladocean",
+      "name": "Iceclad Ocean",
+      "continent": "Velious",
+      "aliases": [],
+      "availability": "out-of-era",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "icewellkeep",
+      "name": "Icewell Keep",
+      "continent": "Velious",
+      "aliases": [],
+      "availability": "out-of-era",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "infectedpaw",
+      "name": "Infected Paw",
+      "continent": "Antonica",
+      "aliases": ["Lair of the Splitpaw", "Splitpaw Lair", "Splitpaw"],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools", "advisor"]
+    },
+    {
+      "id": "innothuleswamp",
+      "name": "Innothule Swamp",
+      "continent": "Antonica",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "kaeldrakkal",
+      "name": "Kael Drakkal",
+      "continent": "Velious",
+      "aliases": [],
+      "availability": "out-of-era",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "kaesora",
+      "name": "Kaesora",
+      "continent": "Kunark",
+      "aliases": [],
+      "availability": "out-of-era",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "kaladim",
+      "name": "Kaladim",
+      "continent": "Faydwer",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "karnorscastle",
+      "name": "Karnor's Castle",
+      "continent": "Kunark",
+      "aliases": [],
+      "availability": "out-of-era",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "kedgekeep",
+      "name": "Kedge Keep",
+      "continent": "Faydwer",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "kelethin",
+      "name": "Kelethin",
+      "continent": "Faydwer",
+      "aliases": ["Kelethin (Greater Faydark)"],
+      "availability": "current",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "kerraisland",
+      "name": "Kerra Island",
+      "continent": "Odus",
+      "aliases": ["Kerra Isle"],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "kithicorforest",
+      "name": "Kithicor Forest",
+      "continent": "Antonica",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "kurnstower",
+      "name": "Kurn's Tower",
+      "continent": "Kunark",
+      "aliases": [],
+      "availability": "out-of-era",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "lakeofillomen",
+      "name": "Lake of Ill Omen",
+      "continent": "Kunark",
+      "aliases": [],
+      "availability": "out-of-era",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "lakerathetear",
+      "name": "Lake Rathetear",
+      "continent": "Antonica",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "lavastormmountains",
+      "name": "Lavastorm Mountains",
+      "continent": "Antonica",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "lesserfaydark",
+      "name": "Lesser Faydark",
+      "continent": "Faydwer",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "minesofnurga",
+      "name": "Mines of Nurga",
+      "continent": "Kunark",
+      "aliases": [],
+      "availability": "out-of-era",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "mistythicket",
+      "name": "Misty Thicket",
+      "continent": "Antonica",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "nagafenslair",
+      "name": "Nagafen's Lair",
+      "continent": "Antonica",
+      "aliases": ["Nagafen's Lair (Sol B)"],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "najena",
+      "name": "Najena",
+      "continent": "Antonica",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools", "advisor"]
+    },
+    {
+      "id": "nektulosforest",
+      "name": "Nektulos Forest",
+      "continent": "Antonica",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "neriak",
+      "name": "Neriak",
+      "continent": "Antonica",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "neriakcommons",
+      "name": "Neriak Commons",
+      "continent": "Antonica",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map"]
+    },
+    {
+      "id": "neriakforeignquarter",
+      "name": "Neriak Foreign Quarter",
+      "continent": "Antonica",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map"]
+    },
+    {
+      "id": "neriakthirdgate",
+      "name": "Neriak Third Gate",
+      "continent": "Antonica",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map"]
+    },
+    {
+      "id": "northfreeport",
+      "name": "North Freeport",
+      "continent": "Antonica",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map"]
+    },
+    {
+      "id": "northkaladim",
+      "name": "North Kaladim",
+      "continent": "Faydwer",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map"]
+    },
+    {
+      "id": "northkarana",
+      "name": "North Karana",
+      "continent": "Antonica",
+      "aliases": ["Northern Karana"],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "northqeynos",
+      "name": "North Qeynos",
+      "continent": "Antonica",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "legends-tools"]
+    },
+    {
+      "id": "northro",
+      "name": "North Ro",
+      "continent": "Antonica",
+      "aliases": ["Northern Desert of Ro"],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "northernfelwithe",
+      "name": "Northern Felwithe",
+      "continent": "Faydwer",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map"]
+    },
+    {
+      "id": "oasisofmarr",
+      "name": "Oasis of Marr",
+      "continent": "Antonica",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "oceanoftears",
+      "name": "Ocean of Tears",
+      "continent": "Sea",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "oggok",
+      "name": "Oggok",
+      "continent": "Antonica",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki"]
+    },
+    {
+      "id": "oldsebilis",
+      "name": "Old Sebilis",
+      "continent": "Kunark",
+      "aliases": [],
+      "availability": "out-of-era",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "paineel",
+      "name": "Paineel",
+      "continent": "Odus",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "permafrostkeep",
+      "name": "Permafrost Keep",
+      "continent": "Antonica",
+      "aliases": ["Permafrost"],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "planeoffear",
+      "name": "Plane of Fear",
+      "continent": "Planes",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "planeofgrowth",
+      "name": "Plane of Growth",
+      "continent": "Velious",
+      "aliases": [],
+      "availability": "out-of-era",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "planeofhate",
+      "name": "Plane of Hate",
+      "continent": "Planes",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "planeofmischief",
+      "name": "Plane of Mischief",
+      "continent": "Velious",
+      "aliases": [],
+      "availability": "out-of-era",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "planeofsky",
+      "name": "Plane of Sky",
+      "continent": "Planes",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "qeynos",
+      "name": "Qeynos",
+      "continent": "Antonica",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "qeynosaqueducts",
+      "name": "Qeynos Aqueducts",
+      "continent": "Antonica",
+      "aliases": ["Qeynos Catacombs"],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "qeynoshills",
+      "name": "Qeynos Hills",
+      "continent": "Antonica",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "rathemountains",
+      "name": "Rathe Mountains",
+      "continent": "Antonica",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "rivervale",
+      "name": "Rivervale",
+      "continent": "Antonica",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki"]
+    },
+    {
+      "id": "ruinsofoldguk",
+      "name": "Ruins of Old Guk",
+      "continent": "Antonica",
+      "aliases": ["Lower Guk"],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools", "advisor"]
+    },
+    {
+      "id": "runnyeye",
+      "name": "Runnyeye",
+      "continent": "Antonica",
+      "aliases": ["Clan RunnyEye", "Runnyeye Citadel"],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "sirensgrotto",
+      "name": "Siren's Grotto",
+      "continent": "Velious",
+      "aliases": [],
+      "availability": "out-of-era",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "skyfiremountains",
+      "name": "Skyfire Mountains",
+      "continent": "Kunark",
+      "aliases": [],
+      "availability": "out-of-era",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "skyshrine",
+      "name": "Skyshrine",
+      "continent": "Velious",
+      "aliases": [],
+      "availability": "out-of-era",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "sleeperstomb",
+      "name": "Sleeper's Tomb",
+      "continent": "Velious",
+      "aliases": [],
+      "availability": "out-of-era",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "solusekseye",
+      "name": "Solusek's Eye",
+      "continent": "Antonica",
+      "aliases": ["Solusek's Eye (Sol A)"],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "southkaladim",
+      "name": "South Kaladim",
+      "continent": "Faydwer",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map"]
+    },
+    {
+      "id": "southkarana",
+      "name": "South Karana",
+      "continent": "Antonica",
+      "aliases": ["Southern Karana"],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "southqeynos",
+      "name": "South Qeynos",
+      "continent": "Antonica",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map"]
+    },
+    {
+      "id": "southro",
+      "name": "South Ro",
+      "continent": "Antonica",
+      "aliases": ["Southern Desert of Ro"],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "southernfelwithe",
+      "name": "Southern Felwithe",
+      "continent": "Faydwer",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map"]
+    },
+    {
+      "id": "steamfontmountains",
+      "name": "Steamfont Mountains",
+      "continent": "Faydwer",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "stonebruntmountains",
+      "name": "Stonebrunt Mountains",
+      "continent": "Odus",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "surefallglade",
+      "name": "Surefall Glade",
+      "continent": "Antonica",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki"]
+    },
+    {
+      "id": "swampofnohope",
+      "name": "Swamp of No Hope",
+      "continent": "Kunark",
+      "aliases": [],
+      "availability": "out-of-era",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "templeofdroga",
+      "name": "Temple of Droga",
+      "continent": "Kunark",
+      "aliases": [],
+      "availability": "out-of-era",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "templeofsolusekro",
+      "name": "Temple of Solusek Ro",
+      "continent": "Antonica",
+      "aliases": ["The Temple of Solusek Ro"],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki"]
+    },
+    {
+      "id": "templeofveeshan",
+      "name": "Temple of Veeshan",
+      "continent": "Velious",
+      "aliases": [],
+      "availability": "out-of-era",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "thearena",
+      "name": "The Arena",
+      "continent": "Antonica",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki"]
+    },
+    {
+      "id": "thegreatdivide",
+      "name": "The Great Divide",
+      "continent": "Velious",
+      "aliases": [],
+      "availability": "out-of-era",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "thehole",
+      "name": "The Hole",
+      "continent": "Odus",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "theoverthere",
+      "name": "The Overthere",
+      "continent": "Kunark",
+      "aliases": [],
+      "availability": "out-of-era",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "thewarrens",
+      "name": "The Warrens",
+      "continent": "Odus",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "thurgadin",
+      "name": "Thurgadin",
+      "continent": "Velious",
+      "aliases": [],
+      "availability": "out-of-era",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "timorousdeep",
+      "name": "Timorous Deep",
+      "continent": "Kunark",
+      "aliases": [],
+      "availability": "out-of-era",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "toweroffrozenshadow",
+      "name": "Tower of Frozen Shadow",
+      "continent": "Velious",
+      "aliases": [],
+      "availability": "out-of-era",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "toxxuliaforest",
+      "name": "Toxxulia Forest",
+      "continent": "Odus",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "trakanonsteeth",
+      "name": "Trakanon's Teeth",
+      "continent": "Kunark",
+      "aliases": [],
+      "availability": "out-of-era",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "tutorialzone",
+      "name": "Tutorial Zone",
+      "continent": "Antonica",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "veeshanspeak",
+      "name": "Veeshan's Peak",
+      "continent": "Kunark",
+      "aliases": [],
+      "availability": "out-of-era",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "velketorslabyrinth",
+      "name": "Velketor's Labyrinth",
+      "continent": "Velious",
+      "aliases": [],
+      "availability": "out-of-era",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "wakeningland",
+      "name": "Wakening Land",
+      "continent": "Velious",
+      "aliases": [],
+      "availability": "out-of-era",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "warslikswoods",
+      "name": "Warsliks Woods",
+      "continent": "Kunark",
+      "aliases": [],
+      "availability": "out-of-era",
+      "sources": ["eql-wiki"]
+    },
+    {
+      "id": "westcommonlands",
+      "name": "West Commonlands",
+      "continent": "Antonica",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "westfreeport",
+      "name": "West Freeport",
+      "continent": "Antonica",
+      "aliases": [],
+      "availability": "current",
+      "sources": ["launch-map", "legends-tools"]
+    },
+    {
+      "id": "westkarana",
+      "name": "West Karana",
+      "continent": "Antonica",
+      "aliases": ["Western Karana"],
+      "availability": "current",
+      "sources": ["launch-map", "eql-wiki", "legends-tools"]
+    },
+    {
+      "id": "westernwastes",
+      "name": "Western Wastes",
+      "continent": "Velious",
+      "aliases": [],
+      "availability": "out-of-era",
+      "sources": ["eql-wiki"]
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+
+.build-advisor,.ba-context{--ba-line:#59482f;--ba-muted:#c5b69c;color:#f4ead7}
+.build-advisor{margin:20px 0;font-size:14px;line-height:1.6}
+.build-advisor h2{font-size:32px;margin:4px 0}
+.build-advisor h3{font-size:22px;margin:12px 0}
+.build-advisor h4{font-size:17px;margin:12px 0 6px;color:#ebce88}
+.build-advisor p,.ba-context p{margin:8px 0;line-height:1.6}
+.ba-heading,.ba-context{display:flex;justify-content:space-between;align-items:center;gap:20px}
+.ba-heading{border-bottom:1px solid var(--ba-line);padding:0 0 18px}
+.ba-heading small,.ba-context small{letter-spacing:.06em;color:#e0c17a}
+.ba-badge{white-space:nowrap;border:1px solid #7b7149;border-radius:30px;padding:6px 13px;color:#d8e5b8;background:#293123}
+.ba-presets{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+.build-advisor button,.build-advisor a.ba-zone-guide,.ba-context button,.ba-import{cursor:pointer;background:#34271b;color:#f6e6bf;border:1px solid #786242;border-radius:7px;padding:10px 13px;font-size:13px;line-height:1.4}
+.build-advisor .ba-zone-guide{display:inline-flex;align-items:center;gap:7px;text-decoration:none}
+.build-advisor a.ba-zone-guide:hover{background:#514027}
+.build-advisor a.ba-zone-guide:focus-visible{outline:3px solid #b9dbe1;outline-offset:3px}
+.build-advisor button:hover,.ba-context button:hover{background:#514027}
+.build-advisor button:disabled{opacity:.6;cursor:default}
+.build-advisor :is(button,input,select,summary):focus-visible,.ba-context :is(button,summary):focus-visible{outline:3px solid #b9dbe1;outline-offset:3px}
+.ba-combo{display:flex;align-items:end;gap:10px;max-width:800px;margin:20px 0}
+.ba-combo label{flex:1}
+.build-advisor label{display:block;color:#d8c6a7;font-size:13px}
+.build-advisor input:not([type=range]),.build-advisor select{display:block;width:100%;min-width:0;background:#15110e;border:1px solid #665339;border-radius:6px;padding:10px;color:#f8eeda;margin:5px 0 10px;font-size:14px}
+.ba-layout{display:grid;grid-template-columns:minmax(240px,300px) minmax(0,1fr);align-items:start;gap:22px}
+.ba-controls{padding:18px;background:#1d1712;border:1px solid var(--ba-line);border-radius:10px}
+.ba-fields{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
+.ba-range{margin:13px 0}
+.ba-range b{float:right}
+.ba-range input{display:block;width:100%;accent-color:#d4b56d;margin:10px 0}
+.ba-range small,.ba-note{color:var(--ba-muted);font-size:12px}
+.ba-results{min-width:0}
+.ba-assessment,.ba-choice,.ba-rules{background:#201910;border:1px solid var(--ba-line);border-radius:10px;padding:20px;margin-bottom:15px}
+.ba-assessment{border-top:3px solid #d9b363;background:linear-gradient(120deg,#302617,#1c1711)}
+.ba-two{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.ba-two section+section{border-left:1px solid var(--ba-line);padding-left:20px}
+.ba-build{display:flex;flex-wrap:wrap;gap:7px}
+.ba-build>span{display:inline-flex;align-items:center;gap:4px;background:#342a1c;border:1px solid #5f4d32;border-radius:6px;padding:4px 8px;font-size:14px}
+.ba-build>span>span{font-size:20px}
+.ba-capabilities{display:grid;grid-template-columns:1fr 1fr;gap:10px 20px;margin:20px 0}
+.ba-capabilities>div{display:grid;grid-template-columns:1fr 70px 30px;align-items:center;gap:6px;font-size:12px}
+.ba-capabilities meter{width:70px;height:10px;accent-color:#b5c992}
+.ba-capabilities b{color:#cabe9f;font-weight:400}
+.ba-buddy{border-left:3px solid #91a87c;padding:12px 16px;margin:15px 0;background:#20251b}
+.ba-choice header{display:flex;align-items:center;gap:10px}
+.ba-choice header h4{flex:1;margin:0}
+.ba-choice header strong{white-space:nowrap;font-size:13px;color:#e6cc88}
+.ba-rank{display:grid;place-items:center;width:30px;height:30px;background:#44351e;border-radius:50%;color:#f4d990}
+.ba-selected{border-color:#b5c992;background:#252c20}
+.ba-evidence{margin-top:12px;font-size:12px}
+.ba-evidence summary,.ba-rules summary{cursor:pointer;color:#d9cda9;padding:8px 0}
+.ba-table-wrap{overflow:auto;max-width:100%}
+.ba-evidence table{border-collapse:collapse;width:100%;font-size:12px;text-align:left;min-width:380px}
+.ba-evidence th,.ba-evidence td{padding:8px;border-bottom:1px solid var(--ba-line);vertical-align:top}
+.ba-evidence th{color:#e5cc95}
+.ba-source{display:block;color:#b8aa90!important;font-size:11px;line-height:1.5;letter-spacing:normal!important;margin-top:5px;overflow-wrap:anywhere}
+.ba-context{background:#252016;border:1px solid var(--ba-line);border-left:3px solid #c5a964;border-radius:8px;padding:18px;margin:18px 0;font-size:13px}
+.ba-context>div{min-width:0;flex:1}
+.ba-context>.ba-build{margin-top:8px}
+.ba-context button{flex-shrink:0}
+.ba-warning{background:#38271a;border:1px solid #987144;border-radius:6px;padding:12px;color:#f2d4a7}
+.ba-import{display:inline-block!important}
+.ba-import input{max-width:230px}
+.ba-sources{margin-top:18px}
+.ba-sources article{padding:12px 0;border-top:1px solid var(--ba-line)}
+.ba-sources a{color:#b9dbe1;text-decoration:underline}
+@media(max-width:1050px){.ba-layout{grid-template-columns:1fr}.ba-controls{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}.ba-controls h3,.ba-controls .ba-fields,.ba-controls .ba-note{grid-column:1/-1}}
+@media(max-width:640px){.ba-heading,.ba-context{align-items:flex-start;flex-direction:column}.ba-two,.ba-capabilities,.ba-controls{grid-template-columns:1fr}.ba-two section+section{border-left:0;border-top:1px solid var(--ba-line);padding:12px 0 0}.ba-combo{align-items:stretch;flex-direction:column}.ba-assessment,.ba-choice{padding:15px}.ba-choice header{flex-wrap:wrap}.ba-capabilities>div{grid-template-columns:1fr 110px 30px}.ba-capabilities meter{width:110px}.ba-build>span{font-size:12px}.ba-badge{white-space:normal}}
+
+.build-advisor .ba-online-toggle{display:flex;align-items:center;gap:10px}.build-advisor .ba-online-toggle input{width:auto;margin:0;accent-color:#d4b56d}.ba-source-updates{max-height:450px;overflow:auto;margin:16px 0}.ba-source-updates>details{padding:10px;border-bottom:1px solid #59482f}.ba-source-updates summary{cursor:pointer}.ba-updates a{color:#b9dbe1;text-decoration:underline}.ba-update-hash{display:block;overflow-wrap:anywhere;font-size:12px}.ba-updates input[type=checkbox]{width:18px;height:18px}.ba-updates>summary{font-size:15px;color:#d9d5ae}

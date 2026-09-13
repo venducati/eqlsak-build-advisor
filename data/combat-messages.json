@@ -1,0 +1,41 @@
+{
+  "version": 2,
+  "messages": [
+    {
+      "text": "You feel armored.",
+      "label": "Armor effect (exact spell unknown)",
+      "provenance": "Player-made log reader guide. Several spells share this message. No spell time is assumed."
+    }
+  ],
+  "sources": [
+    {
+      "title": "EQL community tracker: critical tags, archery, and DoT messages",
+      "url": "https://github.com/blastlaster/eql-log-reader/blob/main/eql_combat_tracker.py",
+      "reviewed": "2026-09-11"
+    },
+    {
+      "title": "EQL parser message formats",
+      "url": "https://github.com/cadmusofthebes/Everquest-Legends-Parser/blob/main/parser.py",
+      "reviewed": "2026-09-10"
+    },
+    {
+      "title": "EQL log reader: ambiguous buff messages and healing",
+      "url": "https://github.com/blastlaster/eql-log-reader",
+      "reviewed": "2026-09-10"
+    },
+    {
+      "title": "EQL Meter setup",
+      "url": "https://eqlmeter.com/docs.html",
+      "reviewed": "2026-09-10"
+    }
+  ],
+  "limitations": [
+    "Log messages do not show your exact current or full health.",
+    "Starting a cast does not prove that the spell worked.",
+    "Spell countdowns use your saved durations, started by a matching landing message or by you. Unknown times stay unknown.",
+    "Critical hits count only when the damage line has a Critical tag. Missing tags do not prove a hit was normal.",
+    "Buff and debuff messages can be shared by several spells. Add only timer rules you have checked in game.",
+    "Healing shows the first amount in the log line. It may not equal the health you gained.",
+    "If spell damage cannot be sorted as direct damage or damage over time, its type stays unknown."
+  ]
+}

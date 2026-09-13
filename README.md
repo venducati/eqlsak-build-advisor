@@ -1,0 +1,62 @@
+# EQLSaK Build Advisor
+
+**Free, offline build planning and combat log tools for EverQuest Legends.**
+
+[Download version 1.6.1 for Windows](https://github.com/venducati/eqlsak-build-advisor/releases/tag/v1.6.1) · [Report a problem or suggest an idea](https://github.com/venducati/eqlsak-build-advisor/issues) · [How to contribute](CONTRIBUTING.md)
+
+## Download and start
+
+1. Open the release page above.
+2. Under **Assets**, download **EQLSaK-Build-Advisor-1.6.1-Setup.exe**.
+3. Run it on 64-bit Windows and follow the setup steps.
+
+This is a **community preview**. The installer is **unsigned**, so Windows may show Unknown Publisher or a SmartScreen warning. It has not been tested on a fresh Windows installation. Read [the installation guide](DESKTOP_ADVISOR.md) and [the checks and limits](RELEASE_CHECKS.md).
+
+For a version that needs no installation, download **EQLSaK-Offline-Advisor.html** from the same release and open it in your browser. Live file access varies by browser; source checks and automatic log discovery are supported by the Windows app.
+
+## What it does
+
+- Enter two or three classes and your goals. Rank third-class options and open a **See why** report with bullets, tradeoffs, sources, and a text download.
+- Compare up to four players, each with their own trio. See party strengths and gaps.
+- Search zones, check hunt fit, follow links to the companion's zone guides, and track faction points you enter or import.
+- Save and share builds as local files.
+- Read a combat log locally for damage, critical hits, spell activity, estimated refresh timers, and loot-trip reports.
+- Choose when to check information sources or preview a reviewed rule update. Roll back an applied update.
+
+The advisor uses **local rules and fixed scoring**, with no AI API, cloud model, or remote inference. Identical inputs and rules give identical recommendations. Sources and player opinions are labeled; planning scores are estimates, not measured damage or guaranteed game outcomes.
+
+All features in this release are free. Donations are optional. No donation page is configured yet, so the app shows no donation button. Maintainers can set an HTTPS address in `data/project-support.json` and rebuild.
+
+## Build from source
+
+Use Node.js 24 or newer and npm. Windows is needed to produce and test the Windows installer with the commands below.
+
+```sh
+npm ci
+npm --prefix desktop ci
+npm test
+npm run typecheck
+npm run lint
+npm run test:desktop
+npm run build
+npm run test:ui
+npm run package:win
+```
+
+The offline HTML is written to `outputs/`. The installer is written to `desktop/release/`. UI tests use an isolated profile, invented log data, and simulated update/file-picker responses. They do not use a player's game session.
+
+## Change the rules
+
+Start with [BUILD_ADVISOR.md](BUILD_ADVISOR.md). Class ratings, weights, synergy rules, source evidence, zones, faction plans and trip strategies live in `data/`. Preserve the distinction between **User-verified EQL**, **EQL-sourced**, and **heuristic/inference**. A changed webpage is a reason to review a rule; it does not update the score automatically.
+
+## Forks and the audit trail
+
+Fork this repository for your own version. Use a branch for each change and a pull request to propose changes here. Include what changed, why, sources for game claims, and checks performed. Commits, pull requests, tags, release notes and SHA-256 checksums make changes and downloads traceable. See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+The first public commit is a reviewed **1.6.1 starting snapshot** of the standalone product. It does not recreate private development history. Private gameplay notes, real player logs, personal settings, and deployment credentials are excluded. This repository contains the source needed for the downloadable Advisor and Meter; the larger site's map viewer and command center remain in the separate companion project. Zone-guide links require internet access, and the linked site's availability is separate from this offline app.
+
+## License and independence
+
+Original code uses the [MIT License](LICENSE), which permits forks and redistribution, including commercial use. This project's downloads remain free. Keep the license and identify changes in your fork. See [CONTENT_LICENSE.md](CONTENT_LICENSE.md) for artwork and source-data notes.
+
+EQLSaK is an unofficial fan project. It is not affiliated with, endorsed by, or sponsored by Daybreak Game Company or EverQuest Legends.

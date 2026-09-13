@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "strongRating": 4,
+  "usefulRating": 3,
+  "metrics": [
+    { "id": "dps", "label": "Damage", "core": true },
+    { "id": "tank", "label": "Taking hits", "core": true },
+    { "id": "heal", "label": "Healing", "core": true },
+    { "id": "control", "label": "Enemy control", "core": true },
+    { "id": "pulling", "label": "Pulling", "core": true },
+    { "id": "survivability", "label": "Staying alive", "core": true },
+    { "id": "mobility", "label": "Movement", "core": false },
+    { "id": "travel", "label": "Travel", "core": false },
+    { "id": "stealth", "label": "Stealth", "core": false },
+    { "id": "faction", "label": "Faction tools", "core": false }
+  ],
+  "provenance": {
+    "label": "heuristic/inference",
+    "reference": "Party coverage uses the best saved class rating for each job. Extra players provide backup, not added skill caps. Healing and control targets come from each saved zone rule."
+  }
+}

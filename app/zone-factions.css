@@ -1,0 +1,261 @@
+.zf-panel {
+  border: 1px solid #997849;
+  border-radius: 10px;
+  background: linear-gradient(130deg, #142b36ef, #17212eee);
+  padding: clamp(14px, 2vw, 24px);
+  margin: 0 0 24px;
+  min-width: 0;
+  color: #eae3d6;
+}
+.zf-panel header {
+  border-bottom: 1px solid #7e704a;
+  padding-bottom: 14px;
+  margin-bottom: 16px;
+}
+.zf-kicker {
+  color: #d7bc7e;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+}
+.zf-panel header h3 {
+  margin: 6px 0 10px;
+}
+.zf-panel p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+.zf-panel fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+.zf-toolbar {
+  display: flex;
+  gap: 12px;
+  align-items: end;
+  flex-wrap: wrap;
+  margin: 14px 0;
+}
+.zf-toolbar label {
+  flex: 1 1 180px;
+}
+.zf-panel label {
+  display: grid;
+  gap: 5px;
+  font-size: 13px;
+  color: #ddd4c1;
+}
+.zf-panel input,
+.zf-panel select {
+  min-width: 0;
+  width: 100%;
+  border: 1px solid #7a725d;
+  background: #0d1d2b;
+  color: #f8efdc;
+  border-radius: 5px;
+  padding: 10px;
+  font: 14px system-ui;
+}
+.zf-panel button {
+  border: 1px solid #bd995a;
+  border-radius: 5px;
+  background: #45361f;
+  color: #fff0cc;
+  padding: 10px 12px;
+  font: 600 13px system-ui;
+  cursor: pointer;
+}
+.zf-panel button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.zf-panel :is(input, select, button, summary):focus-visible {
+  outline: 3px solid #9dd8fa;
+  outline-offset: 3px;
+}
+.zf-panel summary {
+  cursor: pointer;
+  font-size: 14px;
+  color: #e3c48d;
+}
+.zf-panel details {
+  margin: 12px 0;
+}
+.zf-panel details[open] > summary {
+  margin-bottom: 10px;
+}
+.zf-import {
+  border: 1px solid #697e86;
+  border-radius: 6px;
+  padding: 12px;
+  background: #1a34424d;
+}
+.zf-import li {
+  font-size: 14px;
+  line-height: 1.7;
+  margin: 6px 0;
+}
+.zf-status {
+  border-left: 3px solid #81c3e9;
+  padding: 10px;
+  background: #24445d70;
+}
+.zf-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: 14px;
+}
+.zf-grid > div {
+  min-width: 0;
+}
+.zf-card {
+  padding: 16px;
+  background: #0d1b2be8;
+  border: 1px solid #556878;
+  border-radius: 8px;
+  height: auto;
+}
+.zf-card h4 {
+  margin: 0 0 12px !important;
+  color: #f0d49d !important;
+  overflow-wrap: anywhere;
+}
+.zf-standing {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.zf-standing strong {
+  font-size: 20px;
+  color: #e0eff9;
+}
+.zf-standing span {
+  font-size: 12px;
+  color: #c4ced3;
+}
+.zf-chart {
+  margin: 12px 0 0;
+}
+.zf-chart svg {
+  width: 100%;
+  display: block;
+}
+.zf-chart figcaption {
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  font-size: 13px;
+}
+.zf-now {
+  color: #bce3ff;
+}
+.zf-goal {
+  color: #f2cb78;
+}
+.zf-unknown {
+  padding: 18px 10px;
+  margin: 12px 0;
+  border: 1px dashed #697785;
+  border-radius: 6px;
+  color: #b9c7cf;
+  font-size: 13px;
+}
+.zf-gap {
+  color: #e6ce97;
+}
+.zf-edit {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.zf-edit button {
+  grid-column: 1/-1;
+}
+.zf-meta,
+.zf-panel footer {
+  font-size: 12px !important;
+  line-height: 1.6;
+  color: #b7c4cb;
+}
+.zf-panel footer {
+  border-top: 1px solid #536574;
+  margin-top: 18px;
+  padding-top: 14px;
+}
+.zf-plan {
+  border-top: 1px solid #41576b;
+  padding-top: 12px;
+}
+.zf-action {
+  padding: 12px 0;
+  border-bottom: 1px solid #405466;
+}
+.zf-action:last-child {
+  border-bottom: 0;
+}
+.zf-action h5 {
+  font: 600 15px/1.45 system-ui;
+  margin: 0 0 6px;
+  color: #e9d8b1;
+}
+.zf-action small {
+  color: #c3ccd1;
+}
+.zf-effects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 10px 0;
+}
+.zf-effects span {
+  font-size: 12px;
+  border: 1px solid;
+  padding: 4px 7px;
+  border-radius: 5px;
+}
+.zf-up {
+  color: #a6e3c3;
+  border-color: #367e62 !important;
+  background: #163b2f;
+}
+.zf-down {
+  color: #ffc0b8;
+  border-color: #96554e !important;
+  background: #472824;
+}
+.zf-action ul {
+  padding-left: 18px;
+  overflow-wrap: anywhere;
+}
+.zf-action li {
+  font-size: 12px;
+  margin: 6px 0;
+}
+.zf-remove {
+  font-size: 11px !important;
+  margin-top: 6px;
+  background: transparent !important;
+}
+.zf-panel .ba-source {
+  display: inline-block;
+}
+@media (max-width: 520px) {
+  .zf-toolbar {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .zf-standing {
+    display: grid;
+    gap: 2px;
+  }
+  .zf-panel {
+    padding: 12px;
+  }
+  .zf-card {
+    padding: 12px;
+  }
+}

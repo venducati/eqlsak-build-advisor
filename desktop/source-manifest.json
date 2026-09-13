@@ -1,0 +1,413 @@
+{
+  "classIds": [
+    "WAR",
+    "CLR",
+    "PAL",
+    "RNG",
+    "SHD",
+    "DRU",
+    "MNK",
+    "BRD",
+    "ROG",
+    "SHM",
+    "NEC",
+    "WIZ",
+    "MAG",
+    "ENC",
+    "BST",
+    "BER"
+  ],
+  "sources": [
+    {
+      "id": "61272f3cc483edfa",
+      "title": "EQL Wiki — Warrior",
+      "url": "https://eqlwiki.com/Warrior",
+      "classes": [
+        "WAR"
+      ]
+    },
+    {
+      "id": "aafde75d99098341",
+      "title": "EQL Wiki — Cleric",
+      "url": "https://eqlwiki.com/Cleric",
+      "classes": [
+        "CLR"
+      ]
+    },
+    {
+      "id": "dbaa26328ca2bd59",
+      "title": "EQL Wiki — Paladin",
+      "url": "https://eqlwiki.com/Paladin",
+      "classes": [
+        "PAL"
+      ]
+    },
+    {
+      "id": "2d6616e6e48b8221",
+      "title": "EQL Wiki — Ranger",
+      "url": "https://eqlwiki.com/Ranger",
+      "classes": [
+        "RNG"
+      ]
+    },
+    {
+      "id": "65788aa0aa4152bf",
+      "title": "EQL Wiki — Shadow Knight",
+      "url": "https://eqlwiki.com/Shadow_Knight",
+      "classes": [
+        "SHD"
+      ]
+    },
+    {
+      "id": "564c56af73fed1d0",
+      "title": "EQL Wiki — Druid",
+      "url": "https://eqlwiki.com/Druid",
+      "classes": [
+        "DRU"
+      ]
+    },
+    {
+      "id": "575cad3dd60ca57f",
+      "title": "EQL Wiki — Monk",
+      "url": "https://eqlwiki.com/Monk",
+      "classes": [
+        "MNK"
+      ]
+    },
+    {
+      "id": "3bfdd04f118af825",
+      "title": "EQL Wiki — Bard",
+      "url": "https://eqlwiki.com/Bard",
+      "classes": [
+        "BRD"
+      ]
+    },
+    {
+      "id": "304142f82afe8921",
+      "title": "EQL Wiki — Rogue",
+      "url": "https://eqlwiki.com/Rogue",
+      "classes": [
+        "ROG"
+      ]
+    },
+    {
+      "id": "6187167eb3950062",
+      "title": "EQL Wiki — Shaman",
+      "url": "https://eqlwiki.com/Shaman",
+      "classes": [
+        "SHM"
+      ]
+    },
+    {
+      "id": "0e51f55df41c6776",
+      "title": "EQL Wiki — Necromancer",
+      "url": "https://eqlwiki.com/Necromancer",
+      "classes": [
+        "NEC"
+      ]
+    },
+    {
+      "id": "dc93a1a1d30360e4",
+      "title": "EQL Wiki — Wizard",
+      "url": "https://eqlwiki.com/Wizard",
+      "classes": [
+        "WIZ"
+      ]
+    },
+    {
+      "id": "36270a5a3d135e62",
+      "title": "EQL Wiki — Magician",
+      "url": "https://eqlwiki.com/Magician",
+      "classes": [
+        "MAG"
+      ]
+    },
+    {
+      "id": "2df8cc9726fee71c",
+      "title": "EQL Wiki — Enchanter",
+      "url": "https://eqlwiki.com/Enchanter",
+      "classes": [
+        "ENC",
+        "RNG",
+        "ROG"
+      ]
+    },
+    {
+      "id": "1150cbb7c934b978",
+      "title": "EQL Wiki — Beastlord",
+      "url": "https://eqlwiki.com/Beastlord",
+      "classes": [
+        "BST"
+      ]
+    },
+    {
+      "id": "1e89cf936ede68a9",
+      "title": "EQL Wiki — Berserker",
+      "url": "https://eqlwiki.com/Berserker",
+      "classes": [
+        "BER"
+      ]
+    },
+    {
+      "id": "989611a1c696d98d",
+      "title": "EQLForge — The 16 Classes",
+      "url": "https://eqlforge.com/classes",
+      "classes": []
+    },
+    {
+      "id": "91093299813128a8",
+      "title": "EverQuest Guides — Legends Combo Builder",
+      "url": "https://www.everquestguides.com/legends/index.html",
+      "classes": []
+    },
+    {
+      "id": "71bb9c72fe668d8a",
+      "title": "EQL Wiki — Dual Wield",
+      "url": "https://eqlwiki.com/Skill_Dual_Wield",
+      "classes": [
+        "WAR",
+        "MNK",
+        "RNG",
+        "ROG",
+        "BRD",
+        "BST"
+      ]
+    },
+    {
+      "id": "ea1a4b6f56a6313e",
+      "title": "Class comparison — Bard, Enchanter, Shaman, Druid",
+      "url": "https://www.reddit.com/r/EQLegends/comments/1unmmmr/class_comparison_bard_enchanter_shaman_druid/",
+      "classes": [
+        "BRD",
+        "ENC",
+        "SHM",
+        "DRU"
+      ]
+    },
+    {
+      "id": "b971b8a277e9b5ec",
+      "title": "Ranger/Rogue/Shaman Solo",
+      "url": "https://www.reddit.com/r/EQLegends/comments/1v6grg1/rangerrogueshaman_solo/",
+      "classes": [
+        "RNG",
+        "ROG",
+        "SHM"
+      ]
+    },
+    {
+      "id": "eb69911202437104",
+      "title": "Ranger/Bard and a third class",
+      "url": "https://www.reddit.com/r/EQLegends/comments/1w9kpmc/rangerbard_and/",
+      "classes": [
+        "RNG",
+        "BRD",
+        "SHM",
+        "DRU",
+        "WIZ"
+      ]
+    },
+    {
+      "id": "35fea3fee0a85497",
+      "title": "Monk versus Warrior",
+      "url": "https://www.reddit.com/r/EQLegends/comments/1uzy6iy/monk_versus_warrior/",
+      "classes": [
+        "MNK",
+        "WAR",
+        "CLR",
+        "BRD"
+      ]
+    },
+    {
+      "id": "7c47589aef735c17",
+      "title": "Warrior/Cleric — what third?",
+      "url": "https://www.reddit.com/r/EQLegends/comments/1vyc5x7/warriorclericwhat/",
+      "classes": [
+        "WAR",
+        "CLR",
+        "ENC"
+      ]
+    },
+    {
+      "id": "90b8e43976bc259e",
+      "title": "Shadow Knight versus Paladin with Necromancer/Shaman",
+      "url": "https://www.reddit.com/r/EQ_Legends/comments/1vuo1bz/shadow_vs_pally_with_necroshaman/",
+      "classes": [
+        "PAL",
+        "SHD",
+        "SHM",
+        "NEC"
+      ]
+    },
+    {
+      "id": "fd217169122f688f",
+      "title": "Any strong melee builds?",
+      "url": "https://www.reddit.com/r/EQLegends/comments/1vzha6u/any_strong_melee_builds/",
+      "classes": [
+        "WAR",
+        "PAL",
+        "SHD",
+        "RNG",
+        "ROG",
+        "MNK",
+        "BER",
+        "BST",
+        "BRD"
+      ]
+    },
+    {
+      "id": "6be5cce52ffd66db",
+      "title": "Theorycrafting a pure caster build",
+      "url": "https://www.reddit.com/r/EQLegends/comments/1tlr75j/theorycrafting_pure_caster_build/",
+      "classes": [
+        "WIZ",
+        "MAG",
+        "NEC",
+        "ENC",
+        "CLR",
+        "SHM"
+      ]
+    },
+    {
+      "id": "0f79d26f2e982a43",
+      "title": "EQLForge — Ranger/Rogue/Enchanter",
+      "url": "https://eqlforge.com/trio/enchanter-ranger-rogue",
+      "classes": [
+        "ENC",
+        "RNG",
+        "ROG"
+      ]
+    },
+    {
+      "id": "f6c90aadf008e239",
+      "title": "EQL community tracker: critical tags, archery, and DoT messages",
+      "url": "https://github.com/blastlaster/eql-log-reader/blob/main/eql_combat_tracker.py",
+      "classes": []
+    },
+    {
+      "id": "2fe0726fef1ac64a",
+      "title": "EQL parser message formats",
+      "url": "https://github.com/cadmusofthebes/Everquest-Legends-Parser/blob/main/parser.py",
+      "classes": []
+    },
+    {
+      "id": "db33eb8a4b229d6f",
+      "title": "EQL log reader: ambiguous buff messages and healing",
+      "url": "https://github.com/blastlaster/eql-log-reader",
+      "classes": []
+    },
+    {
+      "id": "c7e4d067fa0e7d89",
+      "title": "EQL Meter setup",
+      "url": "https://eqlmeter.com/docs.html",
+      "classes": []
+    },
+    {
+      "id": "9eb49f3b46573abd",
+      "title": "EQL Atlas documented loot and instance log messages",
+      "url": "https://github.com/blastlaster/eql-log-reader/blob/main/eql_atlas.py",
+      "classes": []
+    },
+    {
+      "id": "485d61ae31aab442",
+      "title": "Sky Ledger: EQL instance names and limits of loot logs",
+      "url": "https://www.eqlsource.com/tools/sky-ledger",
+      "classes": []
+    },
+    {
+      "id": "1fae9f078affb105",
+      "title": "Zone / faction: Orc Legionnaire (Crushbone)",
+      "url": "https://eqlwiki.com/Orc_Legionnaire_(Crushbone)",
+      "classes": []
+    },
+    {
+      "id": "cb1bded1888f5025",
+      "title": "Zone / faction: crushbone",
+      "url": "https://eqlsource.com/dungeons/crushbone",
+      "classes": []
+    },
+    {
+      "id": "21acdc65df355f55",
+      "title": "Zone / faction: Alanna's Race Unlock Guide",
+      "url": "https://eqlwiki.com/Alanna%27s_Race_Unlock_Guide",
+      "classes": []
+    },
+    {
+      "id": "35815c15c59d2f52",
+      "title": "Zone / faction: Kobold Molars (Good)",
+      "url": "https://eqlwiki.com/Kobold_Molars_(Good)",
+      "classes": []
+    },
+    {
+      "id": "a123089eab5afe28",
+      "title": "Zone / faction: eqlbase.com",
+      "url": "https://eqlbase.com/npcs/17002/",
+      "classes": []
+    },
+    {
+      "id": "2979b1aa8d9ddbc0",
+      "title": "Zone / faction: faction-impact",
+      "url": "https://eqlsource.com/tools/faction-impact",
+      "classes": []
+    },
+    {
+      "id": "f8cd103e14c4e1ec",
+      "title": "Zone / faction: Paladins of Underfoot",
+      "url": "https://eqlwiki.com/Paladins_of_Underfoot",
+      "classes": []
+    },
+    {
+      "id": "d20811aa227310d9",
+      "title": "Zone / faction: Clerics of Underfoot",
+      "url": "https://eqlwiki.com/Clerics_of_Underfoot",
+      "classes": []
+    },
+    {
+      "id": "276239da9b2c1b6a",
+      "title": "Zone / faction: Chalice of Conquest Quest",
+      "url": "https://eqlwiki.com/Chalice_of_Conquest_Quest",
+      "classes": []
+    },
+    {
+      "id": "e229df0b9bf87a22",
+      "title": "Zone / faction: eqlbase.com",
+      "url": "https://eqlbase.com/npcs/70031/",
+      "classes": []
+    },
+    {
+      "id": "3f0cb11c6986c27c",
+      "title": "Zone / faction: Goblin (Faction)",
+      "url": "https://eqlwiki.com/Goblin_(Faction)",
+      "classes": []
+    },
+    {
+      "id": "14450144d4af01a0",
+      "title": "Zone / faction: blackburrow",
+      "url": "https://eqlsource.com/dungeons/blackburrow",
+      "classes": []
+    },
+    {
+      "id": "5598c302840ec36f",
+      "title": "Zone / faction: Split Paw Clan",
+      "url": "https://eqlwiki.com/Split_Paw_Clan",
+      "classes": []
+    },
+    {
+      "id": "f74c1dcff04c8a67",
+      "title": "Zone / faction: Zones",
+      "url": "https://eqlwiki.com/Zones",
+      "classes": []
+    },
+    {
+      "id": "3cd1d48969553de1",
+      "title": "Zone / faction: eqlegendstools.com",
+      "url": "https://eqlegendstools.com/zones/",
+      "classes": []
+    },
+    {
+      "id": "f923dbf00797e91f",
+      "title": "Zone / faction: zones.json",
+      "url": "https://github.com/lab1702/eql-maps/blob/main/data/zones.json",
+      "classes": []
+    }
+  ]
+}

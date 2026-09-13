@@ -1,0 +1,81 @@
+.ba-zone-picker {
+  display: grid;
+  gap: 6px;
+  margin: 14px 0;
+}
+.ba-zone-picker > label {
+  margin: 0 !important;
+}
+.ba-zone-picker > small {
+  color: #c6c3b8;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.ba-zone-input-group {
+  display: flex;
+  min-width: 0;
+  gap: 4px;
+}
+.ba-zone-input-group input {
+  min-width: 0;
+  flex: 1;
+  width: 0 !important;
+}
+.ba-zone-input-group button {
+  flex: 0 0 42px;
+  display: grid;
+  place-items: center;
+  padding: 8px !important;
+}
+.ba-zone-positioner {
+  z-index: 10000;
+  outline: 0;
+  width: var(--anchor-width);
+  max-width: calc(100vw - 24px);
+}
+.ba-zone-popup {
+  border: 1px solid #b99355;
+  border-radius: 8px;
+  background: #111e2c;
+  color: #f5ead7;
+  box-shadow: 0 14px 42px #000b;
+  font:
+    14px/1.45 system-ui,
+    sans-serif;
+  overflow: hidden;
+}
+.ba-zone-list {
+  max-height: min(320px, var(--available-height));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 5px;
+}
+.ba-zone-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  outline: 0;
+}
+.ba-zone-option small {
+  display: block;
+  color: #bac5ce;
+  font-size: 12px;
+}
+.ba-zone-option svg {
+  flex-shrink: 0;
+  color: #e6c382;
+}
+.ba-zone-option[data-highlighted] {
+  background: #29445b;
+  box-shadow: inset 3px 0 #efd299;
+}
+.ba-zone-empty {
+  padding: 14px;
+  color: #dfca9e;
+}
+.ba-zone-empty:empty {
+  display: none;
+}

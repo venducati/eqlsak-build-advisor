@@ -1,0 +1,60 @@
+{
+  "name": "eqlsak-build-advisor",
+  "version": "1.6.1",
+  "description": "Offline EQLSaK Build Advisor, live combat meter, and optional source updates",
+  "author": "EQLSaK community",
+  "license": "MIT",
+  "main": "main.cjs",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "package:win": "electron-builder --win nsis --x64 --publish never",
+    "test": "node --test test/*.test.cjs"
+  },
+  "dependencies": {
+    "cheerio": "1.2.0"
+  },
+  "devDependencies": {
+    "electron": "44.3.0",
+    "electron-builder": "26.15.3"
+  },
+  "build": {
+    "appId": "community.eqlsak.buildadvisor",
+    "productName": "EQLSaK Build Advisor",
+    "artifactName": "EQLSaK-Build-Advisor-${version}-Setup.${ext}",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "main.cjs",
+      "preload.cjs",
+      "network.cjs",
+      "source-manifest.json",
+      "ui/**/*",
+      "assets/**/*",
+      "LICENSE",
+      "log-tail.cjs",
+      "log-discovery.cjs"
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "assets/advisor.ico",
+      "signAndEditExecutable": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowElevation": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "EQLSaK Build Advisor",
+      "deleteAppDataOnUninstall": false,
+      "runAfterFinish": true,
+      "installerIcon": "assets/advisor.ico",
+      "uninstallerIcon": "assets/advisor.ico"
+    }
+  }
+}
