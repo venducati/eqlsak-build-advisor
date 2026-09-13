@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.6.4 — 2026-09-13
+
+- Make the Combat Meter tab stand out with a teal background, bright border, larger waveform icon and clear selected state.
+- Show the app version beside the Build Advisor title in both downloadable editions. Read it from the app package version and verify it during packaged startup checks.
+
 ## 1.6.3 — 2026-09-13
 
 - Add more space inside and between instruction panels, headings, paragraphs, glossary cells, class-fit reports and combat help.

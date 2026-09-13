@@ -94,6 +94,24 @@
 .ba-title-group > div {
   min-width: 0;
 }
+.build-advisor .ba-title-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+}
+.ba-app-version {
+  display: inline-block;
+  padding: 5px 11px;
+  border: 1px solid #87b4c4;
+  border-radius: 8px;
+  background: #102b38;
+  color: #daf5ff;
+  font: 650 15px/1.5 system-ui, sans-serif;
+  letter-spacing: 0.02em;
+  text-shadow: none;
+  white-space: nowrap;
+}
 .ba-heading p {
   max-width: 610px;
   margin: 0;

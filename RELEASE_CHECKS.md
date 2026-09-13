@@ -1,4 +1,4 @@
-# Version 1.6.3 checks and limits
+# Version 1.6.4 checks and limits
 
 Checked on Windows on 2026-09-13, using Node.js 24.18.0 and Electron 44.3.0.
 
@@ -11,8 +11,8 @@ Checked on Windows on 2026-09-13, using Node.js 24.18.0 and Electron 44.3.0.
 - The same scenario checks buddy controls, zone browsing including Dagnor's Cauldron, faction character/add/save/remove/import actions, spell timer save/refresh/remove, demo controls, log start/pause/resume/stop, saved-log loading and replay, loot goals, trip exit, missed-drop notes, and exports.
 - New interface checks cover Find loot log, keyboard focus, automatic no-log instructions, selected-file history loading, partial-history labels, preservation on empty/error reads, live-reader guards, and selecting a newly loaded trip over newer saved history. The source panel was visually reviewed at desktop width.
 - Tests used a hidden app window, an isolated profile, and invented events. Online requests, file selection, and native log subscription were simulated in these interface tests; the real log reader is tested separately with temporary files. Real gameplay logs are excluded from source and release files.
-- Layout review includes the guide, glossary, class reports, settings, four-player class fields, log help and trip source panels at wide and narrow window sizes. Reviewed layouts have no page overflow. Instructions use more line spacing, panels have consistent inner padding, and narrow teammate fields stack instead of shrinking.
-- Packaged Windows startup: version 1.6.3, glossary matrix, Advisor, updates, combat meter, log discovery and recent-history bridges loaded successfully. The packaged code and final layout match the release source. The NSIS installer archive integrity check passed.
+- The 1.6.3 guide and panel spacing is preserved. The 1.6.4 header was reviewed at 1320, 760 and 420 pixel window widths with both tabs selected in turn: the Combat Meter remains distinct, its selected state is clear, and the title version is readable without page overflow.
+- Packaged Windows startup verified version 1.6.4 and the matching title badge, glossary, Advisor and log/update bridges. Packaged code and styles match the source. The NSIS installer archive integrity check passed.
 
 ## Limits
 

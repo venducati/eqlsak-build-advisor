@@ -296,11 +296,13 @@ export default function BuildAdvisor({
   profileName,
   onZone,
   showProfile = true,
+  appVersion,
 }: {
   model: ReturnType<typeof useBuildAdvisor>;
   profileName: string;
   onZone?: (zone: string) => void;
   showProfile?: boolean;
+  appVersion?: string;
 }) {
   const { input, setInput, pack, setPack, storageMessage, fromProfile } = model;
   const [combo, setCombo] = useState('');
@@ -358,7 +360,7 @@ export default function BuildAdvisor({
           <AdvisorIcon code="compass" medallion />
           <div>
             <small>EQLSaK · EverQuest Legends companion</small>
-            <h2>Build Advisor</h2>
+            <h2 className="ba-title-line">Build Advisor {appVersion && <span className="ba-app-version">v{appVersion}</span>}</h2>
             <p>
               Choose your classes. See what works well, what needs help, and
               which buddy build may fit.

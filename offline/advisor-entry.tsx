@@ -4,6 +4,7 @@ import BuildAdvisor, { useBuildAdvisor } from '../components/BuildAdvisor';
 import CombatMeter from '../components/CombatMeter';
 import ProjectSupport from '../components/ProjectSupport';
 import { Compass, Activity } from 'lucide-react';
+import appPackage from '../package.json' with { type: 'json' };
 import '../app/advisor-spacing.css';
 function App() {
   const model = useBuildAdvisor({
@@ -20,7 +21,7 @@ function App() {
         <button aria-pressed={!meter} onClick={() => setMeter(false)}>
           <Compass aria-hidden="true" /> Build Advisor
         </button>
-        <button aria-pressed={meter} onClick={() => setMeter(true)}>
+        <button className="offline-meter-tab" aria-pressed={meter} onClick={() => setMeter(true)}>
           <Activity aria-hidden="true" /> Combat Meter
         </button>
       </nav>
@@ -29,6 +30,7 @@ function App() {
           model={model}
           profileName="local example"
           showProfile={false}
+          appVersion={appPackage.version}
         />
       </div>
       <div hidden={!meter}>
