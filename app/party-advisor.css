@@ -19,12 +19,12 @@
 }
 .ba-party-class-fields {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 6px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 140px), 1fr));
+  gap: 14px;
 }
-.ba-party-class-fields select {
-  padding: 8px 3px !important;
-  font-size: 12px !important;
+.build-advisor .ba-party-class-fields select {
+  padding: 10px;
+  font-size: 14px;
 }
 .ba-party-zone {
   margin-top: 18px;

@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.6.3 — 2026-09-13
+
+- Add more space inside and between instruction panels, headings, paragraphs, glossary cells, class-fit reports and combat help.
+- Increase text line spacing and separate numbered steps, table rows and colored callouts in the installation and update guide.
+- Let teammate class fields stack when their panel is narrow; restore readable field text and padding.
+- Document shared layout rules so future contributions preserve readable spacing.
+
 ## 1.6.2 — 2026-09-13
 
 - Add **Find loot log** beside the trip report; it starts the existing character-log search and moves keyboard focus to it.

@@ -4,6 +4,7 @@ import BuildAdvisor, { useBuildAdvisor } from '../components/BuildAdvisor';
 import CombatMeter from '../components/CombatMeter';
 import ProjectSupport from '../components/ProjectSupport';
 import { Compass, Activity } from 'lucide-react';
+import '../app/advisor-spacing.css';
 function App() {
   const model = useBuildAdvisor({
     name: 'local example',

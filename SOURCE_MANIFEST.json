@@ -1,5 +1,5 @@
 {
-  "version": "1.6.2",
+  "version": "1.6.3",
   "scope": "Standalone Build Advisor and Combat Meter",
   "files": [
     "ARTWORK_REFINEMENT_1_3.md",
@@ -11,6 +11,7 @@
     "LOOT_TRIPS.md",
     "TRIP_LOG_GUIDE.md",
     "app/advisor-fantasy.css",
+    "app/advisor-spacing.css",
     "app/advisor-zones.css",
     "app/build-advisor.css",
     "app/build-workbench.css",

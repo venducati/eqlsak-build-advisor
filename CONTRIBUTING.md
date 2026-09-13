@@ -13,6 +13,16 @@ For game information, include the source URL, date checked, relevant classes and
 
 Keep recommendation logic deterministic and local. Preserve accessibility, readable text, optional online checks, and rule-update preview/rollback. Do not add remote inference, telemetry, or automatic uploads of player logs.
 
+## Keep the layout easy to read
+
+- Use the shared spacing in `app/advisor-spacing.css`. Keep clear gaps between panels and between a panel and the text around it.
+- Use generous line spacing for instructions and explanations (about 1.75 times the text size), with separate paragraph margins. Keep headings close to the content they introduce, with more space before the next section.
+- Let class fields and other controls wrap or stack when space is limited. Do not shrink text and padding to force several controls into a narrow row.
+- Pair icons and color with plain text labels. Keep instructions short and use the same words for the same action.
+- Review changed screens at wide and narrow window sizes, with expanded instructions and realistic content. Check for clipped text, overlapping controls, cramped rows and page overflow before publishing. Use invented data and an isolated profile for screenshots.
+
+The installation guide has matching spacing in its own style block. Keep that standalone file readable when opened directly or printed.
+
 ## Keep the record useful
 
 - Use clear commit messages and link relevant issues in pull requests.

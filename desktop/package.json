@@ -1,6 +1,6 @@
 {
   "name": "eqlsak-build-advisor",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "description": "Offline EQLSaK Build Advisor, live combat meter, and optional source updates",
   "author": "EQLSaK community",
   "license": "MIT",
