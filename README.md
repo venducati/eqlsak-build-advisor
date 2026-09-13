@@ -2,12 +2,12 @@
 
 **Free, offline build planning and combat log tools for EverQuest Legends.**
 
-[Download version 1.6.1 for Windows](https://github.com/venducati/eqlsak-build-advisor/releases/tag/v1.6.1) · [Report a problem or suggest an idea](https://github.com/venducati/eqlsak-build-advisor/issues) · [How to contribute](CONTRIBUTING.md)
+[Download version 1.6.2 for Windows](https://github.com/venducati/eqlsak-build-advisor/releases/tag/v1.6.2) · [Report a problem or suggest an idea](https://github.com/venducati/eqlsak-build-advisor/issues) · [How to contribute](CONTRIBUTING.md)
 
 ## Download and start
 
 1. Open the release page above.
-2. Under **Assets**, download **EQLSaK-Build-Advisor-1.6.1-Setup.exe**.
+2. Under **Assets**, download **EQLSaK-Build-Advisor-1.6.2-Setup.exe**.
 3. Run it on 64-bit Windows and follow the setup steps.
 
 This is a **community preview**. The installer is **unsigned**, so Windows may show Unknown Publisher or a SmartScreen warning. It has not been tested on a fresh Windows installation. Read [the installation guide](DESKTOP_ADVISOR.md) and [the checks and limits](RELEASE_CHECKS.md).
@@ -44,6 +44,10 @@ npm run package:win
 ```
 
 The offline HTML is written to `outputs/`. The installer is written to `desktop/release/`. UI tests use an isolated profile, invented log data, and simulated update/file-picker responses. They do not use a player's game session.
+
+## Loot logs and Trip Complete
+
+Use **Find loot log** beside the trip report to search your character logs. **Load recent trips** reads up to the last 4 MB of a selected file, including large logs. **Watch selected log** follows new lines. If no log appears, BA opens simple in-game setup steps. The report shows its source file and recorded time span. See [TRIP_LOG_GUIDE.md](TRIP_LOG_GUIDE.md).
 
 ## Change the rules
 

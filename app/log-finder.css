@@ -1,10 +1,26 @@
 .cm-log-finder {
+  scroll-margin-top: 16px;
   background: #20313ddd;
   border: 1px solid #917442;
   border-radius: 12px;
   padding: 18px;
   margin: 20px 0;
 }
+.cm-log-finder:focus-visible {outline: 3px solid #9bd8f4;outline-offset: 4px}
+.cm-log-help {border: 1px solid #667886;border-radius: 8px;margin: 14px 0;padding: 12px 16px;background: #142530}
+.cm-log-help summary {color: #e6c17d;cursor: pointer;font-weight: 650}
+.cm-log-help summary svg {width: 18px;height: 18px;vertical-align: middle;margin-right: 6px}
+.cm-log-help li {margin: 10px 0;line-height: 1.6}
+.cm-log-help code {background: #0b1821;color: #aee5f6;padding: 2px 6px;border-radius: 4px;overflow-wrap: anywhere}
+.cm-trip-log-source {padding: 18px;border: 1px solid #927748;border-radius: 10px;background: #1c2d39;margin: 18px 0}
+.cm-trip-log-source h4 {margin: 0;font-size: 17px;color: #f0d296}
+.cm-trip-log-source h4 svg {width: 19px;height: 19px;vertical-align: middle;margin-right: 5px}
+.cm-trip-log-source p {line-height: 1.6}
+.cm-trip-log-source dl {display: grid;gap: 10px;margin: 14px 0}
+.cm-trip-log-source dl>div {display: grid;grid-template-columns: 135px 1fr;gap: 12px;border-bottom: 1px solid #3c5260;padding-bottom: 8px}
+.cm-trip-log-source dt {color: #e6c17d;font-weight: 650}
+.cm-trip-log-source dd {margin: 0;overflow-wrap: anywhere}
+@media(max-width:600px){.cm-trip-log-source dl>div{grid-template-columns:1fr;gap:4px}}
 .cm-finder-heading {
   display: flex;
   gap: 18px;

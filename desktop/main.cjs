@@ -7,6 +7,7 @@ const {createHash}=require('node:crypto');
 const {fetchText,extractSource,compareSnapshot,validateURL}=require('./network.cjs');
 const {LogTail}=require('./log-tail.cjs');
 const {LogDiscovery}=require('./log-discovery.cjs');
+const {readRecentLog}=require('./log-history.cjs');
 const {basename,extname}=require('node:path');
 const manifest=require('./source-manifest.json');
 const entry=pathToFileURL(join(__dirname,'ui','index.html')).href;
@@ -29,6 +30,7 @@ async function attachLog(path){
  return {name:basename(path),skipPartial:state.skipPartial};
 }
 ipcMain.handle('meter:detect',async event=>{trusted(event);return logFinder().find();});
+ipcMain.handle('meter:read-recent',async(event,id)=>{trusted(event);if(tail)throw new Error('Stop live reading before loading a saved snapshot.');return readRecentLog(await logFinder().resolve(id));});
 ipcMain.handle('meter:choose-folder',async event=>{
  trusted(event);
  const selected=await dialog.showOpenDialog(window,{title:'Choose your EQL game or Logs folder',properties:['openDirectory']});
@@ -112,7 +114,7 @@ app.whenReady().then(async()=>{
   if(smoke) {
     const timer=setTimeout(()=>{console.error('Desktop load timed out.');app.exit(1);},25000);
     window.webContents.on('did-fail-load',(_e,code,description)=>{clearTimeout(timer);console.error('Desktop load failed',code,description);app.exit(1);});
-    window.webContents.on('did-finish-load',async()=>{try{const info=await window.webContents.executeJavaScript('(async()=>({version:window.eqlDesktop.version,history:await window.eqlDesktop.getSourceHistory(),meter:typeof window.eqlMeter.start,detect:typeof window.eqlMeter.detect,folder:typeof window.eqlMeter.chooseFolder,watch:typeof window.eqlMeter.startDetected,glossaryGroups:document.querySelectorAll(".ba-glossary-group").length,glossaryWords:document.querySelectorAll(".ba-glossary-word").length}))()');if(info.version!==app.getVersion()||info.history.version!==1||[info.meter,info.detect,info.folder,info.watch].some(value=>value!=='function'))throw new Error('Desktop bridge check failed.');if(info.glossaryGroups!==6||info.glossaryWords!==21)throw new Error('Packaged glossary matrix did not render.');clearTimeout(timer);console.log('DESKTOP_SMOKE_OK: version '+info.version+', glossary matrix, advisor, updates, combat meter and log discovery bridges loaded.');app.exit(0);}catch(e){console.error(e);app.exit(1);}});
+    window.webContents.on('did-finish-load',async()=>{try{const info=await window.webContents.executeJavaScript('(async()=>({version:window.eqlDesktop.version,history:await window.eqlDesktop.getSourceHistory(),meter:typeof window.eqlMeter.start,detect:typeof window.eqlMeter.detect,recent:typeof window.eqlMeter.readRecent,folder:typeof window.eqlMeter.chooseFolder,watch:typeof window.eqlMeter.startDetected,glossaryGroups:document.querySelectorAll(".ba-glossary-group").length,glossaryWords:document.querySelectorAll(".ba-glossary-word").length}))()');if(info.version!==app.getVersion()||info.history.version!==1||[info.meter,info.detect,info.recent,info.folder,info.watch].some(value=>value!=='function'))throw new Error('Desktop bridge check failed.');if(info.glossaryGroups!==6||info.glossaryWords!==21)throw new Error('Packaged glossary matrix did not render.');clearTimeout(timer);console.log('DESKTOP_SMOKE_OK: version '+info.version+', glossary matrix, advisor, updates, combat meter, log discovery and recent-history bridges loaded.');app.exit(0);}catch(e){console.error(e);app.exit(1);}});
     window.webContents.on('render-process-gone',(_e,details)=>{console.error(details);app.exit(1);});
   }
   await window.loadFile(join(__dirname,'ui','index.html'));

@@ -1,4 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useImperativeHandle, useRef, useState, type Ref } from 'react';
+import LogSetupHelp from './LogSetupHelp';
+import {readRecentBrowserLog, type LogSnapshot} from '../lib/log-history';
 import {
   FolderSearch,
   FolderOpen,
@@ -19,15 +21,21 @@ declare global {
     showDirectoryPicker?: (options: unknown) => Promise<LogDirectory>;
   }
 }
+export type LogFinderActions = {search: () => void};
 export default function LogFinder({
+  ref,
   disabled,
   onDetected,
   onBrowser,
+  onSnapshot,
 }: {
+  ref?: Ref<LogFinderActions>;
   disabled: boolean;
   onDetected: (id: string) => Promise<void>;
   onBrowser: (handle: LogFileHandle) => Promise<void>;
+  onSnapshot: (snapshot: LogSnapshot) => Promise<void>;
 }) {
+  const panel = useRef<HTMLElement>(null);
   const [desktop, setDesktop] = useState(false),
     [working, setWorking] = useState(false),
     [search, setSearch] = useState<LogSearch | null>(null),
@@ -39,6 +47,7 @@ export default function LogFinder({
     setDesktop(Boolean(window.eqlMeter?.detect));
   }, []);
   async function find(choose = false) {
+    if (disabled || working) return;
     setWorking(true);
     setMessage('Looking for character logs…');
     try {
@@ -84,6 +93,30 @@ export default function LogFinder({
       setWorking(false);
     }
   }
+  useImperativeHandle(ref, () => ({search: () => {
+    panel.current?.scrollIntoView({block:'start'});
+    panel.current?.focus({preventScroll:true});
+    void find();
+  }}));
+  async function loadRecent() {
+    if (!selected || disabled || working) return;
+    setWorking(true);
+    setMessage('Reading the recent part of your selected log on this device…');
+    try {
+      let snapshot: LogSnapshot;
+      if (desktop) {
+        if (!window.eqlMeter?.readRecent) throw new Error('Update the Windows app to load recent trips. You can still use Load saved log.');
+        snapshot = await window.eqlMeter.readRecent(selected);
+      } else {
+        const handle = handles.current.get(selected);
+        if (!handle) throw new Error('Search again and choose a log.');
+        snapshot = await readRecentBrowserLog(handle);
+      }
+      await onSnapshot(snapshot);
+      setMessage(snapshot.text ? 'Recent events loaded. Look below for your loot and trip reports. Watch selected log starts a new live recording from now on.' : 'No complete log lines found. Turn logging on in EQL and follow the steps below.');
+    } catch (error) {setMessage(error instanceof Error ? error.message : 'This log could not be read. Search again or choose the file by hand.');}
+    finally {setWorking(false);}
+  }
   async function watch() {
     if (!selected) return;
     setWorking(true);
@@ -103,7 +136,7 @@ export default function LogFinder({
   }
   const blocked = disabled || working;
   return (
-    <section className="cm-log-finder" aria-label="Find EQL character logs">
+    <section ref={panel} tabIndex={-1} className="cm-log-finder" aria-label="Find EQL character logs">
       <div className="cm-finder-heading">
         <div>
           <h3>
@@ -131,6 +164,7 @@ export default function LogFinder({
           {message}
         </p>
       )}
+      <LogSetupHelp open={search?.candidates.length === 0} />
       {disabled && (
         <p className="cm-note">
           Stop the current live log before choosing another character.
@@ -202,14 +236,16 @@ export default function LogFinder({
               <Play />
               Watch selected log
             </button>
+            <button disabled={blocked || !selected} onClick={() => void loadRecent()}>
+              <FileText /> Load recent trips
+            </button>
             <button disabled={blocked} onClick={() => void find()}>
               <RefreshCw />
               Search again
             </button>
           </div>
           <p className="cm-note">
-            Watching starts with new lines. Existing damage spikes can be viewed
-            with Load saved log and Replay last minute.
+            Watching starts with new lines. Load recent trips reads up to the last 4 MB of your chosen log, including loot. It is a saved snapshot; earlier events may be left out. Use Load saved log for a complete file up to 25 MB.
           </p>
         </>
       )}

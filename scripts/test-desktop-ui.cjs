@@ -10,12 +10,12 @@ app.setPath('userData', resolve(testDir, 'profile'));
 app.disableHardwareAcceleration();
 const rules = { ...JSON.parse(readFileSync('data/build-advisor.json')), evidence: JSON.parse(readFileSync('data/build-evidence.json')) };
 const fixture = `
-window.testCalls={downloads:[],sources:[],pause:[],stop:0,detect:0,folder:0,start:0};
+window.testCalls={downloads:[],sources:[],pause:[],recent:[],stop:0,detect:0,folder:0,start:0};
 const originalAnchorClick=HTMLAnchorElement.prototype.click;
 HTMLAnchorElement.prototype.click=function(){if(this.download){testCalls.downloads.push(this.download);return;}return originalAnchorClick.call(this);};
 window.testRules=${JSON.stringify(rules)};
 window.eqlDesktop={version:'test',getSourceHistory:async()=>({version:1,sources:{}}),onProgress:()=>()=>{},checkSources:async classes=>{testCalls.sources.push(classes);return {checkedAt:new Date().toISOString(),results:[]}},getRuleUpdate:async()=>{const rules=structuredClone(testRules);rules.weights.control+=1;return {payload:{format:'eqlsak-rule-update',schemaVersion:1,release:'test',publishedAt:new Date().toISOString(),notes:'Test only',rules},hash:'test',hashVerified:false}},};
-window.eqlMeter={onData:fn=>{window.testEmit=fn;return()=>{}},detect:async()=>{testCalls.detect++;return {candidates:[],locations:[],warnings:[]}},chooseFolder:async()=>{testCalls.folder++;return null},start:async()=>{testCalls.start++;return {name:'eqlog_Test_Example.txt',skipPartial:false}},startDetected:async()=>({name:'eqlog_Test_Example.txt',skipPartial:false}),pause:async value=>{testCalls.pause.push(value)},stop:async()=>{testCalls.stop++}};
+window.eqlMeter={onData:fn=>{window.testEmit=fn;return()=>{}},detect:async()=>{testCalls.detect++;return window.testSearch || {candidates:[],checked:[],warnings:[]}},readRecent:async id=>{testCalls.recent.push(id);if(window.testReadError)throw new Error(window.testReadError);return window.testSnapshot;},chooseFolder:async()=>{testCalls.folder++;return null},start:async()=>{testCalls.start++;return {name:'eqlog_Test_Example.txt',skipPartial:false}},startDetected:async()=>({name:'eqlog_Test_Example.txt',skipPartial:false}),pause:async value=>{testCalls.pause.push(value)},stop:async()=>{testCalls.stop++}};
 `;
 writeFileSync(resolve(testDir, 'fixture.js'), fixture);
 const asset = name => pathToFileURL(resolve('desktop/ui', name)).href;
@@ -30,6 +30,8 @@ app.whenReady().then(async () => {
     await window.loadFile(resolve(testDir, 'index.html'));
     const result = await window.webContents.executeJavaScript(readFileSync('scripts/ui-actions-scenario.js','utf8'));
     writeFileSync(resolve(testDir, 'result.json'), JSON.stringify({result,errors},null,2));
+    window.setSize(1322,940);
+    await new Promise(resolve=>setTimeout(resolve,100));
     writeFileSync(resolve(testDir,'fit-report-wide.png'),(await window.webContents.capturePage()).toPNG());
     window.setSize(420,900);
     await new Promise(resolve=>setTimeout(resolve,100));

@@ -1,7 +1,7 @@
 'use strict';
 const {contextBridge,ipcRenderer}=require('electron');
 contextBridge.exposeInMainWorld('eqlDesktop',{
-  version:'1.6.1',
+  version:'1.6.2',
   getSourceHistory:()=>ipcRenderer.invoke('advisor:history'),
   checkSources:(classes)=>ipcRenderer.invoke('advisor:check-sources',classes),
   getRuleUpdate:(url,expectedHash)=>ipcRenderer.invoke('advisor:rule-update',url,expectedHash),
@@ -13,6 +13,7 @@ contextBridge.exposeInMainWorld('eqlDesktop',{
 });
 contextBridge.exposeInMainWorld('eqlMeter',{
  detect:()=>ipcRenderer.invoke('meter:detect'),
+ readRecent:id=>ipcRenderer.invoke('meter:read-recent',id),
  chooseFolder:()=>ipcRenderer.invoke('meter:choose-folder'),
  startDetected:id=>ipcRenderer.invoke('meter:start-detected',id),
  start:()=>ipcRenderer.invoke('meter:start'),

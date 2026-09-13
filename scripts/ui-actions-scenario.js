@@ -79,6 +79,19 @@
   await upload(document.querySelector('.cm-toolbar input[type="file"]'),'eqlog_Test_Example.txt',earlier+'You slash a training dummy for 12 points of damage.\n'+stamp+'You slash a training dummy for 18 points of damage.\n');assert(document.querySelector('.cm-message').textContent.includes('Saved log loaded'),'Saved log import');
   await click('Replay last minute');await click('Pause replay');await click('Continue replay');await click('Pause replay');
   checks.push('loot goals, instance exit, missed drop add/remove, trip export, saved-log import and replay controls');
-  await click('Build Advisor');await click('See why Bard fits');
+  // Trip-source entry point must run discovery; the empty state gives game setup steps.
+  await click('Find loot log');
+  const helper=document.querySelector('.cm-log-finder .cm-log-help');assert(helper.open,'No-log result opens setup instructions');assert(helper.textContent.includes('/log on'),'Setup command');
+  assert(document.activeElement===document.querySelector('.cm-log-finder'),'Finder receives keyboard focus');
+  window.testSearch={candidates:[{id:'loot-log',name:'eqlog_Test_Example.txt',character:'Test',server:'Example',folder:'Test Logs',size:50*1024*1024,modified:Date.now(),growing:false,lastUsed:false}],checked:['Test Logs'],warnings:[],truncated:false};
+  await click('Auto-detect log');
+  window.testSnapshot={name:'eqlog_Test_Example.txt',text:'[Sun Sep 13 10:00:00 2026] You have entered The Estate of Unrest.\n[Sun Sep 13 10:01:00 2026] --You have looted a Snapshot Gem from a rat\'s corpse.--\n[Sun Sep 13 10:02:00 2026] You have entered Dagnor\'s Cauldron.\n',partial:true,totalBytes:50*1024*1024,bytesRead:4*1024*1024};
+  await click('Load recent trips');assert(testCalls.recent.includes('loot-log'),'Selected log ID used for read');assert(document.querySelector('.cm-trip-board').textContent.includes('Snapshot Gem'),'Recorded loot populates trip table');
+  assert(document.querySelector('.cm-trip-log-source').textContent.includes('partial recent snapshot'),'Partial snapshot report provenance');assert(document.querySelector('.cm-trip-kicker').textContent.includes('TRIP COMPLETE'),'Logged exit completes earlier trip');
+  window.testSnapshot={...testSnapshot,text:''};await click('Load recent trips');assert(document.querySelector('.cm-trip-board').textContent.includes('Snapshot Gem'),'Empty load keeps prior report');
+  window.testReadError='Test read failed';await click('Load recent trips');assert(document.querySelector('.cm-log-finder').textContent.includes('Test read failed'),'Read error is visible');window.testReadError='';
+  await click('Watch selected log');assert(find('Find loot log').disabled,'Cannot replace a live log through trip finder');await click('Stop');
+  checks.push('Trip Complete source panel, Find loot log action/focus, no-log instructions, selected recent history, partial scope, empty/error preservation and live-read guard');
+  document.querySelector('.cm-trip-log-source').scrollIntoView({block:'start'});
   return {checks,downloads:testCalls.downloads,buttonsReviewed:document.querySelectorAll('button').length};
 })()

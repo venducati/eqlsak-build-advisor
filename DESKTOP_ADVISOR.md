@@ -1,6 +1,6 @@
 # EQLSaK Build Advisor — Installation and update guide
 
-Version 1.6.1
+Version 1.6.2
 
 Install the app, check for new information, and update your build rules when you choose.
 
@@ -11,7 +11,7 @@ Install the app, check for new information, and update your build rules when you
 ## 01 · Install the app
 
 1. **Use a Windows computer.** The app needs 64-bit Windows.
-2. **Open the setup file.** `EQLSaK-Build-Advisor-1.6.1-Setup.exe`
+2. **Open the setup file.** `EQLSaK-Build-Advisor-1.6.2-Setup.exe`
 3. **Follow the steps on the screen.** Choose where to install the app. Then open EQLSaK Build Advisor from the Start menu or desktop.
 
 > **! Windows may show “Unknown Publisher”**
@@ -22,7 +22,7 @@ This Windows app includes **Build Advisor** and **Combat Meter**. Maps, loot, fa
 
 ## Free downloads and optional support
 
-Download the Windows setup file and matching source from [GitHub Releases](https://github.com/venducati/eqlsak-build-advisor/releases/tag/v1.6.1). All features are free. A donation is never required. No donation page is set up yet, so there is no donation button.
+Download the Windows setup file and matching source from [GitHub Releases](https://github.com/venducati/eqlsak-build-advisor/releases/tag/v1.6.2). All features are free. A donation is never required. No donation page is set up yet, so there is no donation button.
 
 ## See why a class fits
 
@@ -183,10 +183,14 @@ The setup file will be in `desktop/release`. To sign a release, use your own Win
 
 ### What has been checked
 
-See RELEASE_CHECKS.md in the public repository for the checks performed for version 1.6.1.
+See RELEASE_CHECKS.md in the public repository for the checks performed for version 1.6.2.
 
 The app has not yet been tested on a fresh Windows computer. The meter still needs tests during real EQL play. Source checks and file-picking are simulated in the automated interface tests.
 
 ## Party charts and zone maps
 
 Choose Your party to compare up to four trios. Each zone card shows class icons, strengths, gaps, and healing/control targets. Open zone guide opens the matching EQLSaK map and details in your browser. The website needs internet access and permission to view it.
+
+## Loot logs and Trip Complete
+
+Press **Find loot log** beside the trip report, select your character, and use **Load recent trips** for earlier events or **Watch selected log** for new events. If no log appears, the app opens simple `/log on` instructions. Recent snapshots read at most 4 MB and are marked partial when needed. Saved imports above 25 MB now load recent history instead of failing. See [TRIP_LOG_GUIDE.md](TRIP_LOG_GUIDE.md).

@@ -12,7 +12,10 @@ import {
   Route,
   Check,
   AlertTriangle,
+  FolderSearch,
+  FileText,
 } from 'lucide-react';
+import LogSetupHelp from './LogSetupHelp';
 import { type AdvisorInput, type RulePack } from '../lib/build-advisor';
 import { type CombatEvent } from '../lib/combat-meter';
 import {
@@ -225,6 +228,7 @@ export function useTripJournal(input: AdvisorInput, pack: RulePack) {
   }
   return {
     trips: trips(),
+    sessionTrips: stream.current.trips,
     revision,
     goals: demo.current ? demoGoals : goals,
     begin,
@@ -250,6 +254,9 @@ export default function EncounterJournal({
   source,
   input,
   pack,
+  onFindLog,
+  logBusy,
+  logMode,
 }: {
   model: JournalModel;
   events: CombatEvent[];
@@ -260,6 +267,9 @@ export default function EncounterJournal({
   source: string;
   input: AdvisorInput;
   pack: RulePack;
+  onFindLog: () => void;
+  logBusy: boolean;
+  logMode: 'idle' | 'live' | 'paused' | 'replay' | 'demo';
 }) {
   const replayTrips = useMemo(() => {
     if (!replay) return [];
@@ -284,14 +294,18 @@ export default function EncounterJournal({
     [missedReason, setMissedReason] = useState('Left behind');
   const [exitReason, setExitReason] = useState('Finished the run'),
     [notice, setNotice] = useState('');
-  const latestClosed = [...trips].reverse().find((t) => t.ended !== null);
-  const latestClosedId = latestClosed?.id;
+  // Prefer the file just loaded, even if a newer report exists in saved history.
+  // Preserve a user's manual selection until another trip completes or a new session opens.
+  const sessionTrips = replay ? replayTrips : model.sessionTrips;
+  const preferred = [...sessionTrips].reverse().find((t) => t.ended !== null)
+    || sessionTrips.at(-1) || [...trips].reverse().find((t) => t.ended !== null);
+  const preferredId = preferred?.id;
   useEffect(() => {
-    if (latestClosedId) {
-      setSelected(latestClosedId);
+    if (preferredId) {
+      setSelected(preferredId);
       setZoneFilter('');
     }
-  }, [latestClosedId]);
+  }, [preferredId]);
   const visible = trips.filter((t) => !zoneFilter || t.baseZone === zoneFilter);
   const trip = visible.find((t) => t.id === selected) || visible.at(-1);
   const goals = trip ? goalsForTrip(model.goals, trip) : [];
@@ -347,6 +361,22 @@ export default function EncounterJournal({
           <Target /> Loot goals
         </button>
       </div>
+      <section className="cm-trip-log-source" aria-label="Trip report data source">
+        <div className="cm-chart-heading">
+          <h4><FileText aria-hidden="true" /> Where this report gets its data</h4>
+          <button disabled={logBusy} onClick={onFindLog}><FolderSearch aria-hidden="true" /> Find loot log</button>
+        </div>
+        <p>Loot comes from the same character log as your combat. BA adds entries while watching a live log, or when you load a saved log. A zone exit or <strong>I left the instance</strong> completes the trip.</p>
+        <dl>
+          <div><dt>Current reader</dt><dd>{logMode === 'demo' ? 'Demo — made-up events' : `${logMode === 'live' ? 'Watching new lines' : logMode === 'paused' ? 'Paused' : logMode === 'idle' ? 'Not watching' : 'Saved events'} · ${source}`}</dd></div>
+          <div><dt>This report</dt><dd>{demo ? 'Demo — made-up loot and goals' : trip ? trip.source : 'No trip recorded yet'}</dd></div>
+          {trip && <div><dt>Recorded span</dt><dd>{new Date(trip.started).toLocaleString()} – {new Date(trip.ended ?? trip.last).toLocaleString()}</dd></div>}
+        </dl>
+        {trip?.source.includes('partial recent snapshot') && <p className="cm-note">Partial history: this report comes from the recent end of the file. Earlier events may be missing.</p>}
+        <p className="cm-note">Watching starts with new lines. Choose <strong>Load recent trips</strong> after finding your log to see earlier loot. Saved reports stay on this device. Goals and missed-drop notes are entries you add; they do not come from a loot database.</p>
+        {logBusy && <p className="cm-note">Stop live reading before choosing a different log. Your current reader already supplies new loot events.</p>}
+        <LogSetupHelp />
+      </section>
       <p className="cm-note">
         Tracks your logged drops in any zone or named instance. Entering another
         zone ends the previous trip and opens its report. If you log out or

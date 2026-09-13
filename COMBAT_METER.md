@@ -1,4 +1,4 @@
-# Combat Meter — version 1.6.0
+# Combat Meter — version 1.6.2
 
 Open **Combat Meter** beside Build Advisor. It reads the log you choose. Your data stays on this device. No AI service, account or cloud model is used.
 
@@ -71,3 +71,7 @@ Saved logs must be 25 MB or smaller. Live reading is incremental. Partial lines 
 Critical tags, archery and incoming DoT formats were checked against the [EQL community combat tracker](https://github.com/blastlaster/eql-log-reader/blob/main/eql_combat_tracker.py). Setup guidance is linked from [EQL Meter](https://eqlmeter.com/docs.html). These are community references, not proof that every client emits every pattern. The implementation is original. EQLSaK is not affiliated with EQL Meter.
 
 Add a redacted sample and a test for each new format. Keep ambiguous messages unknown. Run the combat, visual, encounter and desktop log-reader tests. Real in-game checks are still needed before claiming complete client compatibility.
+
+## Find loot logs and read earlier trips (1.6.2)
+
+The trip report now has **Find loot log**, a data-source panel, and simple logging instructions. Use **Load recent trips** after selecting a found log to read up to its last 4 MB. Large saved imports use the same partial snapshot. This keeps your actual log unchanged. See [TRIP_LOG_GUIDE.md](TRIP_LOG_GUIDE.md).

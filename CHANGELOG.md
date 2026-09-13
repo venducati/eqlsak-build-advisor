@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.6.2 — 2026-09-13
+
+- Add **Find loot log** beside the trip report; it starts the existing character-log search and moves keyboard focus to it.
+- Explain the current reader, the selected report's source file, and its recorded time span. Clarify when trips become complete and which entries the player supplies.
+- Open simple `/log on` and loot-chat setup steps automatically when no character logs are found.
+- Add **Load recent trips** for a user-selected log. Read at most its last 4 MB locally and label incomplete coverage. Large saved-log imports use the same bounded snapshot instead of failing at 25 MB.
+- Preserve old data when an empty snapshot is selected, show read errors, and block changing the source during live reading.
+- Show a trip from the log just loaded, even when saved history contains a newer trip from another file.
+- Add regression checks for byte limits, incomplete lines, unchanged source files, desktop/browser agreement, trip completion and the new interface actions.
+
 ## 1.6.1 — 2026-09-13
 
 First public source snapshot and Windows community preview.

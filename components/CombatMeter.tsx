@@ -22,7 +22,8 @@ import type { CombatEvent } from '../lib/combat-meter';
 import sources from '../data/combat-messages.json';
 import { CombatDashboard, SpellActivity } from './CombatDashboard';
 import EncounterJournal, { useTripJournal } from './EncounterJournal';
-import LogFinder from './LogFinder';
+import LogFinder, {type LogFinderActions} from './LogFinder';
+import {readRecentBrowserLog, type LogSnapshot} from '../lib/log-history';
 import type { LogFileHandle, LogSearch } from '../lib/log-discovery';
 import {
   defaultInput,
@@ -40,6 +41,7 @@ import {
 import '../app/live-combat-meter.css';
 type Batch = { text: string; reset: boolean; backlog: number; error?: string };
 type LogBridge = {
+  readRecent?: (id: string) => Promise<LogSnapshot>;
   detect: () => Promise<LogSearch>;
   chooseFolder: () => Promise<LogSearch | null>;
   startDetected: (
@@ -118,6 +120,7 @@ export default function CombatMeter({
     [dropped, setDropped] = useState(0),
     [busy, setBusy] = useState(false);
   const reader = useRef(new CombatLines()),
+    logFinder = useRef<LogFinderActions>(null),
     store = useRef<CombatEvent[]>([]),
     handle = useRef<Handle | null>(null),
     offset = useRef(0),
@@ -329,10 +332,10 @@ export default function CombatMeter({
   async function importFile(file: File) {
     setBusy(true);
     try {
-      if (file.size > 25 * 1024 * 1024)
-        throw new Error(
-          'Saved logs must be 25 MB or smaller. Use Choose live log for larger files.',
-        );
+      if (file.size > 25 * 1024 * 1024) {
+        await loadSnapshot(await readRecentBrowserLog({getFile: async () => file}));
+        return;
+      }
       if (!await stop()) return;
       reset();
       const text = await file.text();
@@ -352,6 +355,24 @@ export default function CombatMeter({
     } finally {
       setBusy(false);
     }
+  }
+  async function loadSnapshot(snapshot: LogSnapshot) {
+    setBusy(true);
+    try {
+      if (!snapshot.text) {setMessage('No complete log lines found. Open How to start a loot log in EQL for setup steps. Your recorded data is kept.');return;}
+      if (!await stop()) throw new Error('The current log reader could not be stopped.');
+      reset();
+      const character = logPlayerName(snapshot.name);
+      const label = snapshot.name + (snapshot.partial ? ' · partial recent snapshot' : ' · saved snapshot');
+      tripJournal.begin(label, character || player);
+      ingest(snapshot.text);
+      setName(label);
+      if (character) setPlayer(character);
+      setPlayhead(combatBounds(store.current, Date.now()).last);
+      setRolling(false);
+      setMode('replay');
+      setMessage(`Recent log loaded (${(snapshot.bytesRead / 1048576).toFixed(1)} MB read). ${snapshot.partial ? 'Partial history: earlier or unfinished lines are left out; the first trip may be incomplete. ' : ''}Read your trip reports below. This is a saved snapshot. Watch selected log follows new events.`);
+    } finally {setBusy(false);}
   }
   async function demo() {
     if (!await stop()) return;
@@ -505,9 +526,11 @@ export default function CombatMeter({
         </span>
       </header>
       <LogFinder
+        ref={logFinder}
         disabled={busy || mode === 'live' || mode === 'paused'}
         onDetected={(id) => start(id)}
         onBrowser={(chosen) => start(undefined, chosen)}
+        onSnapshot={loadSnapshot}
       />
       <div className="cm-toolbar">
         <button
@@ -714,6 +737,9 @@ export default function CombatMeter({
         demo={mode === 'demo'}
       />
       <EncounterJournal
+        onFindLog={() => logFinder.current?.search()}
+        logBusy={busy || mode === 'live' || mode === 'paused'}
+        logMode={mode}
         model={tripJournal}
         events={events}
         clock={clock}
