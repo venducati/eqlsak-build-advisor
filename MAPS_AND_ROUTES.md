@@ -10,6 +10,18 @@ BA can display standard EverQuest text maps from your computer. The Windows app 
 
 The planning zone and actual file name are shown separately. Zone and trip cards open exact matching maps using known names and aliases, including Dagnor's Cauldron, Unrest, Upper/Lower Guk and Splitpaw. Unknown files still appear by filename. Missing or ambiguous matches require a choice; BA does not guess between layouts.
 
+## Expand the map
+
+Click the map, press Enter while it is focused, or choose **Expand map**. A drag moves the map without opening it. The expanded view fills the screen when supported, or fills the app/browser window if full screen is unavailable.
+
+- Drag to move; scroll to zoom toward the mouse pointer.
+- Use the embedded zoom buttons, direction buttons and **Fit map**.
+- Open **Map tools** for layers, label text, landmark search, height filters and the landmark list.
+- With the map focused, use arrow keys to move, plus/minus to zoom, or F to fit.
+- Choose **Close map** or press Escape to return. Your position, zoom, layers, filters and marker stay in place.
+
+The map is redrawn at the new size rather than stretching a screenshot. All map tools continue to work offline.
+
 ## Get a newer map
 
 Open **Map downloads & manual files** for [Brewall](https://www.eqmaps.info/eq-map-files/) and [Good's Maps](https://www.redguides.com/community/resources/goods-everquest-map-pack.303/). Download and unzip the pack yourself, following its creator's guide. After updating the files, choose **Folder options → Refresh map list**. BA reads the current files and notices new layers. A failed read leaves the previous map on screen with an error message. Individual-file import is still available in the collapsed manual section. The map pages also appear in optional source checks; a page change does not install maps or change class scores.
@@ -28,10 +40,10 @@ The Windows app remembers your folder and last successfully opened map. Browser 
 
 ## For maintainers
 
-Source names, links and Good's short label key live in `data/map-sources.json`. `lib/eq-map.ts` reads standard `L` line and `P` label records with finite bounded coordinates, RGB colors and layer numbers. `components/MapLibrary.tsx` renders them on a local canvas and provides an accessible landmark list. `LocalMapContext` connects zone and trip actions without changing the larger site's existing guide navigation.
+Source names, links and Good's short label key live in `data/map-sources.json`. `lib/eq-map.ts` reads standard `L` line and `P` label records with finite bounded coordinates, RGB colors and layer numbers. `components/ExpandedMap.tsx` provides the modal/fullscreen shell and embedded controls. `lib/map-view.ts` keeps wheel zoom anchored to the pointer. The desktop permission rule allows fullscreen only for the trusted main app document. `components/MapLibrary.tsx` renders them on a local canvas and provides an accessible landmark list. `LocalMapContext` connects zone and trip actions without changing the larger site's existing guide navigation.
 
 `desktop/map-library.cjs` discovers map folders, returns opaque selection IDs, bounds reads and saves choices in the app's user-data directory. Trusted main-window handlers expose it through the isolated preload; the overlay has no map-file bridge. `lib/map-library.ts` groups browser directory selections lazily. `components/MapFolderPicker.tsx` handles searches and remembers only successful imports. Edit `data/map-zone-names.json` to add names/aliases, then rebuild. Preserve exact matching and never infer mechanics from filenames.
 
-Run `npm run test:map-folder-ui` after building to verify discovery, saved choices, search, updates, browser folder access and responsive layouts. Fixtures contain invented maps only.
+Run `npm run test:expanded-map-ui` and `npm run test:map-folder-ui` after building to verify discovery, saved choices, search, updates, browser folder access and responsive layouts. Fixtures contain invented maps only.
 
 Map-file X/Y coordinates are used directly for the drawing. For a game `/loc` tuple (north, west, height), the marker uses X = -west, Y = -north, Z = height. Reference formats were checked against public Good's map records; test fixtures are original invented maps. New formats must add parser and interface tests before release.

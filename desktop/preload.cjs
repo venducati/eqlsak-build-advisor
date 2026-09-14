@@ -17,7 +17,7 @@ contextBridge.exposeInMainWorld('eqlOverlay',{
  onOpenControls:callback=>listen('overlay:open-controls',callback),
 });
 contextBridge.exposeInMainWorld('eqlDesktop',{
-  version:'1.6.7',
+  version:'1.6.8',
   getSourceHistory:()=>ipcRenderer.invoke('advisor:history'),
   checkSources:(classes)=>ipcRenderer.invoke('advisor:check-sources',classes),
   getRuleUpdate:(url,expectedHash)=>ipcRenderer.invoke('advisor:rule-update',url,expectedHash),

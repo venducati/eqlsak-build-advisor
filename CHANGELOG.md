@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.6.8 — 2026-09-13
+
+- Click a loaded map or use Expand map to open a full-screen view with zoom, direction, Fit map and Close controls inside the map.
+- Add pointer-centered wheel zoom, click/drag separation, keyboard controls and a collapsible tools panel for layers, labels, landmarks and height filters.
+- Preserve the map position, zoom, filters and marker across expansion and closing. Support Escape, focus return, background scroll locking, native fullscreen exit and a window-filling fallback.
+- Redraw the map at the current display size. Keep fullscreen permission limited to the trusted local main app document; other permissions stay denied.
+
+
 ## 1.6.7 — 2026-09-13
 
 - Find installed EQL map folders automatically in the Windows app, preferring Brewall. Remember the folder and last successfully opened map.

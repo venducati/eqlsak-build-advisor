@@ -10,6 +10,7 @@ const {LogDiscovery}=require('./log-discovery.cjs');
 const {readRecentLog}=require('./log-history.cjs');
 const {createOverlay}=require('./overlay.cjs');
 const {MapLibrary}=require('./map-library.cjs');
+const {allowAppFullscreen}=require('./permissions.cjs');
 const {basename,extname}=require('node:path');
 const manifest=require('./source-manifest.json');
 const entry=pathToFileURL(join(__dirname,'ui','index.html')).href;
@@ -117,8 +118,8 @@ ipcMain.handle('advisor:rule-update',async(event,url,expectedHash)=>{
   return {payload,hash,url:downloaded.url,hashVerified:Boolean(expectedHash)};
 });
 app.whenReady().then(async()=>{
-  session.defaultSession.setPermissionRequestHandler((_wc,_permission,callback)=>callback(false));
-  session.defaultSession.setPermissionCheckHandler(()=>false);
+  session.defaultSession.setPermissionRequestHandler((contents,permission,callback,details)=>callback(allowAppFullscreen(window,entry,contents,permission,details)));
+  session.defaultSession.setPermissionCheckHandler((contents,permission,_origin,details)=>allowAppFullscreen(window,entry,contents,permission,details));
   // The renderer only needs local assets. Explicit update downloads use the main process.
   session.defaultSession.webRequest.onBeforeRequest({urls:['http://*/*','https://*/*']},(_details,callback)=>callback({cancel:true}));
   window=new BrowserWindow({width:1320,height:940,minWidth:760,minHeight:600,show:!smoke,backgroundColor:'#120f0c',title:'EQLSaK Build Advisor',icon:join(__dirname,'assets','advisor.ico'),autoHideMenuBar:true,webPreferences:{preload:join(__dirname,'preload.cjs'),contextIsolation:true,nodeIntegration:false,sandbox:true,webSecurity:true}});

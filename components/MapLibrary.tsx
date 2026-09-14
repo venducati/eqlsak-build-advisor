@@ -1,10 +1,12 @@
-import {useEffect,useMemo,useRef,useState} from 'react';
-import {Map,ExternalLink,FolderOpen,Layers,ZoomIn,ZoomOut,LocateFixed,Trash2,MapPin,Search,ArrowUp,ArrowDown,ArrowLeft,ArrowRight} from 'lucide-react';
+import {useEffect,useMemo,useRef,useState,type RefObject} from 'react';
+import {Map,ExternalLink,FolderOpen,Layers,ZoomIn,ZoomOut,LocateFixed,Trash2,MapPin,Search,ArrowUp,ArrowDown,ArrowLeft,ArrowRight,Maximize} from 'lucide-react';
 import sources from '../data/map-sources.json';
 import {mapBounds,parseMapFile,parseLocation,validateMapSelection,MAP_RECORDS,type MapLayer,type MapPoint} from '../lib/eq-map';
 import {zoneGuideURL} from '../lib/zone-navigation';
 import MapFolderPicker from './MapFolderPicker';
 import {mapLocationName,matchMapLocation,type MapContents} from '../lib/map-library';
+import ExpandedMap from './ExpandedMap';
+import {clampMapZoom,zoomMapAt} from '../lib/map-view';
 import '../app/map-library.css';
 
 export default function MapLibrary({zone,active,requestKey=0}:{zone:string;active:boolean;requestKey?:number}) {
@@ -12,16 +14,53 @@ export default function MapLibrary({zone,active,requestKey=0}:{zone:string;activ
   const [visible,setVisible]=useState<number[]>([0,1,2,3]),[query,setQuery]=useState(''),[showLabels,setShowLabels]=useState(true);
   const [floor,setFloor]=useState(''),[band,setBand]=useState('30'),[location,setLocation]=useState(''),[pin,setPin]=useState<MapPoint|null>(null);
   const [message,setMessage]=useState(''),[busy,setBusy]=useState(false),[zoom,setZoom]=useState(1),[center,setCenter]=useState({x:0,y:0});
-  const [size,setSize]=useState({width:800,height:480});
-  const canvas=useRef<HTMLCanvasElement>(null),picker=useRef<HTMLInputElement>(null),drag=useRef<{x:number;y:number;origin:{x:number;y:number}}|null>(null),generation=useRef(0);
+  const [size,setSize]=useState({width:800,height:480}),[expanded,setExpanded]=useState(false);
+  const dialog=useRef<HTMLDialogElement>(null),surface=useRef<HTMLDivElement>(null),inlineCanvas=useRef<HTMLCanvasElement>(null),fullCanvas=useRef<HTMLCanvasElement>(null),opener=useRef<HTMLElement|null>(null),expandSession=useRef(0);
+  const canvas=expanded?fullCanvas:inlineCanvas;
+  const picker=useRef<HTMLInputElement>(null),drag=useRef<{x:number;y:number;origin:{x:number;y:number};moved:boolean}|null>(null),generation=useRef(0);
+  const didDrag=useRef(false),screenOwned=useRef(false);
   const bounds=useMemo(()=>mapBounds(layers),[layers]);
-  const scale=Math.min(size.width/bounds.spanX,size.height/bounds.spanY)*zoom;
+  // At 100%, leave room around the drawing for the embedded controls.
+  const drawingWidth=Math.max(100,size.width-(expanded?40:0));
+  const drawingHeight=Math.max(100,size.height-(expanded?(size.height<550?180:260):0));
+  const scale=Math.min(drawingWidth/bounds.spanX,drawingHeight/bounds.spanY)*zoom;
   const z= floor.trim()===''?null:Number(floor),thickness=Number(band);
   const validFloor=z===null||Number.isFinite(z)&&Math.abs(z)<=1e7&&Number.isFinite(thickness)&&thickness>0;
   const selected=useMemo(()=>layers.filter(l=>visible.includes(l.layer)),[layers,visible]);
   const labels=useMemo(()=>selected.flatMap(l=>l.labels).filter(p=>(z===null||!validFloor||Math.abs(p.z-z)<=thickness)&&p.text.toLowerCase().includes(query.trim().toLowerCase())),[selected,z,validFloor,thickness,query]);
   const credit=sources.sources.find(s=>s.id===loadedProvider);
-  useEffect(()=>{if(!active||!canvas.current)return;const el=canvas.current;const measure=()=>setSize({width:el.clientWidth,height:el.clientHeight});const observer=new ResizeObserver(measure);observer.observe(el);measure();window.addEventListener('resize',measure);return()=>{observer.disconnect();window.removeEventListener('resize',measure);};},[active,layers.length]);
+  const view=useRef({zoom,center,scale});view.current={zoom,center,scale};
+  function closeExpanded(){
+    expandSession.current++;screenOwned.current=false;setExpanded(false);drag.current=null;
+    if(dialog.current?.open)dialog.current.close();
+    const target=opener.current,restore=()=>{if(!dialog.current?.open&&target?.isConnected)target.focus({preventScroll:true});};
+    if(surface.current&&document.fullscreenElement===surface.current)void document.exitFullscreen().catch(()=>{}).then(restore);
+    else restore();
+  }
+  function openExpanded(){
+    if(!active||!layers.length||dialog.current?.open)return;
+    opener.current=document.activeElement instanceof HTMLElement?document.activeElement:inlineCanvas.current;
+    dialog.current?.showModal();setExpanded(true);drag.current=null;const ticket=++expandSession.current,element=surface.current;
+    if(!document.fullscreenElement&&element?.requestFullscreen){screenOwned.current=true;void element.requestFullscreen().then(()=>{
+      if(ticket!==expandSession.current&&document.fullscreenElement===element)void document.exitFullscreen().catch(()=>{});
+      else if(ticket===expandSession.current&&dialog.current?.open)element.querySelector<HTMLButtonElement>('.map-expanded-close')?.focus({preventScroll:true});
+    }).catch(()=>{if(ticket===expandSession.current)screenOwned.current=false;/* The dialog still fills the app window if full screen is unavailable. */});}
+  }
+  useEffect(()=>{if(!active&&expanded)closeExpanded();},[active,expanded]);
+  useEffect(()=>{const modal=dialog.current,element=surface.current;return()=>{expandSession.current++;modal?.close();if(element&&document.fullscreenElement===element)void document.exitFullscreen().catch(()=>{});};},[]);
+  useEffect(()=>{
+    if(!active||!canvas.current)return;const el=canvas.current;
+    const wheel=(event:WheelEvent)=>{if(event.ctrlKey||event.metaKey||!event.deltaY)return;event.preventDefault();const box=el.getBoundingClientRect(),next=zoomMapAt(view.current,Math.exp(-Math.max(-100,Math.min(100,event.deltaY))*.004),{x:event.clientX-box.left-box.width/2,y:event.clientY-box.top-box.height/2});view.current={...next,scale:view.current.scale*next.zoom/view.current.zoom};setZoom(next.zoom);setCenter(next.center);};
+    el.addEventListener('wheel',wheel,{passive:false});return()=>el.removeEventListener('wheel',wheel);
+  },[active,expanded,layers.length]);
+  useEffect(()=>{
+    if(!active||!canvas.current)return;const el=canvas.current;
+    const measure=()=>setSize({width:el.clientWidth,height:el.clientHeight});
+    const observer=new ResizeObserver(measure);observer.observe(el);measure();
+    // Measure again after dialog cleanup restores page scrollbars.
+    const settled=setTimeout(measure,0);window.addEventListener('resize',measure);
+    return()=>{clearTimeout(settled);observer.disconnect();window.removeEventListener('resize',measure);};
+  },[active,expanded,layers.length]);
   useEffect(()=>{
     if(!active||!canvas.current||!size.width)return;
     const el=canvas.current,dpr=Math.min(2,window.devicePixelRatio||1);el.width=Math.round(size.width*dpr);el.height=Math.round(size.height*dpr);
@@ -31,7 +70,7 @@ export default function MapLibrary({zone,active,requestKey=0}:{zone:string;activ
     for(const layer of selected)for(const line of layer.lines){if(validFloor&&z!==null&&(Math.max(line.a.z,line.b.z)<z-thickness||Math.min(line.a.z,line.b.z)>z+thickness))continue;const a=xy(line.a),b=xy(line.b);ctx.strokeStyle=line.color;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}
     for(const p of labels){const pt=xy(p);if(pt.x<0||pt.y<0||pt.x>size.width||pt.y>size.height)continue;ctx.fillStyle=p.color;ctx.beginPath();ctx.arc(pt.x,pt.y,3,0,Math.PI*2);ctx.fill();if(showLabels){ctx.font=(9+p.size*2)+'px system-ui';ctx.lineWidth=3;ctx.strokeStyle='#fff6df';ctx.strokeText(p.text,pt.x+7,pt.y-5);ctx.fillText(p.text,pt.x+7,pt.y-5);}}
     if(pin){const p=xy(pin);ctx.strokeStyle='#8e254a';ctx.lineWidth=2;ctx.beginPath();ctx.arc(p.x,p.y,9,0,Math.PI*2);ctx.moveTo(p.x-14,p.y);ctx.lineTo(p.x+14,p.y);ctx.moveTo(p.x,p.y-14);ctx.lineTo(p.x,p.y+14);ctx.stroke();}
-  },[active,size,center,scale,selected,labels,showLabels,z,validFloor,thickness,pin]);
+  },[active,expanded,size,center,scale,selected,labels,showLabels,z,validFloor,thickness,pin]);
   function reset(){setCenter({x:bounds.x,y:bounds.y});setZoom(1);}
   function applyFiles(contents:MapContents){
     validateMapSelection(contents.files.map(f=>({name:f.name,size:new TextEncoder().encode(f.text).length})));
@@ -51,6 +90,17 @@ export default function MapLibrary({zone,active,requestKey=0}:{zone:string;activ
   }
   function mark(){const p=parseLocation(location);if(!p){setMessage('Enter three numbers from /loc: north, west, height. Example: 100, -200, 10');return;}setPin(p);setCenter(p);setMessage('Your typed location is marked. It stays here until you enter another location.');}
   const pan=(dx:number,dy:number)=>setCenter(c=>({x:c.x+dx*100/scale,y:c.y+dy*100/scale}));
+
+  function layerControls(){return (<fieldset className="map-layer-controls"><legend><Layers aria-hidden="true"/> Layers</legend>{layers.map(layer=><label key={layer.layer}><input type="checkbox" checked={visible.includes(layer.layer)} onChange={e=>setVisible(v=>e.target.checked?[...v,layer.layer]:v.filter(n=>n!==layer.layer))}/>{layer.layer===0?'Base':'Layer '+layer.layer}<small>{layer.lines.length} lines · {layer.labels.length} labels</small></label>)}</fieldset>);}
+  function mapFilters(){return <><div className="map-filter-grid"><label><Search aria-hidden="true"/> Find a landmark<input value={query} maxLength={120} onChange={e=>setQuery(e.target.value)} placeholder="Merchant, zone exit, named…"/></label><label>Height (Z), optional<input type="number" value={floor} onChange={e=>setFloor(e.target.value)} placeholder="All heights"/></label><label>Height range ±<input type="number" min="1" max="100000" value={band} onChange={e=>setBand(e.target.value)}/></label></div>
+      {!validFloor&&<p role="status">Enter a valid height and a range above zero. Showing all heights for now.</p>}</>;}
+  function landmarkList(){return (<details className="map-landmarks" open={Boolean(query)}><summary>{labels.length} matching landmarks · choose one to center the map</summary><ul>{labels.slice(0,100).map((label,i)=><li key={i}><button onClick={()=>{setCenter(label);setPin(label);setZoom(v=>Math.max(3,v));}}>{label.text}<small>Map X {label.x.toFixed(1)} · Y {label.y.toFixed(1)} · Height {label.z.toFixed(1)}</small></button></li>)}</ul>{labels.length>100&&<p>Showing the first 100. Search above to narrow the list.</p>}{!labels.length&&<p>No labels match your search, layers and height.</p>}</details>);}
+  function mapCanvas(ref:RefObject<HTMLCanvasElement|null>,full=false){return <canvas ref={ref} tabIndex={0} aria-haspopup={full?undefined:'dialog'} aria-label={full?'Expanded map. Drag or use arrow keys to move. Scroll or use plus and minus to zoom. F fits the map.':'Local map. Click or press Enter to expand. Drag to pan or use arrow keys.'}
+    onPointerDown={e=>{if(e.button!==0||!e.isPrimary)return;e.currentTarget.focus({preventScroll:true});e.currentTarget.setPointerCapture(e.pointerId);didDrag.current=false;drag.current={x:e.clientX,y:e.clientY,origin:center,moved:false};}}
+    onPointerMove={e=>{const start=drag.current;if(!start)return;if(Math.hypot(e.clientX-start.x,e.clientY-start.y)>5)start.moved=true;if(start.moved){didDrag.current=true;setCenter({x:start.origin.x-(e.clientX-start.x)/scale,y:start.origin.y-(e.clientY-start.y)/scale});}}}
+    onPointerUp={()=>{drag.current=null;}} onPointerCancel={()=>{didDrag.current=true;drag.current=null;}} onLostPointerCapture={()=>{drag.current=null;}}
+    onClick={()=>{if(!full&&!didDrag.current)openExpanded();}}
+    onKeyDown={e=>{const d:Record<string,[number,number]>={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]};if(d[e.key]){e.preventDefault();pan(...d[e.key]);}else if(e.key==='+'||e.key==='='){e.preventDefault();setZoom(v=>clampMapZoom(v*1.4));}else if(e.key==='-'){e.preventDefault();setZoom(v=>clampMapZoom(v/1.4));}else if(e.key.toLowerCase()==='f'){e.preventDefault();reset();}else if(!full&&(e.key==='Enter'||e.key===' ')){e.preventDefault();openExpanded();}}}/>;}
   return <section className="map-library" aria-label="Maps and routes">
     <header className="map-heading"><Map aria-hidden="true"/><div><h2>Maps &amp; Routes</h2><p>Choose a location. Its map and layers open together.</p></div></header>
     <MapFolderPicker zone={zone} active={active} requestKey={requestKey} loadedStem={layers[0]?.stem||''} busy={busy} onBusy={setBusy} onLoad={applyFiles}/>
@@ -59,17 +109,17 @@ export default function MapLibrary({zone,active,requestKey=0}:{zone:string;activ
     {layers.length>0?<>
       <div className="map-loaded"><strong>{mapLocationName(layers[0].stem)}</strong><span>{credit?.name||'Your chosen map'} · {layers[0].stem}</span><small>EverQuest community map · EQL layout not verified. {credit?'By '+credit.creator+'.':'Check the creator’s terms before sharing.'}</small></div>
       {zone&&!matchMapLocation([{id:'loaded',stem:layers[0].stem,fileCount:layers.length}],zone)&&<p className="map-reference-note">The map shown is <strong>{mapLocationName(layers[0].stem)}</strong>. Your planning zone is {zone}. Choose another location above if needed.</p>}
-      <fieldset className="map-layer-controls"><legend><Layers aria-hidden="true"/> Layers</legend>{layers.map(layer=><label key={layer.layer}><input type="checkbox" checked={visible.includes(layer.layer)} onChange={e=>setVisible(v=>e.target.checked?[...v,layer.layer]:v.filter(n=>n!==layer.layer))}/>{layer.layer===0?'Base':'Layer '+layer.layer}<small>{layer.lines.length} lines · {layer.labels.length} labels</small></label>)}</fieldset>
-      <div className="map-filter-grid"><label><Search aria-hidden="true"/> Find a landmark<input value={query} maxLength={120} onChange={e=>setQuery(e.target.value)} placeholder="Merchant, zone exit, named…"/></label><label>Height (Z), optional<input type="number" value={floor} onChange={e=>setFloor(e.target.value)} placeholder="All heights"/></label><label>Height range ±<input type="number" min="1" max="100000" value={band} onChange={e=>setBand(e.target.value)}/></label></div>
-      {!validFloor&&<p role="status">Enter a valid height and a range above zero. Showing all heights for now.</p>}
+      {layerControls()}
+      {mapFilters()}
       <div className="map-tools"><button onClick={()=>setZoom(v=>Math.min(32,v*1.4))} disabled={zoom>=32}><ZoomIn/> Zoom in</button><button onClick={()=>setZoom(v=>Math.max(.25,v/1.4))} disabled={zoom<=.25}><ZoomOut/> Zoom out</button><button onClick={reset}><LocateFixed/> Fit map</button><label><input type="checkbox" checked={showLabels} onChange={e=>setShowLabels(e.target.checked)}/> Show label text</label></div>
-      <div className="map-view"><canvas ref={canvas} tabIndex={0} aria-label="Local map. Drag to pan or use arrow keys. Use the landmark list below for map labels." onPointerDown={e=>{if(e.button!==0)return;e.currentTarget.setPointerCapture(e.pointerId);drag.current={x:e.clientX,y:e.clientY,origin:center};}} onPointerMove={e=>{if(drag.current)setCenter({x:drag.current.origin.x-(e.clientX-drag.current.x)/scale,y:drag.current.origin.y-(e.clientY-drag.current.y)/scale});}} onPointerUp={()=>{drag.current=null;}} onPointerCancel={()=>{drag.current=null;}} onKeyDown={e=>{const d:Record<string,[number,number]>={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]};if(d[e.key]){e.preventDefault();pan(...d[e.key]);}}}/><span className="map-north">N ↑</span></div>
+      <div className="map-view">{mapCanvas(inlineCanvas)}<span className="map-north">N ↑</span><button className="map-expand-button" onClick={openExpanded} aria-haspopup="dialog"><Maximize aria-hidden="true"/> Expand map</button><span className="map-expand-hint">Click map to expand · Drag to move</span></div>
       <div className="map-pan"><span>Move map view</span><button aria-label="Move view west" onClick={()=>pan(-1,0)}><ArrowLeft/></button><button aria-label="Move view north" onClick={()=>pan(0,-1)}><ArrowUp/></button><button aria-label="Move view south" onClick={()=>pan(0,1)}><ArrowDown/></button><button aria-label="Move view east" onClick={()=>pan(1,0)}><ArrowRight/></button><span>{Math.round(zoom*100)}% · Drag map to move</span></div>
       <div className="map-location"><label>Mark a location from /loc<input value={location} maxLength={160} onChange={e=>setLocation(e.target.value)} placeholder="north, west, height"/></label><button onClick={mark}><MapPin/> Mark location</button>{pin&&<button onClick={()=>setPin(null)}>Clear location</button>}<small>This is a typed marker, not live player tracking.</small></div>
-      <details className="map-landmarks" open={Boolean(query)}><summary>{labels.length} matching landmarks · choose one to center the map</summary><ul>{labels.slice(0,100).map((label,i)=><li key={i}><button onClick={()=>{setCenter(label);setPin(label);setZoom(v=>Math.max(3,v));}}>{label.text}<small>Map X {label.x.toFixed(1)} · Y {label.y.toFixed(1)} · Height {label.z.toFixed(1)}</small></button></li>)}</ul>{labels.length>100&&<p>Showing the first 100. Search above to narrow the list.</p>}{!labels.length&&<p>No labels match your search, layers and height.</p>}</details>
+      {landmarkList()}
       {loadedProvider==='good'&&<details className="map-key"><summary>Good’s map label key</summary><dl>{sources.goodLabelKey.map(k=><div key={k.code}><dt>({k.code})</dt><dd>{k.meaning}</dd></div>)}</dl><p>Layer contents and colors depend on the map. See the creator’s guide for details.</p></details>}
       <button disabled={busy} className="map-clear" onClick={()=>{generation.current++;setLayers([]);setPin(null);setMessage('Map cleared from this view. Your original files are unchanged.');}}><Trash2/> Clear map from BA</button>
     </>:<div className="map-empty"><Map aria-hidden="true"/><h3>Your local map appears here</h3><p>Choose a dungeon or zone above to see its paths and landmarks.</p></div>}
+    <ExpandedMap dialog={dialog} surface={surface} screenOwned={screenOwned} open={expanded} name={layers.length?mapLocationName(layers[0].stem):'Local map'} credit={credit?.name||'Your local map'} zoom={zoom} onClose={closeExpanded} onZoom={factor=>setZoom(v=>clampMapZoom(v*factor))} onPan={pan} onFit={reset} tools={<>{layerControls()}<label className="map-expanded-labels"><input type="checkbox" checked={showLabels} onChange={e=>setShowLabels(e.target.checked)}/> Show label text</label>{mapFilters()}{landmarkList()}</>}><div className="map-view map-expanded-canvas">{mapCanvas(fullCanvas,true)}</div></ExpandedMap>
     <details className="map-setup"><summary>Map downloads &amp; manual files</summary>
       <div className="map-source-grid">{sources.sources.map(source=><article key={source.id}><h3>{source.name}</h3><p>{source.summary}</p><small>By {source.creator}</small><a href={source.url} target="_blank" rel="noopener noreferrer"><ExternalLink aria-hidden="true"/> Downloads &amp; latest changes</a>{source.worldUrl&&<a href={source.worldUrl} target="_blank" rel="noopener noreferrer"><Map aria-hidden="true"/> World connections map</a>}</article>)}</div>
       <p className="map-reference-note"><strong>EverQuest community reference · EQL not verified</strong><br/>{sources.compatibility}</p>
