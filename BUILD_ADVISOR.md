@@ -31,6 +31,12 @@ Ratings are relative 0–5 planning judgments, not measured damage, spell potenc
 
 The seeded Ranger/Rogue defaults favor Bard overall, Enchanter for CC, Shaman for sustained named hunting and Druid for travel. These are **heuristic choices**, not universal community consensus. The requested MCE ↔ Ranger/Rogue/Bard and Monk/Cleric/Rogue ↔ Warrior/Cleric/Enchanter pairings are likewise explicit, editable heuristic bonuses.
 
+## Race & trio fit
+
+`data/race-advisor.json` contains the 15 playable races confirmed for EQL launch. Each record has an icon, start region, short strengths and tradeoffs, six planning values (`frontline`, `melee`, `caster`, `travel`, `faction`, and `utility`), and a provenance label. The local race engine combines the chosen trio's broad roles with the user's goal, solo setting, and mobility need. It ranks all races and explains the result in plain language.
+
+The values are planning aids. They do not replace the game’s character-creation rules, do not claim a primary class is legal for a race, and do not change the existing class recommendation score. Keep a source label on every edited record. Use `heuristic/inference` whenever a value is your comparison rather than a confirmed EQL rule.
+
 ## Zone scoring and limitations
 
 Zone scoring is separate from class ranking so unrelated loot or travel preferences do not masquerade as class damage.
@@ -46,6 +52,7 @@ At levels below the configured tertiary unlock level, third-class advice is mark
 - `lib/build-advisor.ts`: pure engine, input/rule validation, deterministic ranking.
 - `data/build-advisor.json`: classes, relative ratings, weights, synergy/companion rules, aliases, zones.
 - `data/build-evidence.json`: reviewed summaries, class tags, source links, opinion/accepted/excluded status, review dates.
+- `data/race-advisor.json`, `lib/race-advisor.ts`, `components/RaceAdvisor.tsx`: editable 15-race roster, local score engine, and race explanation panel.
 - `components/BuildAdvisor.tsx`: full explanation UI, shared settings, local rule import/export and contextual cards.
 - `app/build-advisor.css`: responsive fantasy-themed layout and labeled class/role icons.
 - `scripts/test-build-advisor.mjs`: engine regressions and all 560 trio checks.

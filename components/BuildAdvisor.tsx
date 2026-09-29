@@ -10,6 +10,7 @@ import AdvisorZonePicker from './AdvisorZonePicker';
 import ZoneFactionAdvisor from './ZoneFactionAdvisor';
 import BuildWorkbench from './BuildWorkbench';
 import ZoneGuideLink from './ZoneGuideLink';
+import RaceAdvisor from './RaceAdvisor';
 import { PartyEditor, PartyZoneChart } from './PartyAdvisor';
 import { allZones } from '../lib/zone-catalog';
 import {
@@ -548,6 +549,13 @@ export default function BuildAdvisor({
                 ))}
               </select>
             </label>
+            <label>
+              Race for this loadout
+              <select value={input.race || ''} onChange={(e) => change('race', e.target.value)}>
+                <option value="">Choose in Race & trio fit</option>
+                <option value="human">Human</option><option value="barbarian">Barbarian</option><option value="erudite">Erudite</option><option value="halfling">Halfling</option><option value="gnome">Gnome</option><option value="dwarf">Dwarf</option><option value="high-elf">High Elf</option><option value="wood-elf">Wood Elf</option><option value="half-elf">Half Elf</option><option value="dark-elf">Dark Elf</option><option value="troll">Troll</option><option value="ogre">Ogre</option><option value="kerran">Kerran</option><option value="iksar">Iksar</option><option value="froglok">Froglok</option>
+              </select>
+            </label>
           </div>
           {(['mobility', 'healing', 'control', 'complexity'] as const).map(
             (key) => (
@@ -714,6 +722,7 @@ export default function BuildAdvisor({
             ) : (
               <>
                 <BuildWorkbench input={input} pack={pack} onLoad={setInput} />
+                <RaceAdvisor input={input} pack={pack} onChoose={(race) => change('race', race)} />
                 {assessment && (
                   <article className="ba-assessment">
                     <small>

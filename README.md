@@ -4,12 +4,12 @@
 
 > **No ChatGPT account or subscription needed.** Download BA and run it on your own computer. EQLSaK is an independent fan project, not affiliated with, sponsored by, or endorsed by OpenAI or ChatGPT. The optional companion website uses ChatGPT Sites hosting; hosting does not imply endorsement.
 
-[Download version 1.6.8 for Windows](https://github.com/venducati/eqlsak-build-advisor/releases/tag/v1.6.8) · [Report a problem or suggest an idea](https://github.com/venducati/eqlsak-build-advisor/issues) · [How to contribute](CONTRIBUTING.md)
+[Download version 1.6.9 for Windows](https://github.com/venducati/eqlsak-build-advisor/releases/tag/v1.6.9) · [Report a problem or suggest an idea](https://github.com/venducati/eqlsak-build-advisor/issues) · [How to contribute](CONTRIBUTING.md)
 
 ## Download and start
 
 1. Open the release page above.
-2. Under **Assets**, download **EQLSaK-Build-Advisor-1.6.8-Setup.exe**.
+2. Under **Assets**, download **EQLSaK-Build-Advisor-1.6.9-Setup.exe**.
 3. Run it on 64-bit Windows and follow the setup steps.
 
 This is a **community preview**. The installer is **unsigned**, so Windows may show Unknown Publisher or a SmartScreen warning. It has not been tested on a fresh Windows installation. Read [the installation guide](DESKTOP_ADVISOR.md) and [the checks and limits](RELEASE_CHECKS.md).
@@ -31,6 +31,7 @@ The host's sign-in screen is managed by OpenAI. The independent project notice o
 ## What it does
 
 - Enter two or three classes and your goals. Rank third-class options and open a **See why** report with bullets, tradeoffs, sources, and a text download.
+- Pick any of the 15 EQL launch races in **Race & trio fit**. The Advisor ranks each race against your trio and goal, explains strengths and tradeoffs, and shows the start region and source label. The editable roster is `data/race-advisor.json`.
 - Compare up to four players, each with their own trio. See party strengths and gaps.
 - Search zones, check hunt fit, follow links to the companion's zone guides, and track faction points you enter or import.
 - Save and share builds as local files.
@@ -79,7 +80,7 @@ The Windows **Combat Meter → Game overlay** keeps log stats above windowed or 
 
 For sound controls and the editable local cue definitions, see [Interface sounds](INTERFACE_SOUNDS.md).
 
-Start with [BUILD_ADVISOR.md](BUILD_ADVISOR.md). Class ratings, weights, synergy rules, source evidence, zones, faction plans and trip strategies live in `data/`. Preserve the distinction between **User-verified EQL**, **EQL-sourced**, and **heuristic/inference**. A changed webpage is a reason to review a rule; it does not update the score automatically.
+Start with [BUILD_ADVISOR.md](BUILD_ADVISOR.md). Class ratings, race profiles, weights, synergy rules, source evidence, zones, faction plans and trip strategies live in `data/`. Preserve the distinction between **User-verified EQL**, **EQL-sourced**, and **heuristic/inference**. A changed webpage is a reason to review a rule; it does not update the score automatically.
 
 ## Forks and the audit trail
 

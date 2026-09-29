@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { readFileSync } from 'node:fs';
 import { defaultRules as pack, defaultInput as input, recommend, validateRulePack, validateInput, parseBuild, companionMatches, assessBuild } from '../lib/build-advisor.ts';
+import { defaultRaceRules, recommendRaces } from '../lib/race-advisor.ts';
 const clone=()=>structuredClone(pack);
 test('seed rules validate and all classes have two-site references and community coverage',()=>{
  validateRulePack(pack);
@@ -97,4 +98,12 @@ test('excluded evidence never contributes score points and inputs are not mutate
 });
 test('engine and advisor perform no network inference calls',()=>{
  for(const file of ['lib/build-advisor.ts','components/BuildAdvisor.tsx']) assert(!/\bfetch\s*\(|XMLHttpRequest|WebSocket|api\.openai/.test(readFileSync(file,'utf8')));
+});
+test('all fifteen launch races have an offline, explainable trio fit',()=>{
+ assert.equal(defaultRaceRules.races.length,15);
+ assert.equal(new Set(defaultRaceRules.races.map(r=>r.id)).size,15);
+ const ranks=recommendRaces({...input,tertiary:'BRD'},pack);
+ assert.equal(ranks.length,15);
+ assert(ranks.every(r=>Number.isFinite(r.score)&&r.reasons.length&&r.tradeoffs.length&&r.race.provenance.label));
+ assert.deepEqual(ranks,recommendRaces({...input,tertiary:'BRD'},pack));
 });

@@ -6,6 +6,8 @@ export type Ratings = Record<string, number>;
 export type SourceEvidence = { id:string; classes:string[]; kind:string; status:'accepted'|'opinion'|'excluded'; summary:string; limitation:string; reviewedOn:string; provenance:Provenance; links:{title:string;url:string}[] };
 export type AdvisorInput = {
   primary: string; secondary: string; tertiary: string; level: number | null;
+  /** Optional race. Race advice is local and does not alter the class engine. */
+  race?: string;
   mode: 'solo' | 'duo' | 'group'; role: string; zone: string; continent: string;
   factionConstraints: string[]; gearGoals: string[];
   mobility: number; healing: number; control: number; complexity: number; buddy: string[];
@@ -26,7 +28,7 @@ export type RulePack = {
   zoneScoring: Record<string,number>; zones: Zone[];
 };
 export const defaultRules = { ...seed, evidence: evidenceSeed } as RulePack;
-export const defaultInput: AdvisorInput = { primary:'RNG', secondary:'ROG', tertiary:'', level:null, mode:'solo', role:'overall', zone:'', continent:'', factionConstraints:[], gearGoals:[], mobility:0, healing:0, control:0, complexity:3, buddy:[] };
+export const defaultInput: AdvisorInput = { primary:'RNG', secondary:'ROG', tertiary:'', race:'', level:null, mode:'solo', role:'overall', zone:'', continent:'', factionConstraints:[], gearGoals:[], mobility:0, healing:0, control:0, complexity:3, buddy:[] };
 export const classIcons: Record<string,string> = { WAR:'🛡️', CLR:'✨', PAL:'⚜️', RNG:'🏹', SHD:'🌑', DRU:'🌿', MNK:'🥋', BRD:'🎵', ROG:'🗡️', SHM:'🐺', NEC:'💀', WIZ:'🔥', MAG:'🔥', ENC:'🔮', BST:'🐾', BER:'🪓' };
 export type Evidence = { label: string; points: number; why: string; provenance: Provenance };
 const heuristic: Provenance = { label:'heuristic/inference', reference:'Saved rules and point values help compare builds. This score does not simulate a fight.' };

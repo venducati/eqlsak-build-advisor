@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.6.9 — 2026-09-29
+
+- Add Race & trio fit: a local, explainable comparison for all 15 EQL launch races.
+- Show race strengths, tradeoffs, start region, icons, and source labels alongside any selected trio.
+- Store the editable race roster separately in `data/race-advisor.json`; race advice makes no network or AI calls.
+
 ## 1.6.8 — 2026-09-13
 
 - Click a loaded map or use Expand map to open a full-screen view with zoom, direction, Fit map and Close controls inside the map.

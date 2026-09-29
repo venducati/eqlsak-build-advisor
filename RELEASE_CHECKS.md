@@ -1,10 +1,11 @@
-# Version 1.6.8 checks and limits
+# Version 1.6.9 checks and limits
 
 Checked on Windows on 2026-09-13, using Node.js 24.18.0 and Electron 44.3.0.
 
 ## Passed
 
 - Public standalone source: engine/parser/render tests, TypeScript checking, lint, and offline/desktop UI build.
+- Race & trio fit checks cover the complete 15-race launch roster, stable local rankings, non-empty reasons and tradeoffs, and source labels. No race advice uses a network request or remote model.
 - Desktop suite: 33 checks for log discovery, bounded local file reading, incomplete lines, replacement/truncation handling, URL restrictions, redirects, and source extraction.
 - Browser and desktop recent-log readers agree on a bounded 4 MB snapshot. Tests verify completed loot trips and that quoted player chat is not counted as loot.
 - Isolated interface scenario: all 14 third-class reports for the Ranger/Rogue pair, report close/save/use, entered-build validation, presets, saved-build controls, rule imports and backups, and source-update preview/apply/rollback.
