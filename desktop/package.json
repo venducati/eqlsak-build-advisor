@@ -9,6 +9,7 @@
   "scripts": {
     "start": "electron .",
     "package:win": "electron-builder --win nsis --x64 --publish never",
+    "package:store": "electron-builder --win appx --x64 --publish never",
     "test": "node --test test/*.test.cjs"
   },
   "dependencies": {
@@ -48,6 +49,17 @@
       ],
       "icon": "assets/advisor.ico",
       "signAndEditExecutable": false
+    },
+    "appx": {
+      "artifactName": "EQLSaK-Build-Advisor-${version}-Store.appx",
+      "identityName": "community.eqlsak.buildadvisor",
+      "applicationId": "EQLSaKBuildAdvisor",
+      "displayName": "EQLSaK Build Advisor",
+      "publisher": "CN=ms",
+      "publisherDisplayName": "EQLSaK Community",
+      "languages": [
+        "en-US"
+      ]
     },
     "nsis": {
       "oneClick": false,

@@ -6,6 +6,8 @@
 
 [Download version 1.6.14 for Windows](https://github.com/venducati/eqlsak-build-advisor/releases/tag/v1.6.14) · [Report a problem or suggest an idea](https://github.com/venducati/eqlsak-build-advisor/issues) · [How to contribute](CONTRIBUTING.md)
 
+The GitHub setup file is currently unsigned. A Microsoft Store package is prepared for the publisher account and certification process; see [Microsoft Store release guide](MICROSOFT_STORE_RELEASE.md).
+
 ## Download and start
 
 1. Open the release page above.
