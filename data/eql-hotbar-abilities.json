@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "provenance": {
+    "label": "heuristic/inference",
+    "reference": "Starter layout actions are planning suggestions. Check your learned abilities and their levels in the EQL Abilities window."
+  },
+  "abilities": [
+    {"name":"Backstab","class":"ROG","kind":"damage","priority":10},{"name":"Evade","class":"ROG","kind":"defense","priority":9},{"name":"Sneak / Hide","class":"ROG","kind":"utility","priority":8},{"name":"Pick Lock","class":"ROG","kind":"utility","priority":5},
+    {"name":"Feign Death","class":"MNK","kind":"defense","priority":10},{"name":"Mend","class":"MNK","kind":"heal","priority":8},{"name":"Flying Kick","class":"MNK","kind":"damage","priority":9},{"name":"Round Kick","class":"MNK","kind":"damage","priority":7},
+    {"name":"Taunt","class":"WAR","kind":"control","priority":10},{"name":"Bash","class":"WAR","kind":"control","priority":8},{"name":"Kick","class":"WAR","kind":"damage","priority":6},{"name":"Disarm","class":"WAR","kind":"utility","priority":5},
+    {"name":"Lay on Hands","class":"PAL","kind":"heal","priority":10},{"name":"Taunt","class":"PAL","kind":"control","priority":9},{"name":"Bash","class":"PAL","kind":"control","priority":8},{"name":"Kick","class":"PAL","kind":"damage","priority":6},
+    {"name":"Harm Touch","class":"SHD","kind":"damage","priority":10},{"name":"Taunt","class":"SHD","kind":"control","priority":9},{"name":"Bash","class":"SHD","kind":"control","priority":8},{"name":"Kick","class":"SHD","kind":"damage","priority":6},
+    {"name":"Kick","class":"RNG","kind":"damage","priority":7},{"name":"Tracking","class":"RNG","kind":"utility","priority":9},{"name":"Forage","class":"RNG","kind":"utility","priority":4},
+    {"name":"Frenzy","class":"BER","kind":"damage","priority":10},{"name":"Kick","class":"BER","kind":"damage","priority":7},{"name":"Taunt","class":"BER","kind":"control","priority":7},
+    {"name":"Kick","class":"BST","kind":"damage","priority":7},{"name":"Feral Swipe","class":"BST","kind":"damage","priority":8},{"name":"Pet attack / back off","class":"BST","kind":"utility","priority":9}
+  ]
+}

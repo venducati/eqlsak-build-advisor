@@ -11,8 +11,10 @@ import ZoneFactionAdvisor from './ZoneFactionAdvisor';
 import BuildWorkbench from './BuildWorkbench';
 import ZoneGuideLink from './ZoneGuideLink';
 import RaceAdvisor from './RaceAdvisor';
+import SpellHotbarPlanner from './SpellHotbarPlanner';
 import { PartyEditor, PartyZoneChart } from './PartyAdvisor';
 import { allZones } from '../lib/zone-catalog';
+import { factions } from '../lib/zone-factions';
 import {
   refreshBuiltInWording,
   roleLabels,
@@ -309,7 +311,7 @@ export default function BuildAdvisor({
   const { input, setInput, pack, setPack, storageMessage, fromProfile } = model;
   const [combo, setCombo] = useState('');
   const [reportClass, setReportClass] = useState('');
-  const [resultView, setResultView] = useState<'build' | 'factions'>('build');
+  const [resultView, setResultView] = useState<'build' | 'factions' | 'hotbars'>('build');
   const [comboError, setComboError] = useState('');
   const [ruleMessage, setRuleMessage] = useState('');
   const [buddyDraft, setBuddyDraft] = useState(input.buddy.join(' / '));
@@ -317,6 +319,7 @@ export default function BuildAdvisor({
   const [factionDraft, setFactionDraft] = useState(
     input.factionConstraints.join(', '),
   );
+  const [factionChoice, setFactionChoice] = useState('');
   useEffect(() => setBuddyDraft(input.buddy.join(' / ')), [input.buddy]);
   useEffect(() => setGearDraft(input.gearGoals.join(', ')), [input.gearGoals]);
   useEffect(
@@ -339,6 +342,27 @@ export default function BuildAdvisor({
     value: AdvisorInput[K],
   ) {
     setInput((i) => ({ ...i, [key]: value }));
+  }
+  function addFaction(name: string) {
+    const clean = name.trim();
+    if (!clean) return;
+    setInput((current) => ({
+      ...current,
+      factionConstraints: current.factionConstraints.some(
+        (item) => item.toLowerCase() === clean.toLowerCase(),
+      )
+        ? current.factionConstraints
+        : [...current.factionConstraints, clean],
+    }));
+    setFactionDraft('');
+  }
+  function removeFaction(name: string) {
+    setInput((current) => ({
+      ...current,
+      factionConstraints: current.factionConstraints.filter(
+        (item) => item !== name,
+      ),
+    }));
   }
   async function importRules(file?: File) {
     if (!file) return;
@@ -642,23 +666,50 @@ export default function BuildAdvisor({
               ))}
             </select>
           </label>
-          <label>
-            Factions to protect or avoid
-            <input
-              value={factionDraft}
-              onChange={(e) => setFactionDraft(e.target.value)}
-              onBlur={() =>
-                change(
-                  'factionConstraints',
-                  factionDraft
-                    .split(',')
-                    .map((x) => x.trim())
-                    .filter(Boolean),
-                )
-              }
-              placeholder="Faction names, separated by commas"
-            />
-          </label>
+          <section className="ba-faction-picker" aria-labelledby="protect-factions">
+            <h4 id="protect-factions"><AdvisorIcon code="faction" /> Factions to protect or avoid</h4>
+            <label>
+              Add a known EQL faction
+              <select
+                value={factionChoice}
+                onChange={(e) => {
+                  addFaction(e.target.value);
+                  setFactionChoice('');
+                }}
+              >
+                <option value="">Choose a faction</option>
+                {factions.slice().sort((a, b) => a.name.localeCompare(b.name)).map((faction) => (
+                  <option key={faction.id} value={faction.name}>{faction.name}</option>
+                ))}
+              </select>
+            </label>
+            <label>
+              Add another faction by name
+              <input
+                value={factionDraft}
+                onChange={(e) => setFactionDraft(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault();
+                    addFaction(factionDraft);
+                  }
+                }}
+                onBlur={() => addFaction(factionDraft)}
+                placeholder="Type a faction not shown above"
+              />
+            </label>
+            {input.factionConstraints.length > 0 && (
+              <div className="ba-faction-tags" aria-label="Selected factions">
+                {input.factionConstraints.map((faction) => (
+                  <span key={faction}>
+                    <AdvisorIcon code="faction" /> {faction}
+                    <button type="button" onClick={() => removeFaction(faction)} aria-label={`Remove ${faction}`}>Remove</button>
+                  </span>
+                ))}
+              </div>
+            )}
+            <p className="ba-note">Pick every faction you want the advisor to protect. You can choose more than one. A selected faction is used by zone-fit and faction-plan warnings.</p>
+          </section>
           <label>
             Gear you want to find
             <input
@@ -698,6 +749,13 @@ export default function BuildAdvisor({
             >
               <AdvisorIcon code="faction" /> Zone factions
             </button>
+            <button
+              type="button"
+              aria-pressed={resultView === 'hotbars'}
+              onClick={() => setResultView('hotbars')}
+            >
+              <AdvisorIcon code="book" /> Spell &amp; hotbars
+            </button>
           </nav>
           <div hidden={resultView !== 'factions'}>
             {!input.zone.trim() && (
@@ -710,6 +768,9 @@ export default function BuildAdvisor({
               profileName={profileName}
               protectedNames={input.factionConstraints}
             />
+          </div>
+          <div hidden={resultView !== 'hotbars'}>
+            <SpellHotbarPlanner input={input} pack={pack} />
           </div>
           <div hidden={resultView !== 'build'}>
             {result.errors.length > 0 ? (

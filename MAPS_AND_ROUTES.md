@@ -5,7 +5,7 @@ BA can display standard EverQuest text maps from your computer. The Windows app 
 1. Open **Maps & Routes**, or choose **Open local map** on a zone recommendation or trip report.
 2. The Windows app finds installed EQL Maps folders and map packs such as Brewall. If none are found, choose your game, Maps or map-pack folder once. In the browser edition, choose the whole folder once per session.
 3. Search **Dungeon or zone**, or open its drop-down list. Choose a name to open the base file and all available numbered layers together. If several packs are found, use **Map folder** to choose one.
-4. Use the layer boxes and landmark search to reduce clutter. Set a height and range to narrow the view to part of a dungeon. Drag to pan, use arrow keys or direction buttons, and choose **Fit map** to reset the view.
+4. Use the layer boxes and landmark search to reduce clutter. Choose **Wireframe view** when you want a clean, high-contrast layout of the map’s paths, layers and landmarks. Choose **3D wireframe view** to rotate those local lines through yaw and pitch. Drag to turn, **Shift-drag** to move across the map’s X/Y plane, and **Alt-drag up or down** to move through recorded Z height. Scroll to zoom and increase **Floor lift** to make recorded heights easier to separate. Choose **Use full map colors** to return to the map’s original colors. Set a height and range to narrow the view to part of a dungeon. Drag to pan, use arrow keys or direction buttons, and choose **Fit map** to reset the view.
 5. Choose a landmark in the list to center and mark it. You may also type the three numbers from `/loc` into **Mark a location**. This marker is manual; it does not follow your character.
 
 The planning zone and actual file name are shown separately. Zone and trip cards open exact matching maps using known names and aliases, including Dagnor's Cauldron, Unrest, Upper/Lower Guk and Splitpaw. Unknown files still appear by filename. Missing or ambiguous matches require a choice; BA does not guess between layouts.
@@ -16,11 +16,11 @@ Click the map, press Enter while it is focused, or choose **Expand map**. A drag
 
 - Drag to move; scroll to zoom toward the mouse pointer.
 - Use the embedded zoom buttons, direction buttons and **Fit map**.
-- Open **Map tools** for layers, label text, landmark search, height filters and the landmark list.
+- Open **Map tools** for layers, wireframe/3D view, Floor lift, label text, landmark search, height filters and the landmark list.
 - With the map focused, use arrow keys to move, plus/minus to zoom, or F to fit.
 - Choose **Close map** or press Escape to return. Your position, zoom, layers, filters and marker stay in place.
 
-The map is redrawn at the new size rather than stretching a screenshot. All map tools continue to work offline.
+The map is redrawn at the new size rather than stretching a screenshot. Wireframe and 3D wireframe views use the same local map lines, labels and recorded heights; they change only how the data is drawn. All map tools continue to work offline.
 
 ## Get a newer map
 

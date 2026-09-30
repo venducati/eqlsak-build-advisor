@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.6.14 — 2026-09-30
+
+- Add **Wireframe view** to Maps & Routes. It redraws the selected local map using a high-contrast structural palette for routes, layers and landmarks, and works in both the embedded and expanded map views.
+- Add **3D wireframe view** with pointer yaw/pitch, scroll zoom, arrow-key turning, a reset control and adjustable Floor lift for separating recorded map heights.
+- Add 3D mouse navigation across all map axes: Shift-drag slides X/Y and Alt-drag vertically moves the camera through Z height.
+- Add **Spell & hotbars**: a bundled, source-labeled 500-record EQL spell catalog with class, level, mana, timing, duration, target and type filters.
+- Add deterministic spell-bar, preparation/travel set and melee-action recommendations based on the selected trio, level, role, priorities and group mode. Keep spell facts and heuristic placement reasons clearly separate.
+
+## 1.6.10 — 2026-09-29
+
+- Add a multi-select faction picker to **Factions to protect or avoid**.
+- Show selected factions as removable tags and preserve custom faction names when the local catalog has no matching record.
+
 ## 1.6.9 — 2026-09-29
 
 - Add Race & trio fit: a local, explainable comparison for all 15 EQL launch races.

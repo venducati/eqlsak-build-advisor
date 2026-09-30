@@ -4,12 +4,12 @@
 
 > **No ChatGPT account or subscription needed.** Download BA and run it on your own computer. EQLSaK is an independent fan project, not affiliated with, sponsored by, or endorsed by OpenAI or ChatGPT. The optional companion website uses ChatGPT Sites hosting; hosting does not imply endorsement.
 
-[Download version 1.6.9 for Windows](https://github.com/venducati/eqlsak-build-advisor/releases/tag/v1.6.9) · [Report a problem or suggest an idea](https://github.com/venducati/eqlsak-build-advisor/issues) · [How to contribute](CONTRIBUTING.md)
+[Download version 1.6.14 for Windows](https://github.com/venducati/eqlsak-build-advisor/releases/tag/v1.6.14) · [Report a problem or suggest an idea](https://github.com/venducati/eqlsak-build-advisor/issues) · [How to contribute](CONTRIBUTING.md)
 
 ## Download and start
 
 1. Open the release page above.
-2. Under **Assets**, download **EQLSaK-Build-Advisor-1.6.9-Setup.exe**.
+2. Under **Assets**, download **EQLSaK-Build-Advisor-1.6.14-Setup.exe**.
 3. Run it on 64-bit Windows and follow the setup steps.
 
 This is a **community preview**. The installer is **unsigned**, so Windows may show Unknown Publisher or a SmartScreen warning. It has not been tested on a fresh Windows installation. Read [the installation guide](DESKTOP_ADVISOR.md) and [the checks and limits](RELEASE_CHECKS.md).
@@ -31,6 +31,7 @@ The host's sign-in screen is managed by OpenAI. The independent project notice o
 ## What it does
 
 - Enter two or three classes and your goals. Rank third-class options and open a **See why** report with bullets, tradeoffs, sources, and a text download.
+- Open **Spell & hotbars** for a local 500-record spell catalog and an explainable spell-bar, preparation-set and melee-action layout for the trio, level and role you chose. The suggested order is editable planning guidance; spell facts retain their source label. See [the spell and hotbar guide](SPELL_HOTBAR_PLANNER.md).
 - Pick any of the 15 EQL launch races in **Race & trio fit**. The Advisor ranks each race against your trio and goal, explains strengths and tradeoffs, and shows the start region and source label. The editable roster is `data/race-advisor.json`.
 - Compare up to four players, each with their own trio. See party strengths and gaps.
 - Search zones, check hunt fit, follow links to the companion's zone guides, and track faction points you enter or import.
@@ -74,7 +75,7 @@ Use **Find loot log** beside the trip report to search your character logs. **Lo
 
 The Windows **Combat Meter → Game overlay** keeps log stats above windowed or borderless EQL. Move it, lock it for click-through play, and adjust size or opacity. See [GAME_OVERLAY.md](GAME_OVERLAY.md).
 
-**Maps & Routes** finds installed map folders in the Windows app. Search the dungeon or zone list to load its base map and layers together. BA remembers the folder and last map. The browser edition lets you choose a whole folder once per session. Brewall and Good’s source links remain available under Map downloads & manual files. Click the map or choose **Expand map** for a full-screen view with embedded controls. Drag to pan, scroll to zoom, and use **Map tools** for layers, landmarks and height filters. Close or Escape returns to the same view. Manual location markers remain available. Zone and trip cards can open this viewer. These map packs are community EverQuest references; EQL compatibility is not verified. See [MAPS_AND_ROUTES.md](MAPS_AND_ROUTES.md).
+**Maps & Routes** finds installed map folders in the Windows app. Search the dungeon or zone list to load its base map and layers together. BA remembers the folder and last map. The browser edition lets you choose a whole folder once per session. Brewall and Good’s source links remain available under Map downloads & manual files. Use **Wireframe view** to redraw the local map as a high-contrast layout of its paths and landmarks. Use **3D wireframe view** to drag the map through yaw and pitch; Shift-drag to move across X/Y and Alt-drag vertically to move through Z height. Adjust Floor lift to separate levels. These controls redraw only the local map data; they do not create routes or floors. Click the map or choose **Expand map** for a full-screen view with embedded controls. Close or Escape returns to the same view. Manual location markers remain available. Zone and trip cards can open this viewer. These map packs are community EverQuest references; EQL compatibility is not verified. See [MAPS_AND_ROUTES.md](MAPS_AND_ROUTES.md).
 
 ## Change the rules
 
