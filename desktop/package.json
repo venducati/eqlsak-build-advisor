@@ -1,7 +1,7 @@
 {
   "name": "eqlsak-build-advisor",
-  "version": "1.6.14",
-  "description": "Offline EQLSaK Build Advisor, live combat meter, and optional source updates",
+  "version": "1.6.15",
+  "description": "Offline EQLSaK Character Build Advisor, live combat meter, and optional source updates",
   "author": "EQLSaK community",
   "license": "MIT",
   "main": "main.cjs",
@@ -9,7 +9,7 @@
   "scripts": {
     "start": "electron .",
     "package:win": "electron-builder --win nsis --x64 --publish never",
-    "package:store": "electron-builder --win appx --x64 --publish never",
+    "package:store": "node build-store-assets.cjs && node package-store.cjs",
     "test": "node --test test/*.test.cjs"
   },
   "dependencies": {
@@ -21,8 +21,8 @@
   },
   "build": {
     "appId": "community.eqlsak.buildadvisor",
-    "productName": "EQLSaK Build Advisor",
-    "artifactName": "EQLSaK-Build-Advisor-${version}-Setup.${ext}",
+    "productName": "EQLSaK Character Build Advisor",
+    "artifactName": "EQLSaK-Character-Build-Advisor-${version}-Setup.${ext}",
     "directories": {
       "output": "release"
     },
@@ -51,12 +51,12 @@
       "signAndEditExecutable": false
     },
     "appx": {
-      "artifactName": "EQLSaK-Build-Advisor-${version}-Store.appx",
-      "identityName": "community.eqlsak.buildadvisor",
+      "artifactName": "EQLSaK-Character-Build-Advisor-${version}-Store.appx",
+      "identityName": "Venducati.EQLSaKCharacterBuildAdvisor",
       "applicationId": "EQLSaKBuildAdvisor",
-      "displayName": "EQLSaK Build Advisor",
-      "publisher": "CN=ms",
-      "publisherDisplayName": "EQLSaK Community",
+      "displayName": "EQLSaK Character Build Advisor",
+      "publisher": "CN=DABC0DB2-83F1-45C6-BD0F-64121E978A48",
+      "publisherDisplayName": "Venducati",
       "languages": [
         "en-US"
       ]
@@ -68,7 +68,7 @@
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "shortcutName": "EQLSaK Build Advisor",
+      "shortcutName": "EQLSaK Character Build Advisor",
       "deleteAppDataOnUninstall": false,
       "runAfterFinish": true,
       "installerIcon": "assets/advisor.ico",

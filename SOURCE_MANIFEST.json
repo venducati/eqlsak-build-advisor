@@ -1,5 +1,5 @@
 {
-  "version": "1.6.5",
+  "version": "1.6.15",
   "scope": "Standalone Build Advisor, Combat Meter and My Guild",
   "files": [
     "ARTWORK_REFINEMENT_1_3.md",
@@ -10,6 +10,7 @@
     "INTERFACE_SOUNDS.md",
     "LICENSE",
     "LOOT_TRIPS.md",
+    "PRIVACY.md",
     "TRIP_LOG_GUIDE.md",
     "app/advisor-fantasy.css",
     "app/advisor-sounds.css",

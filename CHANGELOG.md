@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.6.15 — 2026-09-30
+
+- Rename the Windows app and Store listing to **EQLSaK Character Build Advisor**.
+- Prepare a Microsoft Store AppX package with the reserved `Venducati.EQLSaKCharacterBuildAdvisor` identity and publisher.
+- Add original compass tile artwork and a repeatable local Store-package build that uses the installed Windows SDK when available.
+
 ## 1.6.14 — 2026-09-30
 
 - Add **Wireframe view** to Maps & Routes. It redraws the selected local map using a high-contrast structural palette for routes, layers and landmarks, and works in both the embedded and expanded map views.

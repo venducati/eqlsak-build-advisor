@@ -1,6 +1,6 @@
 # Microsoft Store release guide
 
-This guide prepares EQLSaK Build Advisor for a Microsoft Store release. A Store release gives Windows users a Microsoft-signed package. It removes the usual SmartScreen download warning for Store installs.
+This guide prepares EQLSaK Character Build Advisor for a Microsoft Store release. A Store release gives Windows users a Microsoft-signed package. It removes the usual SmartScreen download warning for Store installs.
 
 ## What the Store does
 
@@ -23,7 +23,7 @@ Keep your sign-in, ID, recovery codes, and verification documents private. Do no
 
 ## Step 2: reserve the app name
 
-In Partner Center, open **Apps and games**, create a new **MSIX app**, and reserve **EQLSaK Build Advisor**. If the name is unavailable, choose a clear variation such as **EQLSaK Build Advisor — Offline**.
+The Store name is reserved as **EQLSaK Character Build Advisor**. Its current Partner Center identity is `Venducati.EQLSaKCharacterBuildAdvisor` and its publisher is `Venducati`.
 
 After reserving the name, Partner Center shows the package identity details. Record these two values:
 
@@ -34,11 +34,9 @@ The identity name is unique to the Store listing. It may differ from the name sh
 
 ## Step 3: set the reserved identity in this project
 
-Open `desktop/package.json` and replace the value under `build.appx.identityName` with the exact **Package/Identity name** from Partner Center.
+`desktop/package.json` now contains the exact identity and publisher from Partner Center. Keep these values in sync if the product is moved to another publisher account.
 
-For a Microsoft Store upload, keep `build.appx.publisher` set to `CN=ms`. This creates an unsigned Store-upload package. The Store replaces that placeholder signature after certification.
-
-Do not use a made-up publisher value. Do not add a private certificate file to Git.
+Do not use a made-up identity or publisher value. Do not add a private certificate file to Git.
 
 ## Step 4: build the Store package
 
@@ -55,6 +53,8 @@ npm run package:store
 ```
 
 The output file is placed in `desktop/release` and ends in `-Store.appx`.
+
+The build finds the installed Windows SDK automatically, then creates the required Store tile images from the project’s original compass artwork. No game logo, character art, or third-party artwork is included.
 
 ## Step 5: create the Store listing
 

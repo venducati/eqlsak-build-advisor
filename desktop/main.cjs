@@ -122,7 +122,7 @@ app.whenReady().then(async()=>{
   session.defaultSession.setPermissionCheckHandler((contents,permission,_origin,details)=>allowAppFullscreen(window,entry,contents,permission,details));
   // The renderer only needs local assets. Explicit update downloads use the main process.
   session.defaultSession.webRequest.onBeforeRequest({urls:['http://*/*','https://*/*']},(_details,callback)=>callback({cancel:true}));
-  window=new BrowserWindow({width:1320,height:940,minWidth:760,minHeight:600,show:!smoke,backgroundColor:'#120f0c',title:'EQLSaK Build Advisor',icon:join(__dirname,'assets','advisor.ico'),autoHideMenuBar:true,webPreferences:{preload:join(__dirname,'preload.cjs'),contextIsolation:true,nodeIntegration:false,sandbox:true,webSecurity:true}});
+  window=new BrowserWindow({width:1320,height:940,minWidth:760,minHeight:600,show:!smoke,backgroundColor:'#120f0c',title:'EQLSaK Character Build Advisor',icon:join(__dirname,'assets','advisor.ico'),autoHideMenuBar:true,webPreferences:{preload:join(__dirname,'preload.cjs'),contextIsolation:true,nodeIntegration:false,sandbox:true,webSecurity:true}});
   overlay=createOverlay({app,BrowserWindow,ipcMain,screen,globalShortcut,mainWindow:()=>window,trustedMain:trusted});
   const sendVisibility=()=>{if(window&&!window.isDestroyed())window.webContents.send('app:visibility',appVisible());};
   for(const name of ['minimize','restore','show','hide'])window.on(name,sendVisibility);

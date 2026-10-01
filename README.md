@@ -1,17 +1,17 @@
-# EQLSaK Build Advisor
+# EQLSaK Character Build Advisor
 
 **Free, offline build planning and combat log tools for EverQuest Legends.**
 
 > **No ChatGPT account or subscription needed.** Download BA and run it on your own computer. EQLSaK is an independent fan project, not affiliated with, sponsored by, or endorsed by OpenAI or ChatGPT. The optional companion website uses ChatGPT Sites hosting; hosting does not imply endorsement.
 
-[Download version 1.6.14 for Windows](https://github.com/venducati/eqlsak-build-advisor/releases/tag/v1.6.14) · [Report a problem or suggest an idea](https://github.com/venducati/eqlsak-build-advisor/issues) · [How to contribute](CONTRIBUTING.md)
+[Download the current Windows release](https://github.com/venducati/eqlsak-build-advisor/releases) · [Report a problem or suggest an idea](https://github.com/venducati/eqlsak-build-advisor/issues) · [Privacy](PRIVACY.md) · [How to contribute](CONTRIBUTING.md)
 
 The GitHub setup file is currently unsigned. A Microsoft Store package is prepared for the publisher account and certification process; see [Microsoft Store release guide](MICROSOFT_STORE_RELEASE.md).
 
 ## Download and start
 
 1. Open the release page above.
-2. Under **Assets**, download **EQLSaK-Build-Advisor-1.6.14-Setup.exe**.
+2. Under **Assets**, download the current **EQLSaK Character Build Advisor** setup file.
 3. Run it on 64-bit Windows and follow the setup steps.
 
 This is a **community preview**. The installer is **unsigned**, so Windows may show Unknown Publisher or a SmartScreen warning. It has not been tested on a fresh Windows installation. Read [the installation guide](DESKTOP_ADVISOR.md) and [the checks and limits](RELEASE_CHECKS.md).
